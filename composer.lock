@@ -3,8 +3,73 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "01e549117b4f00614d21bbdb6cbbe3e6",
+    "hash": "0a84c709222a719295668d970f8d216e",
     "packages": [
+        {
+            "name": "bjyoungblood/bjy-authorize",
+            "version": "1.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bjyoungblood/BjyAuthorize.git",
+                "reference": "cd96a85bc26026c947509e424ede32dc9b50781d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bjyoungblood/BjyAuthorize/zipball/cd96a85bc26026c947509e424ede32dc9b50781d",
+                "reference": "cd96a85bc26026c947509e424ede32dc9b50781d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-eventmanager": "~2.1",
+                "zendframework/zend-mvc": "~2.1",
+                "zendframework/zend-permissions-acl": "~2.1",
+                "zendframework/zend-servicemanager": "~2.1",
+                "zendframework/zend-view": "~2.1"
+            },
+            "require-dev": {
+                "doctrine/common": ">=2.3,<2.5-dev",
+                "zendframework/zend-developer-tools": "0.*",
+                "zf-commons/zfc-user": "0.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "BjyAuthorize\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com",
+                    "homepage": "http://ocramius.github.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Ben Youngblood",
+                    "email": "bx.youngblood@gmail.com",
+                    "homepage": "http://bjyoungblood.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Zend\\Acl based firewall system for ZF2 dispatch protection",
+            "homepage": "https://github.com/bjyoungblood/BjyAuthorize",
+            "keywords": [
+                "acl",
+                "zf2",
+                "zfc-user"
+            ],
+            "time": "2013-05-12 16:07:25"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.1.2",
@@ -720,6 +785,181 @@
             "time": "2014-02-08 16:35:09"
         },
         {
+            "name": "knplabs/doctrine-behaviors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
+                "reference": "1812ec01566bea7b1cc4e9332d75e4b037f75ecd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/1812ec01566bea7b1cc4e9332d75e4b037f75ecd",
+                "reference": "1812ec01566bea7b1cc4e9332d75e4b037f75ecd",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": ">=2.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm": "dev-master",
+                "doctrine/orm": ">=2.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\DoctrineBehaviors": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Knplabs",
+                    "homepage": "http://knplabs.com"
+                }
+            ],
+            "description": "Doctrine2 behavior traits",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "Blameable",
+                "behaviors",
+                "doctrine2",
+                "filterable",
+                "softdeletable",
+                "timestampable",
+                "translatable",
+                "tree"
+            ],
+            "time": "2014-02-28 10:17:44"
+        },
+        {
+            "name": "phly/phly-restfully",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phly/PhlyRestfully.git",
+                "reference": "21d264072efdfe01064de7b6b8f2920b7dfbab94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phly/PhlyRestfully/zipball/21d264072efdfe01064de7b6b8f2920b7dfbab94",
+                "reference": "21d264072efdfe01064de7b6b8f2920b7dfbab94",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-eventmanager": ">=2.2.0",
+                "zendframework/zend-json": ">=2.2.0",
+                "zendframework/zend-loader": ">=2.2.0",
+                "zendframework/zend-mvc": ">=2.2.0",
+                "zendframework/zend-paginator": ">=2.2.0",
+                "zendframework/zend-stdlib": ">=2.2.0",
+                "zendframework/zend-uri": ">=2.2.0",
+                "zendframework/zend-view": ">=2.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "zendframework/zend-console": ">=2.2.0",
+                "zendframework/zend-http": ">=2.2.0",
+                "zendframework/zend-navigation": ">=2.2.0",
+                "zendframework/zend-servicemanager": ">=2.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PhlyRestfully\\": "src/",
+                    "PhlyRestfullyTest\\": "test/"
+                },
+                "classmap": [
+                    "./"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Weier O'Phinney",
+                    "email": "matthew@weierophinney.net",
+                    "homepage": "http://mwop.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ZF2 Module providing structure for RESTful resources",
+            "homepage": "https://github.com/weierophinney/PhlyRestfully",
+            "keywords": [
+                "module",
+                "rest",
+                "zend",
+                "zf2"
+            ],
+            "time": "2013-08-15 14:22:47"
+        },
+        {
+            "name": "phly/phly-simple-page",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phly/PhlySimplePage.git",
+                "reference": "57ac072d46be93a4df931ca483f114b0509e572b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phly/PhlySimplePage/zipball/57ac072d46be93a4df931ca483f114b0509e572b",
+                "reference": "57ac072d46be93a4df931ca483f114b0509e572b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-console": "2.*",
+                "zendframework/zend-eventmanager": "2.*",
+                "zendframework/zend-http": "2.*",
+                "zendframework/zend-mvc": "2.*",
+                "zendframework/zend-stdlib": "2.*",
+                "zendframework/zend-view": "2.*"
+            },
+            "require-dev": {
+                "zendframework/zend-servicemanager": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PhlySimplePage\\": "src/",
+                    "PhlySimplePageTest\\": "test/"
+                },
+                "classmap": [
+                    "./"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Matthew Weier O'Phinney",
+                    "email": "matthew@weierophinney.net",
+                    "homepage": "http://mwop.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ZF2 Module for easily creating static pages",
+            "homepage": "https://github.com/weierophinney/PhlySimplePage",
+            "keywords": [
+                "module",
+                "zend",
+                "zf2"
+            ],
+            "time": "2013-11-05 14:08:50"
+        },
+        {
             "name": "symfony/console",
             "version": "v2.4.2",
             "target-dir": "Symfony/Component/Console",
@@ -1049,6 +1289,48 @@
             "time": "2013-10-24 20:16:50"
         },
         {
+            "name": "zendframework/zendservice-apple-apns",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZendService_Apple_Apns.git",
+                "reference": "e27de555525ce0d5202f05a957f443a0dc5a78db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/ZendService_Apple_Apns/zipball/e27de555525ce0d5202f05a957f443a0dc5a78db",
+                "reference": "e27de555525ce0d5202f05a957f443a0dc5a78db",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-json": ">=2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ZendService": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "OOP Zend Framework 2 wrapper for Apple Push Notification Service",
+            "homepage": "http://packages.zendframework.com/",
+            "keywords": [
+                "apns",
+                "apple",
+                "notification",
+                "push",
+                "zf2"
+            ],
+            "time": "2013-10-16 16:28:09"
+        },
+        {
             "name": "zendframework/zendxml",
             "version": "1.0.0",
             "source": {
@@ -1370,6 +1652,102 @@
                 "zf2"
             ],
             "time": "2013-10-27 17:23:03"
+        },
+        {
+            "name": "zircote/api-problem",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zircote/ApiProblem.git",
+                "reference": "1c5e36f7c2de3f809532898a2f969f171e68fbc7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zircote/ApiProblem/zipball/1c5e36f7c2de3f809532898a2f969f171e68fbc7",
+                "reference": "1c5e36f7c2de3f809532898a2f969f171e68fbc7",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ApiProblem": "library",
+                    "ApiProblemTests": "tests/library"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Allen",
+                    "email": "zircote@gmail.com",
+                    "homepage": "http://www.zircote.com"
+                }
+            ],
+            "description": "An Api Problem Exception implementation in PHP. See: http://tools.ietf.org/html/draft-nottingham-http-problem for the latest on the specification",
+            "keywords": [
+                "api",
+                "exception"
+            ],
+            "time": "2013-12-16 13:57:22"
+        },
+        {
+            "name": "zircote/hal",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zircote/Hal.git",
+                "reference": "f01c211edf309cf6074d1f9ce7e652ec4d4f53a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zircote/Hal/zipball/f01c211edf309cf6074d1f9ce7e652ec4d4f53a1",
+                "reference": "f01c211edf309cf6074d1f9ce7e652ec4d4f53a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Hal": "library"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Allen",
+                    "email": "zircote@gmail.com",
+                    "homepage": "http://www.zircote.com"
+                },
+                {
+                    "name": "Herman J. Radtke III",
+                    "email": "hermanradtke@gmail.com",
+                    "homepage": "http://hermanradtke.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Baldur Rensch",
+                    "email": "brensch@gmail.com"
+                }
+            ],
+            "description": "A PHP implementation of HAL http://stateless.co/hal_specification.html",
+            "homepage": "https://github.com/zircote/Hal/",
+            "keywords": [
+                "HATEOAS",
+                "api",
+                "hal",
+                "json"
+            ],
+            "time": "2012-11-27 00:00:00"
         }
     ],
     "packages-dev": [
@@ -1382,9 +1760,14 @@
     "stability-flags": {
         "zendframework/zftool": 20,
         "zf-commons/zfc-user": 20,
+        "knplabs/doctrine-behaviors": 20,
         "zendexperts/ze-theme": 20,
         "zendframework/zendgdata": 20,
-        "zendframework/zend-developer-tools": 20
+        "zendframework/zend-developer-tools": 20,
+        "phly/phly-simple-page": 20,
+        "phly/phly-restfully": 20,
+        "zircote/hal": 20,
+        "zircote/api-problem": 20
     },
     "platform": {
         "php": ">=5.3.3"
