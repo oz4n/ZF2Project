@@ -6,23 +6,20 @@
  * @see https://github.com/zendframework/ZFTool
  */
 return array(
-	'modules' => array(
-		'DoctrineModule',
-		'DoctrineORMModule',
-		'ZfcBase',
-		'ZfcUser',
-		'ZfcUserDoctrineORM',
-//		'BjyAuthorize',
-		'Application',
-		'ZendDeveloperTools',
-	),
-	'module_listener_options' => array(
-		'module_paths' => array(
-			'./module',
-			'./vendor'
-		),
-		'config_glob_paths' => array(
-			'config/autoload/{,*.}{global,local}.php'
-		)
-	)
-);
+    'modules' => array(
+        'DoctrineModule',
+        'DoctrineORMModule',
+        'ZfcBase',
+        'Application',
+        'ZendDeveloperTools',
+        'ORM',
+        'Account'
+        ),
+    'module_listener_options' => array(
+        'module_paths' => array(
+            './module',
+            './vendor'
+            ),
+        'config_glob_paths' => array('config/autoload/{,*.}{global,local}.php')
+        )
+    );

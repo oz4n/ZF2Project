@@ -9,7 +9,7 @@ return array(
 				'params' => array(
 					'host' => 'localhost',
 					'port' => '3306',
-					'dbname' => 'noizing',
+					'dbname' => 'noizing_zf2',
 				),
 			),
 		)
