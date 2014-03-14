@@ -64,16 +64,6 @@ class Comment
     private $createTime;
 
     /**
-     * @var \ORM\Entity\Post
-     *
-     * @ORM\ManyToOne(targetEntity="ORM\Entity\Post")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="post_id", referencedColumnName="id")
-     * })
-     */
-    private $post;
-
-    /**
      * @var \ORM\Entity\Comment
      *
      * @ORM\ManyToOne(targetEntity="ORM\Entity\Comment")
@@ -82,6 +72,16 @@ class Comment
      * })
      */
     private $parent;
+
+    /**
+     * @var \ORM\Entity\Post
+     *
+     * @ORM\ManyToOne(targetEntity="ORM\Entity\Post")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * })
+     */
+    private $post;
 
 
 
@@ -234,29 +234,6 @@ class Comment
     }
 
     /**
-     * Set post
-     *
-     * @param \ORM\Entity\Post $post
-     * @return Comment
-     */
-    public function setPost(\ORM\Entity\Post $post = null)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * Get post
-     *
-     * @return \ORM\Entity\Post 
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
      * Set parent
      *
      * @param \ORM\Entity\Comment $parent
@@ -277,5 +254,28 @@ class Comment
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Set post
+     *
+     * @param \ORM\Entity\Post $post
+     * @return Comment
+     */
+    public function setPost(\ORM\Entity\Post $post = null)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get post
+     *
+     * @return \ORM\Entity\Post 
+     */
+    public function getPost()
+    {
+        return $this->post;
     }
 }

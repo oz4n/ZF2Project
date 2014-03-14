@@ -13,7 +13,8 @@ return array(
         'Application',
         'ZendDeveloperTools',
         'ORM',
-        'Account'
+        'Account',
+        'Post'
         ),
     'module_listener_options' => array(
         'module_paths' => array(

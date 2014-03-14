@@ -24,9 +24,9 @@ class TermAccount
     /**
      * @var string
      *
-     * @ORM\Column(name="key", type="string", length=255, nullable=false)
+     * @ORM\Column(name="term_key", type="string", length=255, nullable=false)
      */
-    private $key;
+    private $termKey;
 
     /**
      * @var string
@@ -65,26 +65,26 @@ class TermAccount
     }
 
     /**
-     * Set key
+     * Set termKey
      *
-     * @param string $key
+     * @param string $termKey
      * @return TermAccount
      */
-    public function setKey($key)
+    public function setTermKey($termKey)
     {
-        $this->key = $key;
+        $this->termKey = $termKey;
 
         return $this;
     }
 
     /**
-     * Get key
+     * Get termKey
      *
      * @return string 
      */
-    public function getKey()
+    public function getTermKey()
     {
-        return $this->key;
+        return $this->termKey;
     }
 
     /**

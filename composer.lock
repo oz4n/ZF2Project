@@ -3,8 +3,54 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0a84c709222a719295668d970f8d216e",
+    "hash": "3f97e358a3e305f02493b5a935d5c96a",
     "packages": [
+        {
+            "name": "bjyoungblood/BjyProfiler",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bjyoungblood/BjyProfiler.git",
+                "reference": "1ad040a59791bf28eafe4d27d485877d925db43e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bjyoungblood/BjyProfiler/zipball/1ad040a59791bf28eafe4d27d485877d925db43e",
+                "reference": "1ad040a59791bf28eafe4d27d485877d925db43e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3",
+                "zendframework/zendframework": ">=2.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "BjyProfiler": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Ben Youngblood",
+                    "email": "bx.youngblood@gmail.com",
+                    "homepage": "http://bjyoungblood.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Database profiler for Zend\\Db (also plugin for ZendDeveloperTools)",
+            "homepage": "https://github.com/bjyoungblood/BjyProfiler",
+            "keywords": [
+                "db",
+                "profiler",
+                "zdt",
+                "zf2"
+            ],
+            "time": "2013-07-25 02:55:43"
+        },
         {
             "name": "bjyoungblood/bjy-authorize",
             "version": "1.2.6",
@@ -1381,12 +1427,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZFTool.git",
-                "reference": "d73bf6f0ae6ce9b92acc72ecc8f336e2352f3ae0"
+                "reference": "a8272c70d05e472dca0c56d2ffd3af3e87715350"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZFTool/zipball/d73bf6f0ae6ce9b92acc72ecc8f336e2352f3ae0",
-                "reference": "d73bf6f0ae6ce9b92acc72ecc8f336e2352f3ae0",
+                "url": "https://api.github.com/repos/zendframework/ZFTool/zipball/a8272c70d05e472dca0c56d2ffd3af3e87715350",
+                "reference": "a8272c70d05e472dca0c56d2ffd3af3e87715350",
                 "shasum": ""
             },
             "require": {
@@ -1425,7 +1471,7 @@
                 "tool",
                 "zf2"
             ],
-            "time": "2014-01-02 17:29:50"
+            "time": "2014-03-14 10:30:46"
         },
         {
             "name": "zf-commons/zfc-base",

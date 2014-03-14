@@ -3,23 +3,23 @@
 namespace Account\Form;
 
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilter;
 use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\InputFilter\InputFilter;
 
-class AccountForm extends Form {
+class TermAccountForm extends Form {
 	public function __construct() {
-		parent::__construct ( 'account' );
+		parent::__construct ( 'termaccount' );
 		$this->setAttribute ( 'method', 'post' )->setHydrator ( new ClassMethods () )->setInputFilter ( new InputFilter () );		
 		$this->setAttribute ( 'role', 'form' );
 		$this->setAttribute ( 'class', 'form-horizontal' );
 		
+		
 		$this->add ( [ 
-				'type' => 'Account\Form\Fieldset\AccountFieldset',
+				'type' => 'Account\Form\Fieldset\TermAccountFieldset',
 				'options' => [ 
 						'use_as_base_fieldset' => true 
 				] 
 		] );
-		
 		$this->add ( [ 
 				'name' => 'security',
 				'type' => 'Zend\Form\Element\Csrf' 
@@ -36,12 +36,12 @@ class AccountForm extends Form {
 		
 		$this->setValidationGroup ( [ 
 				'security',
-				'account' => [ 
-						'username',						
-						'password', 
-						'salt',
-						'email'
+				'termaccount' => [ 
+						'termKey',
+						'value',
+						'autoload',
+						'account' 
 				] 
 		] );
 	}
-} 
+}

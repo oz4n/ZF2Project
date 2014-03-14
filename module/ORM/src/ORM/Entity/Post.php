@@ -85,16 +85,6 @@ class Post
     private $postStatus;
 
     /**
-     * @var \ORM\Entity\Account
-     *
-     * @ORM\ManyToOne(targetEntity="ORM\Entity\Account")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="account_id", referencedColumnName="id")
-     * })
-     */
-    private $account;
-
-    /**
      * @var \ORM\Entity\Post
      *
      * @ORM\ManyToOne(targetEntity="ORM\Entity\Post")
@@ -103,6 +93,16 @@ class Post
      * })
      */
     private $parent;
+
+    /**
+     * @var \ORM\Entity\Account
+     *
+     * @ORM\ManyToOne(targetEntity="ORM\Entity\Account")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="account_id", referencedColumnName="id")
+     * })
+     */
+    private $account;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -346,29 +346,6 @@ class Post
     }
 
     /**
-     * Set account
-     *
-     * @param \ORM\Entity\Account $account
-     * @return Post
-     */
-    public function setAccount(\ORM\Entity\Account $account = null)
-    {
-        $this->account = $account;
-
-        return $this;
-    }
-
-    /**
-     * Get account
-     *
-     * @return \ORM\Entity\Account 
-     */
-    public function getAccount()
-    {
-        return $this->account;
-    }
-
-    /**
      * Set parent
      *
      * @param \ORM\Entity\Post $parent
@@ -389,6 +366,29 @@ class Post
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \ORM\Entity\Account $account
+     * @return Post
+     */
+    public function setAccount(\ORM\Entity\Account $account = null)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \ORM\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 
     /**
