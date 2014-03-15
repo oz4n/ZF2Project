@@ -99,4 +99,9 @@ return array(
             ),
         ),
     ),
+	'asset_bundle' => array(
+		'assets' => array(
+			'less' => array('@zfRootPath/vendor/twitter/bootstrap/less/bootstrap.less')
+		)
+	),
 );

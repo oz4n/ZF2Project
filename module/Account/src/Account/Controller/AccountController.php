@@ -1,5 +1,4 @@
 <?php
-
 namespace Account\Controller;
 
 use Account\Form\AccountForm;
@@ -7,164 +6,164 @@ use Doctrine\ORM\EntityManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use ORM\Entity\Account;
-use ORM\Registry\ORMRegistry;
+use ORM\Registry\Registry;
 use ORM\DAO\DAOManager;
 
 class AccountController extends AbstractActionController
 {
-	/**
-	 *
-	 * @var EntityManager
-	 */
-	protected $entityManager;
 
-	/**
-	 * Sets the EntityManager
-	 *
-	 * @param EntityManager $em
-	 * @access protected
-	 * @return UserController
-	 */
-	protected function setEntityManager(EntityManager $em)
-	{
-		$this->entityManager = $em;
-		return $this;
-	}
+    /**
+     *
+     * @var EntityManager
+     */
+    protected $entityManager;
 
-	/**
-	 * Returns the EntityManager
-	 *
-	 * Fetches the EntityManager from ServiceLocator if it has not been initiated
-	 * and then returns it
-	 *
-	 * @access protected
-	 * @return EntityManager
-	 */
-	protected function getEntityManager()
-	{
-		if (null === $this->entityManager) {
-			$this->setEntityManager($this->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
-		}
-		return $this->entityManager;
-	}
+    /**
+     * Sets the EntityManager
+     *
+     * @param EntityManager $em            
+     * @access protected
+     * @return UserController
+     */
+    protected function setEntityManager(EntityManager $em)
+    {
+        $this->entityManager = $em;
+        return $this;
+    }
 
-	/**
-	 *
-	 * @return \ORM\DAO\DAOManager
-	 */
-	protected function AccountDaoManager()
-	{
-		return new DAOManager ($this->getEntityManager(), 'ORM\Entity\Account');
-	}
+    /**
+     * Returns the EntityManager
+     *
+     * Fetches the EntityManager from ServiceLocator if it has not been initiated
+     * and then returns it
+     *
+     * @access protected
+     * @return EntityManager
+     */
+    protected function getEntityManager()
+    {
+        if (null === $this->entityManager) {
+            $this->setEntityManager($this->getServiceLocator()
+                ->get('Doctrine\ORM\EntityManager'));
+        }
+        return $this->entityManager;
+    }
 
-	/**
-	 *
-	 * @return \ORM\Registry\ORMRegistry
-	 */
-	protected function RegisterEntityManager()
-	{
-		return ORMRegistry::set("entityManager", $this->getEntityManager());
-	}
+    /**
+     *
+     * @return \ORM\DAO\DAOManager
+     */
+    protected function AccountDaoManager()
+    {
+        return new DAOManager($this->getEntityManager(), 'ORM\Entity\Account');
+    }
 
-	/**
-	 *
-	 * @param int $id
-	 * @return object
-	 */
-	protected function findAccountId($id)
-	{
-		return $this->AccountDaoManager()->find($id);
-	}
+    /**
+     *
+     * @return \ORM\Registry\ORMRegistry
+     */
+    protected function RegisterEntityManager()
+    {
+        return Registry::set("entityManager", $this->getEntityManager());
+    }
 
-	/**
-	 * Users list action
-	 *
-	 * Fetches and displays all users.
-	 *
-	 * @return array view variables
-	 */
-	public function indexAction()
-	{
-		$repository = $this->AccountDaoManager();
-		$accounts = $repository->findAll();
-		return new ViewModel ([
-			"accounts" => $accounts
-		]);
-	}
+    /**
+     *
+     * @param int $id            
+     * @return object
+     */
+    protected function findAccountId($id)
+    {
+        return $this->AccountDaoManager()->find($id);
+    }
 
-	/**
-	 * Adds new Account
-	 *
-	 * @return array view variables
-	 */
-	public function addAction()
-	{
-		$this->RegisterEntityManager();
-		$account = new Account ();
-		$form = new AccountForm ();
-		$form->bind($account);
+    /**
+     * Users list action
+     *
+     * Fetches and displays all users.
+     *
+     * @return array view variables
+     */
+    public function indexAction()
+    {
+        $repository = $this->AccountDaoManager();
+        $accounts = $repository->findAll();
+        return new ViewModel([
+            "accounts" => $accounts
+        ]);
+    }
 
-		$request = $this->getRequest();
-		if ($request->isPost()) {
-			$form->setData($request->getPost());
-			if ($form->isValid()) {
-				$this->AccountDaoManager()->save($account);
-				$this->redirect()->toRoute('account');
-			}
-		}
+    /**
+     * Adds new Account
+     *
+     * @return array view variables
+     */
+    public function addAction()
+    {
+        $this->RegisterEntityManager();
+        $account = new Account();
+        $form = new AccountForm();
+        $form->bind($account);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $this->AccountDaoManager()->save($account);
+                $this->redirect()->toRoute('account');
+            }
+        }
+        
+        return new ViewModel([
+            'form' => $form
+        ]);
+    }
 
-		return new ViewModel ([
-			'form' => $form
-		]);
-	}
+    /**
+     * Edits Account
+     *
+     * @return array view variables
+     */
+    public function editAction()
+    {
+        $request = $this->getRequest();
+        $id = $request->isPost() ? $request->getPost()->account["id"] : (int) $this->params('id', null);
+        
+        if (null === $id) {
+            return $this->redirect()->toRoute('account');
+        }
+        
+        $this->RegisterEntityManager();
+        $account = $this->findAccountId($id);
+        
+        $form = new AccountForm();
+        $form->bind($account);
+        
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $this->AccountDaoManager()->save($account);
+                $this->redirect()->toRoute('account');
+            }
+        }
+        
+        return new ViewModel([
+            'form' => $form,
+            'id' => $id
+        ]);
+    }
 
-	/**
-	 * Edits Account
-	 *
-	 * @return array view variables
-	 */
-	public function editAction()
-	{
-		$request = $this->getRequest();
-		// Getting id parameter either from request or POST
-		$id = $request->isPost() ? $request->getPost()->account ["id"] : ( int )$this->params('id', null);
-
-		if (null === $id) {
-			return $this->redirect()->toRoute('account');
-		}
-
-		$this->RegisterEntityManager();
-		$account = $this->findAccountId($id);
-
-		$form = new AccountForm ();
-		$form->bind($account);
-
-		if ($request->isPost()) {
-			$form->setData($request->getPost());
-			if ($form->isValid()) {
-				$this->AccountDaoManager()->save($account);
-				$this->redirect()->toRoute('account');
-			}
-		}
-
-		return new ViewModel ([
-			'form' => $form,
-			'id' => $id
-		]);
-	}
-
-	/**
-	 * Deletes an User
-	 */
-	public function deleteAction()
-	{
-		$id = ( int )$this->params('id', null);
-		if (null === $id) {
-			return $this->redirect()->toRoute('account');
-		}
-
-		$this->AccountDaoManager()->remove($this->findAccountId($id));
-		$this->redirect()->toRoute('account');
-	}
+    /**
+     * Deletes an User
+     */
+    public function deleteAction()
+    {
+        $id = (int) $this->params('id', null);
+        if (null === $id) {
+            return $this->redirect()->toRoute('account');
+        }
+        
+        $this->AccountDaoManager()->remove($this->findAccountId($id));
+        $this->redirect()->toRoute('account');
+    }
 }
 

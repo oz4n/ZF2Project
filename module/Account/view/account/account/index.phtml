@@ -2,7 +2,6 @@
 /**
  * @var \ORM\Entity\Account $account
  */
-
 ?>
 
 
@@ -11,31 +10,32 @@
 		<h3>Users</h3>
 	</div>
 	<div>
-		<a href="<?php echo $this->url('account',['action' => 'add']); ?>">Add User</a>
+		<a href="<?php echo $this->url('account',['action' => 'add']); ?>">Add
+			User</a>
 
 		<?php if (isset($accounts)) : ?>
 			<table class="table">
-				<thead>
+			<thead>
 				<tr>
 					<th>No</th>
 					<th>Username</th>
 					<th>Email</th>
 					<th>Action</th>
 				</tr>
-				</thead>
+			</thead>
 				<?php $i = 1; foreach ($accounts as $account): ?>
 					<tbody>
-					<tr>
-						<td><?php echo $i++; ?></td>
-						<td><?php echo $account->getUsername(); ?></td>
-						<td><?php echo $account->getEmail(); ?></td>
-						<td>
-							<a href="<?php echo $this->url('account', ['action' => 'edit', 'id' => $account->getId()]); ?>">Edit</a>
-							|
-							<a href="<?php echo $this->url('account', ['action' => 'delete', 'id' => $account->getId()]); ?>">Delete</a>
-						</td>
-					</tr>
-					</tbody>
+				<tr>
+					<td><?php echo $i++; ?></td>
+					<td><?php echo $account->getUsername(); ?></td>
+					<td><?php echo $account->getEmail(); ?></td>
+					<td><a
+						href="<?php echo $this->url('account', ['action' => 'edit', 'id' => $account->getId()]); ?>">Edit</a>
+						| <a
+						href="<?php echo $this->url('account', ['action' => 'delete', 'id' => $account->getId()]); ?>">Delete</a>
+					</td>
+				</tr>
+			</tbody>
 				<?php endforeach; ?>
 			</table>
 		<?php endif; ?>

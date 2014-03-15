@@ -4,52 +4,52 @@
  * @var \Account\Form\AccountForm $form
  * @var \ORM\Entity\Account $account
  */
-$form->setAttribute ( 'action', $this->url ( 'account', [ 
-		'controller' => 'index',
-		'action' => 'edit' 
-] ) )->prepare ();
-echo $this->form ()->openTag ( $form );
-$uf = $form->get ( "account" );
 ?>
-<div class="form-group">
-	<label for="inputUsername" class="col-sm-2 control-label">Username</label>
-
-	<div class="col-sm-10">
+<div class="col-lg-10">
+    <?php
+    $form->setAttribute('action', $this->url('account', [
+        'controller' => 'index',
+        'action' => 'edit'
+    ]));
+    $form->prepare();
+    echo $this->form()->openTag($form);
+    $uf = $form->get("account");
+    ?>
+    <div class="form-group">
+		<label for="inputUsername" class="col-sm-2 control-label">Username</label>
+		<div class="col-sm-10">
 		<?php echo $this->formHidden($form->get('security')); ?>
 		<?php echo $this->formHidden($uf->get('id')); ?>
 		<?php echo $this->formRow($uf->get('username')); ?>
 	</div>
-</div>
+	</div>
 
-<div class="form-group">
-	<label for="inputPassword" class="col-sm-2 control-label">Password</label>
-
-	<div class="col-sm-10">
+	<div class="form-group">
+		<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+		<div class="col-sm-10">
 		<?php echo $this->formRow($uf->get('password')); ?>
 	</div>
-</div>
+	</div>
 
-<div class="form-group">
-	<label for="inputSalt" class="col-sm-2 control-label">Salt</label>
-
-	<div class="col-sm-10">
+	<div class="form-group">
+		<label for="inputSalt" class="col-sm-2 control-label">Salt</label>
+		<div class="col-sm-10">
 		<?php echo $this->formRow($uf->get('salt')); ?>
 	</div>
-</div>
+	</div>
 
-<div class="form-group">
-	<label for="inputEmail" class="col-sm-2 control-label">E-Mail</label>
-
-	<div class="col-sm-10">
+	<div class="form-group">
+		<label for="inputEmail" class="col-sm-2 control-label">E-Mail</label>
+		<div class="col-sm-10">
 		<?php echo $this->formRow($uf->get('email')); ?>
 	</div>
-</div>
+	</div>
 
-<div class="form-group">
-	<div class="col-sm-offset-2 col-sm-10">
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
 		<?php echo $this->formRow($form->get('submit')); ?>
 	</div>
-</div>
+	</div>
 
 <?php echo $this->form()->closeTag(); ?>
-
+</div>

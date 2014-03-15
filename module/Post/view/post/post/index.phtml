@@ -1,0 +1,47 @@
+<?php
+/**
+ * @var \ORM\Entity\Post $post
+ */
+?>
+
+
+<div>
+	<div>
+		<h3>Post</h3>
+	</div>
+	<div>
+		<a href="<?php echo $this->url('post',['action' => 'add']); ?>">Add
+			Post</a>
+
+		<?php if (isset($posts)) : ?>
+			<table class="table">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Title</th>
+					<th>Content</th>
+					<th>Slug</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+				<?php $i = 1; foreach ($posts as $post): ?>
+					<tbody>
+				<tr>
+					<td><?php echo $i++; ?></td>
+					<td><?php echo $post->getTitle(); ?></td>
+					<td><?php echo $post->getContent(); ?></td>
+					<td><?php echo $post->getSlug(); ?></td>
+					<td><a
+						href="<?php echo $this->url('post', ['action' => 'edit', 'id' => $post->getId()]); ?>">Edit</a>
+						| <a
+						href="<?php echo $this->url('post', ['action' => 'delete', 'id' => $post->getId()]); ?>">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+				<?php endforeach; ?>
+			</table>
+		<?php endif; ?>
+	</div>
+</div>
+
+
