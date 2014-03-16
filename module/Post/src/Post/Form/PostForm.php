@@ -44,7 +44,7 @@ class PostForm extends Form
             'post' => [
                 'title',
                 'content',
-                'slug',
+//                 'slug',
                 'status',
                 'commentStatus',
                 'account'            

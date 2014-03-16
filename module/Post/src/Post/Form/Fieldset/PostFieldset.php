@@ -37,13 +37,13 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
             ]
         ]);
         
-        $this->add([
-            'name' => 'slug',
-            'type' => 'Zend\Form\Element\Text',
-            'attributes' => [
-                'class' => 'form-class'
-            ]
-        ]);
+//         $this->add([
+//             'name' => 'slug',
+//             'type' => 'Zend\Form\Element\Text',
+//             'attributes' => [
+//                 'class' => 'form-class'
+//             ]
+//         ]);
         
 //         $this->add([
 //             'name' => 'createTime',

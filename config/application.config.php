@@ -7,7 +7,7 @@
  */
 return array(
     'modules' => array(
-		'TwbBundle',
+        'TwbBundle',
         'DoctrineModule',
         'DoctrineORMModule',
         'ZfcBase',
@@ -15,7 +15,8 @@ return array(
         'ZendDeveloperTools',
         'ORM',
         'Account',
-        'Post'
+        'Post',
+        'User'
         ),
     'module_listener_options' => array(
         'module_paths' => array(

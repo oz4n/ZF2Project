@@ -37,7 +37,8 @@ class Post
 
     /**
      * @var string
-     *
+     * 
+     * @Gedmo\Mapping\Annotation\Slug(fields={"title"}, separator="-", updatable=true)     
      * @ORM\Column(name="slug", type="text", nullable=false)
      */
     private $slug;
@@ -52,13 +53,15 @@ class Post
     /**
      * @var \DateTime
      *
+     * @Gedmo\Mapping\Annotation\Timestampable(on="create")
      * @ORM\Column(name="create_time", type="datetime", nullable=false)
      */
     private $createTime;
 
     /**
      * @var \DateTime
-     *
+     * 
+     * @Gedmo\Mapping\Annotation\Timestampable(on="update")
      * @ORM\Column(name="update_time", type="datetime", nullable=false)
      */
     private $updateTime;

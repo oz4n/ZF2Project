@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use ORM\Registry\Registry;
 use ORM\Entity\Post;
 use Post\Form\PostForm;
+use Zend\Crypt\PublicKey\Rsa\PublicKey;
 
 class PostController extends AbstractActionController
 {
@@ -68,15 +69,19 @@ class PostController extends AbstractActionController
     }
 
     /**
-     *
-     * @param int $id            
+     * 
+     * @param unknown $id
      * @return object
      */
-    protected function findAccountId($id)
+    protected function findPostId($id)
     {
         return $this->PostDaoManager()->find($id);
     }
-
+    
+    /**
+     * 
+     * @return \Zend\View\Model\ViewModel
+     */
     public function indexAction()
     {
         $repository = $this->PostDaoManager();
@@ -101,10 +106,8 @@ class PostController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
-//             $a =  new \DateTime('now');
-//             echo $a->format('Y-m-d H:i:s');
-            $post->setCreateTime(new \DateTime('now'));
-            $post->setUpdateTime(new \DateTime('now'));
+            // $post->setCreateTime(new \DateTime('now'));
+            // $post->setUpdateTime(new \DateTime('now'));
             
             if ($form->isValid()) {
                 $this->PostDaoManager()->save($post);
@@ -114,6 +117,55 @@ class PostController extends AbstractActionController
         return new ViewModel([
             'form' => $form
         ]);
+    }
+    
+    /**
+     * 
+     * @return Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
+     */
+    public function editAction()
+    {
+        $request = $this->getRequest();
+        $id = $request->isPost() ? $request->getPost()->post["id"] : (int) $this->params('id', null);
+        
+        if (null === $id) {
+            return $this->redirect()->toRoute('post');
+        }
+        
+        $this->RegisterEntityManager();
+        $post = $this->findPostId($id);
+        
+        $form = new PostForm();
+        $form->bind($post);
+        
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $this->PostDaoManager()->save($post);
+                $this->redirect()->toRoute("post");
+            }
+        }
+        
+        return new ViewModel([
+            'form' => $form,
+            'id' => $id
+        ]);
+    }
+    
+    /**
+     * 
+     * @return Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>
+     */
+    public function deleteAction()
+    {
+        $id = (int) $this->params('id', null);
+        
+        if (null === $id) {
+            return $this->redirect()->toRoute('post');
+        }
+        
+        $this->PostDaoManager()->remove($this->findPostId($id));
+        $this->redirect()->toRoute('post');
     }
 }
 
