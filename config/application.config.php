@@ -11,7 +11,6 @@ return array(
         'DoctrineORMModule',
         'ZfcBase',
         'ZendDeveloperTools',
-        'ZfcTwitterBootstrap',
         'Setting',
         'ORM',
         'Account',
