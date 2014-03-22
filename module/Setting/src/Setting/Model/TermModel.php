@@ -16,19 +16,15 @@ class TermModel
         $em = Registry::get('entityManager');
         return new DAOManager($em, 'ORM\Entity\TermTaxonomy');
     }
-    
-    public function fineAllBreadCrumbs()
-    {
-    	return array();
-    }
 
+   
     public function findAllMenu()
     {
         // $this->TermManager()->findAll();
         return array(
             array(
                 'label' => 'Dashboard',
-                'route' => 'home',
+                'route' => 'dashboard',
                 'action' => 'index',
                 'id' => 'icon-dashboard',
                 'pages' => array()
@@ -72,7 +68,7 @@ class TermModel
                 'id' => 'icon-tasks',
                 'pages' => array(
                     array(
-                        'label' => 'All Pages',                        
+                        'label' => 'All Pages',
                         'route' => 'page',
                         'action' => 'index',
                         'class' => 'all-page',

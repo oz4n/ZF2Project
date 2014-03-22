@@ -25,7 +25,7 @@ class Breadcrumbs extends ZendBreadcrumbs
      *
      * @var string
      */
-    protected $separator = '/';
+    protected $separator = '';
 
     /**
      * Returns an HTML string containing an 'a' element for the given page

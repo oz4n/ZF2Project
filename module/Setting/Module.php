@@ -29,7 +29,8 @@ class Module
             )
             ,
             'factories' => array(
-                'Navigation' => 'Setting\Factory\NavigationFactory'
+                'Navigation' => 'Setting\Factory\NavigationFactory',
+                'Breadcrumbs' => 'Setting\Factory\BreadcrumbsFactory'
             )                        
         );
     }
@@ -39,6 +40,7 @@ class Module
     	return array(
     	    'invokables' => array(
     	        'NavigationHelper' => 'Setting\Helper\NavigationHelper',    	           	       
+    	        'BreadcrumbsHelper' => 'Setting\Helper\BreadcrumdsHelper',    	           	       
     	    )
     	);
     }
