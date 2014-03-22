@@ -12,7 +12,7 @@ return array(
         'ZfcBase',
         'ZendDeveloperTools',
         'ZfcTwitterBootstrap',
-        'Application',
+        'Setting',
         'ORM',
         'Account',
         'Post',
