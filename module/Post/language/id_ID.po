@@ -1,0 +1,150 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZendSkeletonApplication\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-21 14:00+0800\n"
+"PO-Revision-Date: 2014-03-21 14:26+0800\n"
+"Last-Translator: Evan Coury <me@evancoury.com>\n"
+"Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
+"Language: id_ID\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../view/post/category/add.phtml:14 ../view/post/category/edit.phtml:14
+#: ../view/post/category/index.phtml:14 ../view/post/comment/add.phtml:14
+#: ../view/post/comment/edit.phtml:14 ../view/post/comment/index.phtml:14
+#: ../view/post/post/add.phtml:22 ../view/post/post/edit.phtml:22
+#: ../view/post/post/index.phtml:24 ../view/post/tag/add.phtml:14
+#: ../view/post/tag/edit.phtml:14 ../view/post/tag/index.phtml:14
+msgid "Dashboard"
+msgstr "Beranda"
+
+#: ../view/post/category/add.phtml:19 ../view/post/category/edit.phtml:19
+#: ../view/post/category/index.phtml:19 ../view/post/post/index.phtml:7
+#: ../view/post/post/index.phtml:26 ../view/post/post/index.phtml:43
+#: ../view/post/tag/add.phtml:19 ../view/post/tag/edit.phtml:19
+#: ../view/post/tag/index.phtml:19
+msgid "Posts"
+msgstr "Postingan"
+
+#: ../view/post/category/add.phtml:24 ../view/post/category/edit.phtml:24
+#: ../view/post/category/index.phtml:23 ../view/post/category/index.phtml:40
+msgid "Categories"
+msgstr "Katagori"
+
+#: ../view/post/category/add.phtml:28 ../view/post/category/edit.phtml:50
+#: ../view/post/category/index.phtml:44 ../view/post/comment/add.phtml:23
+#: ../view/post/post/add.phtml:28 ../view/post/post/edit.phtml:51
+#: ../view/post/post/index.phtml:47 ../view/post/tag/add.phtml:28
+#: ../view/post/tag/edit.phtml:50 ../view/post/tag/index.phtml:44
+msgid "Add New"
+msgstr "Tambah Baru"
+
+#: ../view/post/category/add.phtml:45
+msgid "Add New Category"
+msgstr "Tambah Kategori Baru"
+
+#: ../view/post/category/edit.phtml:28 ../view/post/category/edit.phtml:45
+msgid "Edit Category"
+msgstr "Ubah Kategori"
+
+#: ../view/post/category/edit.phtml:48 ../view/post/post/edit.phtml:51
+#: ../view/post/tag/edit.phtml:48
+msgid "or"
+msgstr "atau"
+
+#: ../view/post/comment/add.phtml:19 ../view/post/comment/edit.phtml:19
+#: ../view/post/comment/index.phtml:18 ../view/post/comment/index.phtml:35
+msgid "Comments"
+msgstr "Komentar"
+
+#: ../view/post/comment/add.phtml:40
+msgid "Add New Comment"
+msgstr "Tambah Komentar Baru"
+
+#: ../view/post/comment/edit.phtml:23
+msgid "Edit Comments"
+msgstr "Ubah Komentar"
+
+#: ../view/post/comment/edit.phtml:40
+msgid "Edit Comment"
+msgstr "Ubah Komentar"
+
+#: ../view/post/post/add.phtml:7 ../view/post/post/add.phtml:45
+msgid "Add New Post"
+msgstr "Tambah Postingan Baru"
+
+#: ../view/post/post/add.phtml:25 ../view/post/post/edit.phtml:25
+msgid "Post"
+msgstr "Postingan"
+
+#: ../view/post/post/add.phtml:77 ../view/post/post/index.phtml:60
+msgid "Title"
+msgstr "Judul"
+
+#: ../view/post/post/add.phtml:86 ../view/post/post/index.phtml:61
+msgid "Content"
+msgstr "Isi"
+
+#: ../view/post/post/add.phtml:94
+msgid "Status"
+msgstr "Status"
+
+#: ../view/post/post/add.phtml:101
+msgid "Comment Status"
+msgstr "Status Komentar"
+
+#: ../view/post/post/add.phtml:108
+msgid "Post Status"
+msgstr "Status Postingan"
+
+#: ../view/post/post/add.phtml:115
+msgid "Parent"
+msgstr "Bapak"
+
+#: ../view/post/post/add.phtml:122
+msgid "Account"
+msgstr "Akun"
+
+#: ../view/post/post/edit.phtml:7 ../view/post/post/edit.phtml:28
+#: ../view/post/post/edit.phtml:48
+msgid "Edit Post"
+msgstr "Ubah Postingan"
+
+#: ../view/post/post/index.phtml:59
+msgid "No"
+msgstr "No"
+
+#: ../view/post/post/index.phtml:62
+msgid "Slug"
+msgstr "Slug"
+
+#: ../view/post/post/index.phtml:63
+msgid "Action"
+msgstr "Aksi"
+
+#: ../view/post/post/index.phtml:77
+msgid "Edit"
+msgstr "Ubah"
+
+#: ../view/post/post/index.phtml:79
+msgid "Delete"
+msgstr "Hapus"
+
+#: ../view/post/tag/add.phtml:24 ../view/post/tag/edit.phtml:24
+#: ../view/post/tag/index.phtml:23 ../view/post/tag/index.phtml:40
+msgid "Tags"
+msgstr "Lebel"
+
+#: ../view/post/tag/add.phtml:45
+msgid "Add New Tag"
+msgstr "Tambah Lebel Baru"
+
+#: ../view/post/tag/edit.phtml:28 ../view/post/tag/edit.phtml:45
+msgid "Edit Tag"
+msgstr "Ubah Lebel"

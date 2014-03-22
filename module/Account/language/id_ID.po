@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZendSkeletonApplication\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-20 11:50+0800\n"
+"PO-Revision-Date: 2014-03-20 11:52+0800\n"
+"Last-Translator: Evan Coury <me@evancoury.com>\n"
+"Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
+"Language: id_ID\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../view/account/account/add.phtml:18 ../view/account/account/index.phtml:56
+msgid "Username"
+msgstr "Nama Akun"
+
+#: ../view/account/account/add.phtml:27
+msgid "Password"
+msgstr "Kata Sandi"
+
+#: ../view/account/account/add.phtml:35
+msgid "Salt"
+msgstr "Salt"
+
+#: ../view/account/account/add.phtml:43
+msgid "E-Mail"
+msgstr "Email"
+
+#: ../view/account/account/index.phtml:20
+msgid "Dashboard"
+msgstr "Beranda"
+
+#: ../view/account/account/index.phtml:22
+#: ../view/account/account/index.phtml:38
+msgid "User"
+msgstr "Pengguna"
+
+#: ../view/account/account/index.phtml:42
+msgid "Add User"
+msgstr "Tambah Baru"
+
+#: ../view/account/account/index.phtml:55
+msgid "No"
+msgstr "No"
+
+#: ../view/account/account/index.phtml:57
+msgid "Email"
+msgstr "Email"
+
+#: ../view/account/account/index.phtml:58
+msgid "Action"
+msgstr "Aksi"
+
+#: ../view/account/account/index.phtml:71
+msgid "Edit"
+msgstr "Ubah"
+
+#: ../view/account/account/index.phtml:73
+msgid "Delete"
+msgstr "Hapus"
+
+#~ msgid "Skeleton Application"
+#~ msgstr "NoiZing Application"
+
+#~ msgid "Words"
+#~ msgstr "Tulisan"
+
+#~ msgid "All Post"
+#~ msgstr "Postingan"
+
+#~ msgid "Categories"
+#~ msgstr "Katagori"
+
+#~ msgid "Tags"
+#~ msgstr "Lebel"

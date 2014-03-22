@@ -3,81 +3,143 @@
  * @var \Zend\Form\Form $this
  * @var \Post\Form\PostForm $form
  */
+
+$this->headTitle($this->translate('Add New Post'));
+$this->placeholder('siteTitle')->set('PREPEND');
 ?>
-<div class="col-lg-10">
-    <?php
-    $form->setAttribute('action', $this->url('post', [
-        'controller' => 'index',
-        'action' => 'add'
-    ]));
-    $form->prepare();
-    echo $this->form()->openTag($form);
-//     $a =  new \DateTime('now');
-//     echo $a->format('Y-m-d H:i:s');
-    $ap = $form->get("post");
-    ?>
-	<div class="form-group">
-		<label for="inputUsername" class="col-sm-2 control-label">Title</label>
-		<div class="col-sm-10">
-			<?php echo $this->formHidden($form->get('security')); ?>
-			<?php echo $this->formRow($ap->get('title')); ?>
-		</div>
-	</div>
-	
-	
-	<div class="form-group">
-		<label for="inputUsername" class="col-sm-2 control-label">Content</label>
-		<div class="col-sm-10">
-			<?php echo $this->formRow($ap->get('content')); ?>
-		</div>
-	</div>
-	
-<!-- 	<div class="form-group"> -->
-<!-- 		<label for="inputUsername" class="col-sm-2 control-label">Slug</label> -->
-<!-- 		<div class="col-sm-10"> -->
-			<?php //echo $this->formRow($ap->get('slug')); ?>
-<!-- 		</div> -->
-<!-- 	</div> -->
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed');
+            } catch (e) {
+            }
+        </script>
 
-	<div class="form-group">
-		<label for="inputUsername" class="col-sm-2 control-label">Staus</label>
-		<div class="col-sm-10">
-			<?php echo $this->formRow($ap->get('status')); ?>
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<label for="inputUsername" class="col-sm-2 control-label">Comment Status</label>
-		<div class="col-sm-10">
-			<?php echo $this->formRow($ap->get('commentStatus')); ?>
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<label for="inputUsername" class="col-sm-2 control-label">Post Status</label>
-		<div class="col-sm-10">
-			<?php echo $this->formRow($ap->get('postStatus')); ?>
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<label for="inputUsername" class="col-sm-2 control-label">Parent</label>
-		<div class="col-sm-10">
-			<?php echo $this->formRow($ap->get('parent')); ?>
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<label for="inputUsername" class="col-sm-2 control-label">Account</label>
-		<div class="col-sm-10">
-			<?php echo $this->formRow($ap->get('account')); ?>
-		</div>
-	</div>
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="<?php echo $this->url('home'); ?>"><?php echo $this->translate('Dashboard'); ?></a>
+            </li>
+            <li>
+                <a href="<?php echo $this->url('post'); ?>"><?php echo $this->translate('Posts'); ?></a>
+            </li>
+            <li class="active">
+                <?php echo $this->translate('Add New'); ?>
+            </li>
+        </ul>
+        <!-- .breadcrumb -->
 
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<?php echo $this->formRow($form->get('button')); ?>
-		</div>
-	</div>
-	<?php echo $this->form()->closeTag(); ?>
+        <div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div><!-- #nav-search -->
+    </div>
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                <?php echo $this->translate('Add New Post'); ?>               
+            </h1>
+        </div>
+        <div class="row">
+
+            <div class="col-xs-12">
+                <?php
+                $form->setAttribute('action', $this->url('post', [
+                            'controller' => 'index',
+                            'action' => 'add'
+                ]));
+                $form->prepare();
+                echo $this->form()->openTag($form);
+
+                $ap = $form->get("post");
+//                $ap->get('commentStatus')->setOptions([
+//                    "value_options" => [
+//                        "E" => $this->translate("Enable"),
+//                        "D" => $this->translate("Disable")
+//                    ]
+//                ]);
+//                $ap->get('status')->setOptions([
+//                    "value_options" => [
+//                        "P" => $this->translate("Publish"),
+//                        "D" => $this->translate("Draft")
+//                    ]
+//                ]);
+//                $form->get('button')->setAttributes([
+//                    'value' => $this->translate("Save")
+//                ]);
+                ?>
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label no-padding-right"><?php echo $this->translate('Title'); ?></label>
+                    <div class="col-sm-9">
+                        <?php echo $this->formHidden($form->get('security')); ?>
+                        <?php echo $this->formRow($ap->get('title')); ?>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label no-padding-right"><?php echo $this->translate('Content'); ?></label>
+                    <div class="col-sm-9">
+                        <?php echo $this->formRow($ap->get('content')); ?>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label no-padding-right"><?php echo $this->translate('Status'); ?></label>
+                    <div class="col-sm-9">
+                        <?php echo $this->formRow($ap->get('status')); ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label no-padding-right"><?php echo $this->translate('Comment Status'); ?></label>
+                    <div class="col-sm-9">
+                        <?php echo $this->formRow($ap->get('commentStatus')); ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label no-padding-right"><?php echo $this->translate('Post Status'); ?></label>
+                    <div class="col-sm-9">
+                        <?php echo $this->formRow($ap->get('postStatus')); ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label no-padding-right"><?php echo $this->translate('Parent'); ?></label>
+                    <div class="col-sm-9">
+                        <?php echo $this->formRow($ap->get('parent')); ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label no-padding-right"><?php echo $this->translate('Account'); ?></label>
+                    <div class="col-sm-9">
+                        <?php echo $this->formRow($ap->get('account')); ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <?php echo $this->formRow($form->get('button')); ?>
+                    </div>
+                </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script>
+   jQuery(function ($){
+        $('ul.nav > li.words').addClass('active open');
+        $('ul.submenu > li.add-new-post').addClass('active');
+   });   
+</script>

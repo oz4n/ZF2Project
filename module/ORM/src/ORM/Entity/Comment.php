@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Comment
  *
- * @ORM\Table(name="comment", indexes={@ORM\Index(name="fk_comment_post1_idx", columns={"post_id"})})
+ * @ORM\Table(name="comment", indexes={@ORM\Index(name="fk_comment_post1_idx", columns={"post_id"}), @ORM\Index(name="fk_comment_comment1_idx", columns={"parent"})})
  * @ORM\Entity
  */
 class Comment
@@ -64,11 +64,14 @@ class Comment
     private $createTime;
 
     /**
-     * @var integer
+     * @var \ORM\Entity\Comment
      *
-     * @ORM\Column(name="parent", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="ORM\Entity\Comment")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     * })
      */
-    private $parent = '0';
+    private $parent;
 
     /**
      * @var \ORM\Entity\Post
@@ -233,10 +236,10 @@ class Comment
     /**
      * Set parent
      *
-     * @param integer $parent
+     * @param \ORM\Entity\Comment $parent
      * @return Comment
      */
-    public function setParent($parent)
+    public function setParent(\ORM\Entity\Comment $parent = null)
     {
         $this->parent = $parent;
 
@@ -246,7 +249,7 @@ class Comment
     /**
      * Get parent
      *
-     * @return integer 
+     * @return \ORM\Entity\Comment 
      */
     public function getParent()
     {

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Post
  *
- * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_post_account1_idx", columns={"account_id"})})
+ * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_post_account1_idx", columns={"account_id"}), @ORM\Index(name="fk_post_post1_idx", columns={"parent"})})
  * @ORM\Entity
  */
 class Post
@@ -37,8 +37,7 @@ class Post
 
     /**
      * @var string
-     * 
-     * @Gedmo\Mapping\Annotation\Slug(fields={"title"}, separator="-", updatable=true)     
+     *
      * @ORM\Column(name="slug", type="text", nullable=false)
      */
     private $slug;
@@ -53,15 +52,13 @@ class Post
     /**
      * @var \DateTime
      *
-     * @Gedmo\Mapping\Annotation\Timestampable(on="create")
      * @ORM\Column(name="create_time", type="datetime", nullable=false)
      */
     private $createTime;
 
     /**
      * @var \DateTime
-     * 
-     * @Gedmo\Mapping\Annotation\Timestampable(on="update")
+     *
      * @ORM\Column(name="update_time", type="datetime", nullable=false)
      */
     private $updateTime;
@@ -81,11 +78,14 @@ class Post
     private $postStatus;
 
     /**
-     * @var integer
+     * @var \ORM\Entity\Post
      *
-     * @ORM\Column(name="parent", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="ORM\Entity\Post")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     * })
      */
-    private $parent = '0';
+    private $parent;
 
     /**
      * @var \ORM\Entity\Account
@@ -318,10 +318,10 @@ class Post
     /**
      * Set parent
      *
-     * @param integer $parent
+     * @param \ORM\Entity\Post $parent
      * @return Post
      */
-    public function setParent($parent)
+    public function setParent(\ORM\Entity\Post $parent = null)
     {
         $this->parent = $parent;
 
@@ -331,7 +331,7 @@ class Post
     /**
      * Get parent
      *
-     * @return integer 
+     * @return \ORM\Entity\Post 
      */
     public function getParent()
     {

@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZendSkeletonApplication\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-21 14:32+0800\n"
+"PO-Revision-Date: 2014-03-21 14:32+0800\n"
+"Last-Translator: Evan Coury <me@evancoury.com>\n"
+"Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
+"Language: id_ID\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../view/page/page/add.phtml:14 ../view/page/page/edit.phtml:14
+#: ../view/page/page/index.phtml:14
+msgid "Dashboard"
+msgstr "Beranda"
+
+#: ../view/page/page/add.phtml:19 ../view/page/page/edit.phtml:19
+#: ../view/page/page/index.phtml:18 ../view/page/page/index.phtml:35
+msgid "Pages"
+msgstr "Halaman"
+
+#: ../view/page/page/add.phtml:23 ../view/page/page/edit.phtml:43
+#: ../view/page/page/index.phtml:39
+msgid "Add New"
+msgstr "Tambah Baru"
+
+#: ../view/page/page/add.phtml:40
+msgid "Add New Page"
+msgstr "Tambah Halaman Baru"
+
+#: ../view/page/page/edit.phtml:23 ../view/page/page/edit.phtml:40
+msgid "Edit Page"
+msgstr "Ubah Halaman"
+
+#: ../view/page/page/edit.phtml:43
+msgid "or"
+msgstr "atau"
+
+#~ msgid "Posts"
+#~ msgstr "Postingan"
+
+#~ msgid "Categories"
+#~ msgstr "Katagori"
+
+#~ msgid "Add New Category"
+#~ msgstr "Tambah Kategori Baru"
+
+#~ msgid "Edit Category"
+#~ msgstr "Ubah Kategori"
+
+#~ msgid "Comments"
+#~ msgstr "Komentar"
+
+#~ msgid "Add New Comment"
+#~ msgstr "Tambah Komentar Baru"
+
+#~ msgid "Edit Comments"
+#~ msgstr "Ubah Komentar"
+
+#~ msgid "Edit Comment"
+#~ msgstr "Ubah Komentar"
+
+#~ msgid "Add New Post"
+#~ msgstr "Tambah Postingan Baru"
+
+#~ msgid "Post"
+#~ msgstr "Postingan"
+
+#~ msgid "Title"
+#~ msgstr "Judul"
+
+#~ msgid "Content"
+#~ msgstr "Isi"
+
+#~ msgid "Status"
+#~ msgstr "Status"
+
+#~ msgid "Comment Status"
+#~ msgstr "Status Komentar"
+
+#~ msgid "Post Status"
+#~ msgstr "Status Postingan"
+
+#~ msgid "Parent"
+#~ msgstr "Bapak"
+
+#~ msgid "Account"
+#~ msgstr "Akun"
+
+#~ msgid "Edit Post"
+#~ msgstr "Ubah Postingan"
+
+#~ msgid "No"
+#~ msgstr "No"
+
+#~ msgid "Slug"
+#~ msgstr "Slug"
+
+#~ msgid "Action"
+#~ msgstr "Aksi"
+
+#~ msgid "Edit"
+#~ msgstr "Ubah"
+
+#~ msgid "Delete"
+#~ msgstr "Hapus"
+
+#~ msgid "Tags"
+#~ msgstr "Lebel"

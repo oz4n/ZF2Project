@@ -25,7 +25,7 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'title',
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'class' => 'form-control'
+                'class' => 'col-xs-10 col-sm-5'
             ]
         ]);
         
@@ -33,7 +33,7 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'content',
             'type' => 'Zend\Form\Element\Textarea',
             'attributes' => [
-                'class' => 'form-control'
+                'class' => 'col-xs-10 col-sm-5'
             ]
         ]);
         
@@ -72,7 +72,7 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'status',
             'type' => 'Zend\Form\Element\Select',
             'attributes' => [
-                'class' => 'form-control'
+                'class' => 'col-xs-10 col-sm-5'
             ],
             "options" => [
                 "value_options" => [
@@ -86,7 +86,7 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'commentStatus',
             'type' => 'Zend\Form\Element\Select',
             'attributes' => [
-                'class' => 'form-control'
+                'class' => 'col-xs-10 col-sm-5'
             ],
             "options" => [
                 "value_options" => [
@@ -100,7 +100,7 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'postStatus',
             'type' => 'Zend\Form\Element\Select',
             'attributes' => [
-                'class' => 'form-control'
+                'class' => 'col-xs-10 col-sm-5'
             ],
             "options" => [
                 "value_options" => [
@@ -114,7 +114,7 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'name' => 'parent',
             "attributes" => [
-                "class" => "form-control"
+                "class" => "col-xs-10 col-sm-5"
             ],
             'options' => [
                 'object_manager' => $em,
@@ -127,7 +127,7 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
             'name' => 'account',
             "attributes" => [
-                "class" => "form-control"
+                "class" => "col-xs-10 col-sm-5"
             ],
             'options' => [
                 'object_manager' => $em,

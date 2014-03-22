@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManager;
 use ORM\Registry\Registry;
 use ORM\Entity\Post;
 use Post\Form\PostForm;
-use Zend\Crypt\PublicKey\Rsa\PublicKey;
 
 class PostController extends AbstractActionController
 {
@@ -78,6 +77,8 @@ class PostController extends AbstractActionController
         return $this->PostDaoManager()->find($id);
     }
     
+   
+
     /**
      * 
      * @return \Zend\View\Model\ViewModel
@@ -85,9 +86,9 @@ class PostController extends AbstractActionController
     public function indexAction()
     {
         $repository = $this->PostDaoManager();
-        $posts = $repository->findAll();
+        $posts = $repository->findAll();       
         return new ViewModel([
-            'posts' => $posts
+            'posts' => $posts,           
         ]);
     }
 
@@ -105,7 +106,7 @@ class PostController extends AbstractActionController
         
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setData($request->getPost());
+            $form->setData($request->getPost());           
             // $post->setCreateTime(new \DateTime('now'));
             // $post->setUpdateTime(new \DateTime('now'));
             
@@ -148,6 +149,7 @@ class PostController extends AbstractActionController
         
         return new ViewModel([
             'form' => $form,
+            'post' => $post,
             'id' => $id
         ]);
     }

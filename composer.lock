@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8279be5b3016154c2df854ab7fdf3443",
+    "hash": "6fd2d2f7673f4a2629cb06980f5d3200",
     "packages": [
         {
             "name": "bjyoungblood/BjyProfiler",
@@ -968,17 +968,68 @@
             "time": "2014-02-28 10:17:44"
         },
         {
+            "name": "mwillbanks/zfc-twitter-bootstrap",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mwillbanks/ZfcTwitterBootstrap.git",
+                "reference": "e3ee2072dfe6be0b862102a84dc0c26bba655cf4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/e3ee2072dfe6be0b862102a84dc0c26bba655cf4",
+                "reference": "e3ee2072dfe6be0b862102a84dc0c26bba655cf4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-filter": "2.*",
+                "zendframework/zend-form": "2.*",
+                "zendframework/zend-navigation": "2.*",
+                "zendframework/zend-view": "2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=3.7.7",
+                "zendframework/zendframework": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ZfcTwitterBootstrap": "src/"
+                },
+                "classmap": [
+                    "./"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Mike Willbanks",
+                    "email": "mike@digitalstruct.com",
+                    "homepage": "http://blog.digitalstruct.com/"
+                }
+            ],
+            "description": "A module that assists in implementing Twitter Bootstrap for ZF2",
+            "homepage": "https://github.com/mwillbanks/ZfcTwitterBootstrap",
+            "keywords": [
+                "twBootstrap",
+                "twitter bootstrap",
+                "zf2"
+            ],
+            "time": "2013-07-23 19:40:34"
+        },
+        {
             "name": "neilime/zf2-twb-bundle",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neilime/zf2-twb-bundle.git",
-                "reference": "88dce5b4559a80945b416fcf5b30b84738af0962"
+                "reference": "e7b90a101fef9c9d278575554d7d107ccd9efaec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neilime/zf2-twb-bundle/zipball/88dce5b4559a80945b416fcf5b30b84738af0962",
-                "reference": "88dce5b4559a80945b416fcf5b30b84738af0962",
+                "url": "https://api.github.com/repos/neilime/zf2-twb-bundle/zipball/e7b90a101fef9c9d278575554d7d107ccd9efaec",
+                "reference": "e7b90a101fef9c9d278575554d7d107ccd9efaec",
                 "shasum": ""
             },
             "require": {
@@ -1025,7 +1076,7 @@
                 "twitter bootstrap",
                 "zend framework 2"
             ],
-            "time": "2014-03-01 08:43:27"
+            "time": "2014-03-19 21:41:02"
         },
         {
             "name": "phly/phly-restfully",
@@ -1314,20 +1365,20 @@
         },
         {
             "name": "zendframework/zendframework",
-            "version": "2.2.6",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "5eae447d46b00a280573b94c398b2f46f45a6903"
+                "reference": "5d22cee82f6f7f9218f47f22a145f3e95c39cacf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/5eae447d46b00a280573b94c398b2f46f45a6903",
-                "reference": "5eae447d46b00a280573b94c398b2f46f45a6903",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/5d22cee82f6f7f9218f47f22a145f3e95c39cacf",
+                "reference": "5d22cee82f6f7f9218f47f22a145f3e95c39cacf",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": ">=5.3.23",
                 "zendframework/zendxml": "~1.0-dev"
             },
             "replace": {
@@ -1388,14 +1439,16 @@
                 "fabpot/php-cs-fixer": "*@dev",
                 "ircmaxell/random-lib": "dev-master",
                 "ircmaxell/security-lib": "dev-master",
-                "ocramius/proxy-manager": "0.4.*",
-                "phpunit/phpunit": "3.7.*"
+                "mikey179/vfsstream": "1.2.*",
+                "phpunit/phpunit": "3.7.*",
+                "satooshi/php-coveralls": "dev-master",
+                "sebastianbergmann/phpcov": "1.1.0"
             },
             "suggest": {
                 "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
                 "ext-intl": "ext/intl for i18n features (included in default builds of PHP)",
                 "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
-                "ocramius/proxy-manager": "ProxyManager to handle lazy initialization of services",
+                "ocramius/proxy-manager": "ProxyManager 0.5.* to handle lazy initialization of services",
                 "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
                 "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
             },
@@ -1426,7 +1479,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2014-03-06 17:27:03"
+            "time": "2014-03-12 16:51:16"
         },
         {
             "name": "zendframework/zendgdata",
@@ -1672,12 +1725,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ZF-Commons/ZfcUser.git",
-                "reference": "a876f5765ea39256cb572048b7f6a425cec5ff13"
+                "reference": "5589c505834a958ef4f7ee68d9d092053cd3493f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ZF-Commons/ZfcUser/zipball/a876f5765ea39256cb572048b7f6a425cec5ff13",
-                "reference": "a876f5765ea39256cb572048b7f6a425cec5ff13",
+                "url": "https://api.github.com/repos/ZF-Commons/ZfcUser/zipball/5589c505834a958ef4f7ee68d9d092053cd3493f",
+                "reference": "5589c505834a958ef4f7ee68d9d092053cd3493f",
                 "shasum": ""
             },
             "require": {
@@ -1733,7 +1786,7 @@
             "keywords": [
                 "zf2"
             ],
-            "time": "2014-03-07 12:02:08"
+            "time": "2014-03-16 09:10:27"
         },
         {
             "name": "zf-commons/zfc-user-doctrine-orm",
@@ -1954,7 +2007,8 @@
         "phly/phly-restfully": 20,
         "zircote/hal": 20,
         "zircote/api-problem": 20,
-        "neilime/zf2-twb-bundle": 20
+        "neilime/zf2-twb-bundle": 20,
+        "mwillbanks/zfc-twitter-bootstrap": 20
     },
     "platform": {
         "php": ">=5.3.3"

@@ -1,13 +1,13 @@
 <?php
-return [ 
-		'controllers' => [ 
-				'invokables' => [ 
-						'Account\Controller\Account' => 'Account\Controller\AccountController',
-						'Account\Controller\TermAccount' => 'Account\Controller\TermAccountController' 
-				] 
-		],
-		
-		'router' => [
+
+return [
+    'controllers' => [
+        'invokables' => [
+            'Account\Controller\Account' => 'Account\Controller\AccountController',
+            'Account\Controller\TermAccount' => 'Account\Controller\TermAccountController'
+        ]
+    ],
+    'router' => [
         'routes' => [
             'account' => [
                 'type' => 'segment',
@@ -43,5 +43,15 @@ return [
         'template_path_stack' => [
             'account' => __DIR__ . '/../view'
         ]
-    ] 
+    ],
+    'translator' => array(
+        'locale' => 'id_ID',
+        'translation_file_patterns' => array(
+            array(
+                'type' => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern' => '%s.mo',
+            ),
+        ),
+    ),
 ];

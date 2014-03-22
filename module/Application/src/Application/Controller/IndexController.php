@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -11,11 +12,19 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Navigation\Page\Mvc;
 
-class IndexController extends AbstractActionController
-{
-    public function indexAction()
-    {
+class IndexController extends AbstractActionController {
+    
+    public function indexAction() {
+        $page = new Mvc([
+	           
+        ]);
         return new ViewModel();
     }
+    
+    public function testAction() {
+        return new ViewModel();
+    }
+
 }

@@ -7,22 +7,27 @@
  */
 return array(
     'modules' => array(
-        'TwbBundle',
         'DoctrineModule',
         'DoctrineORMModule',
         'ZfcBase',
-        'Application',
         'ZendDeveloperTools',
+        'ZfcTwitterBootstrap',
+        'Application',
         'ORM',
         'Account',
         'Post',
-        'User'
-        ),
+        'User',
+        'Page',
+        'Appearance',
+        'Dashboard'
+    ),
     'module_listener_options' => array(
         'module_paths' => array(
             './module',
             './vendor'
-            ),
-        'config_glob_paths' => array('config/autoload/{,*.}{global,local}.php')
+        ),
+        'config_glob_paths' => array(
+            'config/autoload/{,*.}{global,local}.php'
         )
-    );
+    )
+);

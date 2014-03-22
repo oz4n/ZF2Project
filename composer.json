@@ -3,7 +3,7 @@
 	"description": "Skeleton Application for ZF2",
 	"require": {
 		"php": ">=5.3.3",
-		"zendframework/zendframework": "2.2.*",
+		"zendframework/zendframework": "2.3.*",
 		"doctrine/doctrine-module": "0.*",
 		"doctrine/doctrine-orm-module": "0.*",
 		"gedmo/doctrine-extensions": "2.3.*",
@@ -24,7 +24,8 @@
 		"zircote/api-problem": "dev-master",
 		"bjyoungblood/BjyProfiler": "=v1.0.0",
 		"neilime/zf2-twb-bundle": "2.0",
-		"neilime/zf2-twb-bundle": "dev-master"
+		"neilime/zf2-twb-bundle": "dev-master",
+		"mwillbanks/zfc-twitter-bootstrap": "@dev"
 	},
 	"keywords": [ "framework", "zf2" ],
 	"license": "BSD-3-Clause",

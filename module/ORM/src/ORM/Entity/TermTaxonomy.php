@@ -6,8 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TermTaxonomy
- *
- * @ORM\Table(name="term_taxonomy", indexes={@ORM\Index(name="fk_term_taxonomy_terminologi1_idx", columns={"terminologi_id"})})
+ * 
+ * @Gedmo\Mapping\Annotation\Tree(type="nested")
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
+ * @ORM\Table(name="term_taxonomy", indexes={@ORM\Index(name="fk_term_taxonomy_terminologi1_idx", columns={"terminologi_id"}), @ORM\Index(name="fk_term_taxonomy_term_taxonomy1_idx", columns={"parent"})})
  * @ORM\Entity
  */
 class TermTaxonomy
@@ -59,9 +61,30 @@ class TermTaxonomy
     /**
      * @var integer
      *
-     * @ORM\Column(name="parent", type="integer", nullable=true)
+     * @Gedmo\Mapping\Annotation\TreeLeft
+     * @ORM\Column(name="lft", type="integer", nullable=true)
      */
-    private $parent = '0';
+    private $lft = '0';
+
+    
+    /**
+     * @var integer
+     * 
+     * @Gedmo\Mapping\Annotation\TreeRight
+     * @ORM\Column(name="rgt", type="integer", nullable=true)
+     */
+    private $rgt = '0';
+
+    /**
+     * @var \ORM\Entity\TermTaxonomy
+     *
+     * @Gedmo\Mapping\Annotation\TreeParent
+     * @ORM\ManyToOne(targetEntity="ORM\Entity\TermTaxonomy")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     * })
+     */
+    private $parent;
 
     /**
      * @var \ORM\Entity\Terminologi
@@ -215,12 +238,59 @@ class TermTaxonomy
     }
 
     /**
-     * Set parent
+     * Set lft
      *
-     * @param integer $parent
+     * @param integer $lft
      * @return TermTaxonomy
      */
-    public function setParent($parent)
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
+
+        return $this;
+    }
+
+    /**
+     * Get lft
+     *
+     * @return integer 
+     */
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    
+    /**
+     * Set rgt
+     *
+     * @param integer $rgt
+     * @return TermTaxonomy
+     */
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
+
+        return $this;
+    }
+
+    /**
+     * Get rgt
+     *
+     * @return integer 
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \ORM\Entity\TermTaxonomy $parent
+     * @return TermTaxonomy
+     */
+    public function setParent(\ORM\Entity\TermTaxonomy $parent = null)
     {
         $this->parent = $parent;
 
@@ -230,7 +300,7 @@ class TermTaxonomy
     /**
      * Get parent
      *
-     * @return integer 
+     * @return \ORM\Entity\TermTaxonomy 
      */
     public function getParent()
     {
