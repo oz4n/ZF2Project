@@ -1,0 +1,35 @@
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs"></div>
+	<div class="page-content">
+		<div class="row">
+			     <div class="col-xs-12">
+			     <?php echo $this->partial('csn-user/layout/nav-menu', array('navMenu' => $this->navMenu)); ?>
+                <hr />
+                <div class="jumbotron">
+                <h2>Change email</h2>
+                
+                <?php
+                $form = $this->form;
+                $form->setAttribute('action', $this->url('changeEmail'));
+                $form->prepare();
+                
+                echo $this->form()->openTag($form);
+                echo $this->formRow($form->get('currentPassword'));
+                echo '<br />';
+                echo $this->formRow($form->get('newEmail'));
+                echo '<br />';
+                echo $this->formRow($form->get('newEmailConfirm'));
+                echo '<br />';
+                echo $this->formSubmit($form->get('submit'));
+                echo $this->form()->closeTag();
+                ?>
+                <br/>
+                <?php echo '<div style="font-size: 20px; color: red;">' . $this->message . '</div>'; ?>
+                </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
