@@ -6,9 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TermTaxonomy
- * 
- * @Gedmo\Mapping\Annotation\Tree(type="nested")
- * @Doctrine\ORM\Mapping\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
+ *
  * @ORM\Table(name="term_taxonomy", indexes={@ORM\Index(name="fk_term_taxonomy_terminologi1_idx", columns={"terminologi_id"}), @ORM\Index(name="fk_term_taxonomy_term_taxonomy1_idx", columns={"parent"})})
  * @ORM\Entity
  */
@@ -61,30 +59,16 @@ class TermTaxonomy
     /**
      * @var integer
      *
-     * @Gedmo\Mapping\Annotation\TreeLeft
      * @ORM\Column(name="lft", type="integer", nullable=true)
      */
     private $lft = '0';
 
-    
     /**
      * @var integer
-     * 
-     * @Gedmo\Mapping\Annotation\TreeRight
+     *
      * @ORM\Column(name="rgt", type="integer", nullable=true)
      */
     private $rgt = '0';
-
-    /**
-     * @var \ORM\Entity\TermTaxonomy
-     *
-     * @Gedmo\Mapping\Annotation\TreeParent
-     * @ORM\ManyToOne(targetEntity="ORM\Entity\TermTaxonomy")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="parent", referencedColumnName="id")
-     * })
-     */
-    private $parent;
 
     /**
      * @var \ORM\Entity\Terminologi
@@ -95,6 +79,16 @@ class TermTaxonomy
      * })
      */
     private $terminologi;
+
+    /**
+     * @var \ORM\Entity\TermTaxonomy
+     *
+     * @ORM\ManyToOne(targetEntity="ORM\Entity\TermTaxonomy")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     * })
+     */
+    private $parent;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -260,7 +254,6 @@ class TermTaxonomy
         return $this->lft;
     }
 
-    
     /**
      * Set rgt
      *
@@ -285,29 +278,6 @@ class TermTaxonomy
     }
 
     /**
-     * Set parent
-     *
-     * @param \ORM\Entity\TermTaxonomy $parent
-     * @return TermTaxonomy
-     */
-    public function setParent(\ORM\Entity\TermTaxonomy $parent = null)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return \ORM\Entity\TermTaxonomy 
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
      * Set terminologi
      *
      * @param \ORM\Entity\Terminologi $terminologi
@@ -328,6 +298,29 @@ class TermTaxonomy
     public function getTerminologi()
     {
         return $this->terminologi;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \ORM\Entity\TermTaxonomy $parent
+     * @return TermTaxonomy
+     */
+    public function setParent(\ORM\Entity\TermTaxonomy $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \ORM\Entity\TermTaxonomy 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**

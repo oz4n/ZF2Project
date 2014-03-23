@@ -51,13 +51,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             ->serviceLocator
             ->expects($this->any())
             ->method('get')
-            ->will($this->returnCallback(function ($name) use ($authorize) {
-                if ($name === 'BjyAuthorize\Service\Authorize') {
-                    return $authorize;
-                }
-
-                throw new \UnexpectedValueException();
-            }));
+            ->with('BjyAuthorize\\Service\\Authorize')
+            ->will($this->returnValue($authorize));
     }
 
     /**
@@ -129,9 +124,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             ->authorize
             ->expects($this->any())
             ->method('isAllowed')
-            ->will($this->returnValue(function ($resource) {
-                return $resource === 'controller/test-controller';
-            }));
+            ->will(
+                $this->returnValue(
+                    function ($resource) {
+                        return $resource === 'controller/test-controller';
+                    }
+                )
+            );
 
         $this->assertNull($this->controllerGuard->onDispatch($event), 'Does not stop event propagation');
     }
@@ -147,9 +146,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             ->authorize
             ->expects($this->any())
             ->method('isAllowed')
-            ->will($this->returnValue(function ($resource) {
-                return $resource === 'controller/test-controller:test-action';
-            }));
+            ->will(
+                $this->returnValue(
+                    function ($resource) {
+                        return $resource === 'controller/test-controller:test-action';
+                    }
+                )
+            );
 
         $this->assertNull($this->controllerGuard->onDispatch($event), 'Does not stop event propagation');
     }
@@ -165,9 +168,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             ->authorize
             ->expects($this->any())
             ->method('isAllowed')
-            ->will($this->returnValue(function ($resource) {
-                return $resource === 'controller/test-controller:put';
-            }));
+            ->will(
+                $this->returnValue(
+                    function ($resource) {
+                        return $resource === 'controller/test-controller:put';
+                    }
+                )
+            );
 
         $this->assertNull($this->controllerGuard->onDispatch($event), 'Does not stop event propagation');
     }
@@ -202,14 +209,15 @@ class ControllerTest extends PHPUnit_Framework_TestCase
             ->method('isAllowed')
             ->will($this->returnValue(false));
         $event->expects($this->once())->method('setError')->with(Controller::ERROR);
-        $event->expects($this->exactly(3))->method('setParam')->with(
-            $this->callback(function ($key) {
-                return in_array($key, array('identity', 'controller', 'action'));
-            }),
-            $this->callback(function ($val) {
-                return in_array($val, array('admin', 'test-controller', 'test-action'));
-            })
+
+        $event->expects($this->at(4))->method('setParam')->with('identity', 'admin');
+        $event->expects($this->at(5))->method('setParam')->with('controller', 'test-controller');
+        $event->expects($this->at(6))->method('setParam')->with('action', 'test-action');
+        $event->expects($this->at(7))->method('setParam')->with(
+            'exception',
+            $this->isInstanceOf('BjyAuthorize\Exception\UnAuthorizedException')
         );
+
         $event
             ->getTarget()
             ->getEventManager()
@@ -243,17 +251,21 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $routeMatch
             ->expects($this->any())
             ->method('getParam')
-            ->will($this->returnCallback(function ($param) use ($controller, $action) {
-                if ($param === 'controller') {
-                    return $controller;
-                }
+            ->will(
+                $this->returnCallback(
+                    function ($param) use ($controller, $action) {
+                        if ($param === 'controller') {
+                            return $controller;
+                        }
 
-                if ($param === 'action') {
-                    return $action;
-                }
+                        if ($param === 'action') {
+                            return $action;
+                        }
 
-                return null;
-            }));
+                        return null;
+                    }
+                )
+            );
 
         return $event;
     }

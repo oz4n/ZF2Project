@@ -10,6 +10,10 @@ return array(
 					'host' => 'localhost',
 					'port' => '3306',
 					'dbname' => 'noizing_zf2',
+				    'charset' => 'utf8', // extra
+				    'driverOptions' => array(
+				        1002=>'SET NAMES utf8'
+				    )
 				),
 			),
 		)

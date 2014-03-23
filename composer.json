@@ -9,9 +9,9 @@
     "gedmo/doctrine-extensions" : "2.3.*",
     "zendframework/zftool" : "dev-master",
     "zf-commons/zfc-base" : "0.*",
-    "zf-commons/zfc-user" : "dev-master",
+    "zf-commons/zfc-user" : "0.1.*",
     "zf-commons/zfc-user-doctrine-orm" : "0.1.*",
-    "bjyoungblood/bjy-authorize" : "1.2.*",
+    "bjyoungblood/bjy-authorize" : "1.4.*",
     "knplabs/doctrine-behaviors" : "dev-master",
     "zendexperts/ze-theme" : "dev-master",
     "zendframework/zendgdata" : "2.0.*@dev",
@@ -23,7 +23,10 @@
     "zircote/hal" : "dev-master",
     "zircote/api-problem" : "dev-master",
     "bjyoungblood/BjyProfiler" : "=v1.0.0",
-    "neilime/zf2-twb-bundle" : "dev-master"
+    "neilime/zf2-twb-bundle" : "dev-master",
+    "coolcsn/csn-user" : "dev-master",
+    "coolcsn/csn-authorization" : "dev-master",    
+    "manuakasam/sam-user" : "dev-master"
   },
   "keywords" : [ "framework", "zf2" ],
   "license" : "BSD-3-Clause",

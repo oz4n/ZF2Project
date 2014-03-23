@@ -9,16 +9,18 @@ return array(
     'modules' => array(
         'DoctrineModule',
         'DoctrineORMModule',
-        'ZfcBase',
         'ZendDeveloperTools',
-        'Setting',
+        'ZfcBase',
+        'ZfcUser',
+        'ZfcUserDoctrineORM',
+        'BjyAuthorize',
+        'Setting',        
         'ORM',
-        'Account',
         'Post',
-        'User',
         'Page',
         'Appearance',
-        'Dashboard'
+        'Dashboard',
+        'Site'
     ),
     'module_listener_options' => array(
         'module_paths' => array(

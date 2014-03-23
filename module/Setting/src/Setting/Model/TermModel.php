@@ -27,6 +27,7 @@ class TermModel
                 'route' => 'dashboard',
                 'action' => 'index',
                 'id' => 'icon-dashboard',
+                'roles' => array('admin'),
                 'pages' => array()
             ),
             array(

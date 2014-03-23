@@ -43,7 +43,7 @@ class Register extends Base
     }
 
     /**
-     * Set Registration Options
+     * Set Regsitration Options
      *
      * @param RegistrationOptionsInterface $registrationOptions
      * @return Register
@@ -55,7 +55,7 @@ class Register extends Base
     }
 
     /**
-     * Get Registration Options
+     * Get Regsitration Options
      *
      * @return RegistrationOptionsInterface
      */

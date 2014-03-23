@@ -38,10 +38,24 @@ return array(
 
         // Template name for the unauthorized strategy
         'template'              => 'error/403',
+
+        // cache options have to be compatible with Zend\Cache\StorageFactory::factory
+        'cache_options'         => array(
+            'adapter'   => array(
+                'name' => 'memory',
+            ),
+            'plugins'   => array(
+                'serializer',
+            )
+        ),
+
+        // Key used by the cache for caching the acl
+        'cache_key'             => 'bjyauthorize_acl'
     ),
 
     'service_manager' => array(
         'factories' => array(
+            'BjyAuthorize\Cache'                    => 'BjyAuthorize\Service\CacheFactory',
             'BjyAuthorize\Config'                   => 'BjyAuthorize\Service\ConfigServiceFactory',
             'BjyAuthorize\Guards'                   => 'BjyAuthorize\Service\GuardsServiceFactory',
             'BjyAuthorize\RoleProviders'            => 'BjyAuthorize\Service\RoleProvidersServiceFactory',
@@ -51,6 +65,7 @@ return array(
             'BjyAuthorize\Guard\Route'              => 'BjyAuthorize\Service\RouteGuardServiceFactory',
             'BjyAuthorize\Provider\Role\Config'     => 'BjyAuthorize\Service\ConfigRoleProviderServiceFactory',
             'BjyAuthorize\Provider\Role\ZendDb'     => 'BjyAuthorize\Service\ZendDbRoleProviderServiceFactory',
+            'BjyAuthorize\Provider\Rule\Config'     => 'BjyAuthorize\Service\ConfigRuleProviderServiceFactory',
             'BjyAuthorize\Provider\Resource\Config' => 'BjyAuthorize\Service\ConfigResourceProviderServiceFactory',
             'BjyAuthorize\Service\Authorize'        => 'BjyAuthorize\Service\AuthorizeFactory',
             'BjyAuthorize\Provider\Identity\ProviderInterface'

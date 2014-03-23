@@ -12,5 +12,7 @@
  */
 
 return array(
-    // ...
+    'module_layouts' => array(
+        'ModuleName' => 'layout/some-layout',
+    ),
 );

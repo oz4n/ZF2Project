@@ -1,6 +1,6 @@
 # BjyAuthorize - Acl security for ZF2
 
-[![Travis-CI Build Status](https://api.travis-ci.org/bjyoungblood/BjyAuthorize.png?branch=master)](https://travis-ci.org/bjyoungblood/BjyAuthorize) [![Dependency Status](https://www.versioneye.com/package/php--bjyoungblood--bjy-authorize/badge.png)](https://www.versioneye.com/package/php--bjyoungblood--bjy-authorize)
+[![Travis-CI Build Status](https://api.travis-ci.org/bjyoungblood/BjyAuthorize.png?branch=master)](https://travis-ci.org/bjyoungblood/BjyAuthorize) [![Coverage Status](https://coveralls.io/repos/bjyoungblood/BjyAuthorize/badge.png)](https://coveralls.io/r/bjyoungblood/BjyAuthorize) [![Dependency Status](https://www.versioneye.com/package/php--bjyoungblood--bjy-authorize/badge.png)](https://www.versioneye.com/package/php--bjyoungblood--bjy-authorize)
 
 This module is designed provide a facade for `Zend\Permissions\Acl` that will
 ease its usage with modules and applications. By default, it provides simple
@@ -56,9 +56,8 @@ also check the [doctrine documentation](https://github.com/bjyoungblood/BjyAutho
      * `ZfcUser`
      * `BjyAuthorize`
  3. Import the SQL schema located in `./vendor/BjyAuthorize/data/schema.sql`.
- 4. Copy `./vendor/BjyAuthorize/config/module.config.php` to
-    `./config/autoload/module.bjyauthorize.global.php`.
- 5. Fill in the required configuration variable values in  `./config/autoload/module.bjyauthorize.global.php`
+ 4. Create a `./config/autoload/bjyauthorize.global.php` file and fill it with
+    configuration variable values as described in the following annotated example.
 
 Here is an annotated sample configuration file:
 

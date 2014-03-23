@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6fd2d2f7673f4a2629cb06980f5d3200",
+    "hash": "89c2568dc683440d564ebb3e7f1edb59",
     "packages": [
         {
             "name": "bjyoungblood/BjyProfiler",
@@ -53,21 +53,23 @@
         },
         {
             "name": "bjyoungblood/bjy-authorize",
-            "version": "1.2.6",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bjyoungblood/BjyAuthorize.git",
-                "reference": "cd96a85bc26026c947509e424ede32dc9b50781d"
+                "reference": "02723bd19f0bba33649d708022f8d0e0b795f57a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bjyoungblood/BjyAuthorize/zipball/cd96a85bc26026c947509e424ede32dc9b50781d",
-                "reference": "cd96a85bc26026c947509e424ede32dc9b50781d",
+                "url": "https://api.github.com/repos/bjyoungblood/BjyAuthorize/zipball/02723bd19f0bba33649d708022f8d0e0b795f57a",
+                "reference": "02723bd19f0bba33649d708022f8d0e0b795f57a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
+                "zendframework/zend-cache": "~2.1",
                 "zendframework/zend-eventmanager": "~2.1",
+                "zendframework/zend-http": "~2.1",
                 "zendframework/zend-mvc": "~2.1",
                 "zendframework/zend-permissions-acl": "~2.1",
                 "zendframework/zend-servicemanager": "~2.1",
@@ -75,13 +77,16 @@
             },
             "require-dev": {
                 "doctrine/common": ">=2.3,<2.5-dev",
+                "phpunit/phpunit": "~3.7",
+                "satooshi/php-coveralls": "~0.6",
+                "squizlabs/php_codesniffer": "1.4.*",
                 "zendframework/zend-developer-tools": "0.*",
                 "zf-commons/zfc-user": "0.*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -114,7 +119,120 @@
                 "zf2",
                 "zfc-user"
             ],
-            "time": "2013-05-12 16:07:25"
+            "time": "2013-07-05 11:59:46"
+        },
+        {
+            "name": "coolcsn/csn-authorization",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coolcsn/CsnAuthorization.git",
+                "reference": "1132c9f04cfc01b226e6e6187b707ac0b922832e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coolcsn/CsnAuthorization/zipball/1132c9f04cfc01b226e6e6187b707ac0b922832e",
+                "reference": "1132c9f04cfc01b226e6e6187b707ac0b922832e",
+                "shasum": ""
+            },
+            "require": {
+                "coolcsn/csn-user": "dev-master",
+                "doctrine/doctrine-orm-module": ">=0.7",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CsnAuthorization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Stoyan Cheresharov",
+                    "email": "stoyancheresharov@gmail.com",
+                    "homepage": "http://coolcsn.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Stoyan Revov",
+                    "email": "st.revov@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Authorization based on DoctrineORMModule and ACL",
+            "homepage": "https://github.com/coolcsn/CsnAuthorization",
+            "keywords": [
+                "csn-authorization",
+                "doctrine",
+                "doctrine-orm-module",
+                "zf2"
+            ],
+            "time": "2014-02-12 13:37:34"
+        },
+        {
+            "name": "coolcsn/csn-user",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coolcsn/CsnUser.git",
+                "reference": "39adb453bc6b37624f54488aa50e16d8a16ef7d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coolcsn/CsnUser/zipball/39adb453bc6b37624f54488aa50e16d8a16ef7d7",
+                "reference": "39adb453bc6b37624f54488aa50e16d8a16ef7d7",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": ">=0.7",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CsnUser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Stoyan Cheresharov",
+                    "email": "stoyancheresharov@gmail.com",
+                    "homepage": "http://coolcsn.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Stoyan Revov",
+                    "email": "st.revov@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Svetoslav Chonkov",
+                    "email": "svetoslav.chonkov@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Nikola Vasilev",
+                    "email": "niko7vasilev@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Authentication based on DoctrineORMModule",
+            "homepage": "https://github.com/coolcsn/CsnUser",
+            "keywords": [
+                "csn-user",
+                "doctrine",
+                "doctrine-orm-module",
+                "zf2"
+            ],
+            "time": "2014-02-25 17:56:41"
         },
         {
             "name": "doctrine/annotations",
@@ -968,55 +1086,54 @@
             "time": "2014-02-28 10:17:44"
         },
         {
-            "name": "mwillbanks/zfc-twitter-bootstrap",
+            "name": "manuakasam/sam-user",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mwillbanks/ZfcTwitterBootstrap.git",
-                "reference": "e3ee2072dfe6be0b862102a84dc0c26bba655cf4"
+                "url": "https://github.com/manuakasam/SamUser.git",
+                "reference": "935d252cac30284b66f7980d57e129983e8bb13e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mwillbanks/ZfcTwitterBootstrap/zipball/e3ee2072dfe6be0b862102a84dc0c26bba655cf4",
-                "reference": "e3ee2072dfe6be0b862102a84dc0c26bba655cf4",
+                "url": "https://api.github.com/repos/manuakasam/SamUser/zipball/935d252cac30284b66f7980d57e129983e8bb13e",
+                "reference": "935d252cac30284b66f7980d57e129983e8bb13e",
                 "shasum": ""
             },
             "require": {
+                "bjyoungblood/bjy-authorize": ">=1.2",
+                "doctrine/doctrine-orm-module": ">=0.7",
                 "php": ">=5.3.3",
-                "zendframework/zend-filter": "2.*",
-                "zendframework/zend-form": "2.*",
-                "zendframework/zend-navigation": "2.*",
-                "zendframework/zend-view": "2.*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": ">=3.7.7",
-                "zendframework/zendframework": "2.*"
+                "zf-commons/zfc-user": ">=0.1",
+                "zf-commons/zfc-user-doctrine-orm": ">=0.1"
             },
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "ZfcTwitterBootstrap": "src/"
-                },
-                "classmap": [
-                    "./"
-                ]
+                    "SamUser\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
             "authors": [
                 {
-                    "name": "Mike Willbanks",
-                    "email": "mike@digitalstruct.com",
-                    "homepage": "http://blog.digitalstruct.com/"
+                    "name": "Manuel Stosic",
+                    "email": "manuakasam@gmail.com",
+                    "homepage": "http://samminds.com/",
+                    "role": "Developer"
                 }
             ],
-            "description": "A module that assists in implementing Twitter Bootstrap for ZF2",
-            "homepage": "https://github.com/mwillbanks/ZfcTwitterBootstrap",
+            "description": "A simple useable module to quickly glue together ZfcUser, BjyAuthorize and Doctrine 2",
+            "homepage": "https://github.com/bjyoungblood/BjyAuthorize",
             "keywords": [
-                "twBootstrap",
-                "twitter bootstrap",
-                "zf2"
+                "bjy-authorize",
+                "doctrine",
+                "doctrine-orm-module",
+                "zf2",
+                "zfc-user"
             ],
-            "time": "2013-07-23 19:40:34"
+            "time": "2013-10-29 15:42:15"
         },
         {
             "name": "neilime/zf2-twb-bundle",
@@ -1721,16 +1838,16 @@
         },
         {
             "name": "zf-commons/zfc-user",
-            "version": "dev-master",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ZF-Commons/ZfcUser.git",
-                "reference": "5589c505834a958ef4f7ee68d9d092053cd3493f"
+                "reference": "7425ea50733caeeaeaeaa77ea7e910dab3434493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ZF-Commons/ZfcUser/zipball/5589c505834a958ef4f7ee68d9d092053cd3493f",
-                "reference": "5589c505834a958ef4f7ee68d9d092053cd3493f",
+                "url": "https://api.github.com/repos/ZF-Commons/ZfcUser/zipball/7425ea50733caeeaeaeaa77ea7e910dab3434493",
+                "reference": "7425ea50733caeeaeaeaa77ea7e910dab3434493",
                 "shasum": ""
             },
             "require": {
@@ -1752,11 +1869,6 @@
                 "zendframework/zend-session": "To use the default authentication adapter."
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "ZfcUser": "src/"
@@ -1766,9 +1878,6 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
             "authors": [
                 {
                     "name": "Kyle Spraggs",
@@ -1786,7 +1895,7 @@
             "keywords": [
                 "zf2"
             ],
-            "time": "2014-03-16 09:10:27"
+            "time": "2013-05-02 12:33:31"
         },
         {
             "name": "zf-commons/zfc-user-doctrine-orm",
@@ -1998,7 +2107,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "zendframework/zftool": 20,
-        "zf-commons/zfc-user": 20,
         "knplabs/doctrine-behaviors": 20,
         "zendexperts/ze-theme": 20,
         "zendframework/zendgdata": 20,
@@ -2008,7 +2116,9 @@
         "zircote/hal": 20,
         "zircote/api-problem": 20,
         "neilime/zf2-twb-bundle": 20,
-        "mwillbanks/zfc-twitter-bootstrap": 20
+        "coolcsn/csn-user": 20,
+        "coolcsn/csn-authorization": 20,
+        "manuakasam/sam-user": 20
     },
     "platform": {
         "php": ">=5.3.3"

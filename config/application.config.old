@@ -9,16 +9,21 @@ return array(
     'modules' => array(
         'DoctrineModule',
         'DoctrineORMModule',
-        'ZfcBase',
         'ZendDeveloperTools',
-        'ZfcTwitterBootstrap',
-        'Application',
-        'ORM',
-        'Account',
-        'Post',
-        'User',
+        'ZfcBase',
+        'ZfcUser',
+        'ZfcUserDoctrineORM',
+//         'BjyAuthorize',
+//         'SamUser',
+//         'CsnUser',
+//         'CsnAuthorization',
+        
+        'Setting',
+        'ORM',      
+        'Post',       
         'Page',
-        'Appearance'
+        'Appearance',
+        'Dashboard'
     ),
     'module_listener_options' => array(
         'module_paths' => array(

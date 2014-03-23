@@ -295,7 +295,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
      */
     public function getFormHydrator()
     {
-        if (!$this->formHydrator instanceof Hydrator\HydratorInterface) {
+        if (!$this->formHydrator instanceof Hydrator\ClassMethods) {
             $this->setFormHydrator($this->getServiceManager()->get('zfcuser_register_form_hydrator'));
         }
 
@@ -305,10 +305,10 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     /**
      * Set the Form Hydrator to use
      *
-     * @param Hydrator\HydratorInterface $formHydrator
+     * @param Hydrator\ClassMethods $formHydrator
      * @return User
      */
-    public function setFormHydrator(Hydrator\HydratorInterface $formHydrator)
+    public function setFormHydrator(Hydrator\ClassMethods $formHydrator)
     {
         $this->formHydrator = $formHydrator;
         return $this;

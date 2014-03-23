@@ -7,7 +7,6 @@ use Zend\Authentication\Result as AuthenticationResult;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Crypt\Password\Bcrypt;
-use Zend\Session\Container as SessionContainer;
 use ZfcUser\Authentication\Adapter\AdapterChainEvent as AuthEvent;
 use ZfcUser\Mapper\User as UserMapperInterface;
 use ZfcUser\Options\AuthenticationOptionsInterface;
@@ -34,16 +33,6 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
      */
     protected $options;
 
-    /**
-     * Called when user id logged out
-     * @param  AuthEvent $e event passed
-     */
-    public function logout(AuthEvent $e)
-    {
-        $session = new SessionContainer($this->getStorage()->getNameSpace());
-        $session->getManager()->destroy();
-    }
-    
     public function authenticate(AuthEvent $e)
     {
         if ($this->isSatisfied()) {
@@ -99,10 +88,6 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
             $this->setSatisfied(false);
             return false;
         }
-
-        // regen the id
-        $session = new SessionContainer($this->getStorage()->getNameSpace());
-        $session->getManager()->regenerateId();
 
         // Success!
         $e->setIdentity($userObject->getId());

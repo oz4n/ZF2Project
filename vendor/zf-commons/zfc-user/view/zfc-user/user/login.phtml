@@ -1,32 +1,107 @@
-<h1><?php echo $this->translate('Sign In'); ?></h1>
-
 <?php
 $form = $this->loginForm;
 $form->prepare();
 $form->setAttribute('action', $this->url('zfcuser/login'));
 $form->setAttribute('method', 'post');
+$form->get('identity')->setAttributes(
+	array(
+	   'class' => 'form-control',
+	   'placeholder' => 'Username'
+    )
+);
+$form->get('credential')->setAttributes(
+    array(
+        'class' => 'form-control',
+        'placeholder' => 'Password'
+    )
+);
+
+$form->get('submit')->setAttributes(
+    array(
+        'class' => 'width-35 pull-right btn btn-sm btn-primary',
+        'label' => 'Login'
+    )
+);
 ?>
+<div id="login-box" class="login-box visible widget-box no-border">
+	<div class="widget-body">
+		<div class="widget-main">
+			<h4 class="header blue lighter bigger">
+				<i class="icon-coffee green"></i> Please Enter Your Information
+			</h4>
 
-<?php echo $this->form()->openTag($form) ?>
+			<div class="space-6"></div>
 
-    <dl class="zend_form">
-        <?php echo $this->formElementErrors($form->get('identity')) ?>
+			<?php echo $this->form()->openTag($form)?>
+			     
+    			<?php echo $this->formElementErrors($form->get('identity'))?>
+				<fieldset>				
+					<label class="block clearfix"> 
+    					<span class="block input-icon input-icon-right"> 
+    					<?php echo $this->formInput($form->get('identity')) ?>
+    					<i class="icon-user"></i>
+    					</span>
+					</label>
+					<label class="block clearfix"> 
+					<span class="block input-icon input-icon-right"> 
+					    <?php echo $this->formInput($form->get('credential')) ?>					    
+						<i class="icon-lock"></i>						
+					</span>
+					</label>
 
-        <dt><?php echo $this->formLabel($form->get('identity')) ?></dt>
-        <dd><?php echo $this->formInput($form->get('identity')) ?></dd>
+					<div class="space"></div>
 
-        <dt><?php echo $this->formLabel($form->get('credential')) ?></dt>
-        <dd><?php echo $this->formInput($form->get('credential')) ?></dd>
+					<div class="clearfix">
+						<label class="inline"> <input type="checkbox" class="ace" /> <span
+							class="lbl"> Remember Me</span>
+						</label>
+					       <?php echo $this->formButton($form->get('submit')) ?>
+						</button>
+					</div>
 
-        <?php if ($this->redirect): ?>
-            <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
-        <?php endif ?>
+					<div class="space-4"></div>
+				</fieldset>
+			<?php echo $this->form()->closeTag()?>
 
-        <dd><?php echo $this->formButton($form->get('submit')) ?></dd>
-    </dl>
+			<div class="social-or-login center">
+				<span class="bigger-110">Or Login Using</span>
+			</div>
 
-<?php echo $this->form()->closeTag() ?>
+			<div class="social-login center">
+				<a class="btn btn-primary"> <i class="icon-facebook"></i>
+				</a> <a class="btn btn-info"> <i class="icon-twitter"></i>
+				</a> <a class="btn btn-danger"> <i class="icon-google-plus"></i>
+				</a>
+			</div>
+		</div>
+		<!-- /widget-main -->
 
-<?php if ($this->enableRegistration) : ?>
-<?php echo $this->translate('Not registered?'); ?> <a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->redirect : '') ?>"><?php echo $this->translate('Sign up!'); ?></a>
-<?php endif; ?>
+		<div class="toolbar clearfix">
+			<div>
+				<a href="#"
+					onclick="show_box('forgot-box'); return false;"
+					class="forgot-password-link"> <i class="icon-arrow-left"></i> I
+					forgot my password
+				</a>
+			</div>
+
+			<div>				
+				<?php if ($this->enableRegistration) : ?>                
+                    <a class="user-signup-link" href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->redirect : '') ?>">
+                        I want to register <i class="icon-arrow-right"></i>
+                    </a>
+                <?php endif; ?>
+			</div>
+		</div>
+	</div>
+	<!-- /widget-body -->
+</div>
+
+<?php if ($this->redirect): ?>
+  <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
+<?php endif ?>
+
+
+
+
+

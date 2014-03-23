@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Post
  *
- * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_post_account1_idx", columns={"account_id"}), @ORM\Index(name="fk_post_post1_idx", columns={"parent"})})
+ * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_post_post1_idx", columns={"parent"})})
  * @ORM\Entity
  */
 class Post
@@ -86,16 +86,6 @@ class Post
      * })
      */
     private $parent;
-
-    /**
-     * @var \ORM\Entity\Account
-     *
-     * @ORM\ManyToOne(targetEntity="ORM\Entity\Account")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="account_id", referencedColumnName="id")
-     * })
-     */
-    private $account;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -336,29 +326,6 @@ class Post
     public function getParent()
     {
         return $this->parent;
-    }
-
-    /**
-     * Set account
-     *
-     * @param \ORM\Entity\Account $account
-     * @return Post
-     */
-    public function setAccount(\ORM\Entity\Account $account = null)
-    {
-        $this->account = $account;
-
-        return $this;
-    }
-
-    /**
-     * Get account
-     *
-     * @return \ORM\Entity\Account 
-     */
-    public function getAccount()
-    {
-        return $this->account;
     }
 
     /**
