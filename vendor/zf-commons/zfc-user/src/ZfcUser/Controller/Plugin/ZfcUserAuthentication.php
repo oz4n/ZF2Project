@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
@@ -9,17 +8,21 @@ use ZfcUser\Authentication\Adapter\AdapterChain as AuthAdapter;
 
 class ZfcUserAuthentication extends AbstractPlugin
 {
+
     /**
+     *
      * @var AuthAdapter
      */
     protected $authAdapter;
 
     /**
+     *
      * @var AuthenticationService
      */
     protected $authService;
 
     /**
+     *
      * @var ServiceLocatorInterface
      */
     protected $serviceLocator;
@@ -57,7 +60,7 @@ class ZfcUserAuthentication extends AbstractPlugin
     /**
      * Set authAdapter.
      *
-     * @param authAdapter $authAdapter
+     * @param authAdapter $authAdapter            
      */
     public function setAuthAdapter(AuthAdapter $authAdapter)
     {

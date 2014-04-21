@@ -43,8 +43,7 @@ class AccountForm extends Form
             'security',
             'account' => [
                 'username',
-                'password',
-                'salt',
+                'password',            
                 'email'
             ]
         ]);

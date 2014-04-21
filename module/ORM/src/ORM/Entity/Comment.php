@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Comment
  *
- * @ORM\Table(name="comment", indexes={@ORM\Index(name="fk_comment_post1_idx", columns={"post_id"}), @ORM\Index(name="fk_comment_comment1_idx", columns={"parent"})})
+ * @ORM\Table(name="comment", indexes={@ORM\Index(name="fk_comment_post1_idx", columns={"post_id"}), @ORM\Index(name="fk_comment_comment1_idx", columns={"parent_id"}), @ORM\Index(name="fk_comment_user1_idx", columns={"user_id"})})
  * @ORM\Entity
  */
 class Comment
@@ -59,16 +59,23 @@ class Comment
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="create_time", type="datetime", nullable=true)
+     * @ORM\Column(name="created", type="datetime", nullable=false)
      */
-    private $createTime;
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=false)
+     */
+    private $updated;
 
     /**
      * @var \ORM\Entity\Comment
      *
      * @ORM\ManyToOne(targetEntity="ORM\Entity\Comment")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * })
      */
     private $parent;
@@ -82,6 +89,16 @@ class Comment
      * })
      */
     private $post;
+
+    /**
+     * @var \ORM\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="ORM\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
 
 
 
@@ -211,26 +228,49 @@ class Comment
     }
 
     /**
-     * Set createTime
+     * Set created
      *
-     * @param \DateTime $createTime
+     * @param \DateTime $created
      * @return Comment
      */
-    public function setCreateTime($createTime)
+    public function setCreated($created)
     {
-        $this->createTime = $createTime;
+        $this->created = $created;
 
         return $this;
     }
 
     /**
-     * Get createTime
+     * Get created
      *
      * @return \DateTime 
      */
-    public function getCreateTime()
+    public function getCreated()
     {
-        return $this->createTime;
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Comment
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 
     /**
@@ -277,5 +317,28 @@ class Comment
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ORM\Entity\User $user
+     * @return Comment
+     */
+    public function setUser(\ORM\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ORM\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

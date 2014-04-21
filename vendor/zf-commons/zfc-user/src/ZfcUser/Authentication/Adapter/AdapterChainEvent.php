@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\Authentication\Adapter;
 
 use Zend\EventManager\Event;
@@ -7,6 +6,7 @@ use Zend\Stdlib\RequestInterface as Request;
 
 class AdapterChainEvent extends Event
 {
+
     /**
      * getIdentity
      *
@@ -20,7 +20,7 @@ class AdapterChainEvent extends Event
     /**
      * setIdentity
      *
-     * @param mixed $identity
+     * @param mixed $identity            
      * @return AuthEvent
      */
     public function setIdentity($identity = null)
@@ -47,7 +47,7 @@ class AdapterChainEvent extends Event
     /**
      * setCode
      *
-     * @param int $code
+     * @param int $code            
      * @return AdapterChainEvent
      */
     public function setCode($code = null)
@@ -63,13 +63,13 @@ class AdapterChainEvent extends Event
      */
     public function getMessages()
     {
-        return $this->getParam('messages') ?: array();
+        return $this->getParam('messages') ?  : array();
     }
 
     /**
      * setMessages
      *
-     * @param array $messages
+     * @param array $messages            
      * @return AdapterChainEvent
      */
     public function setMessages($messages = array())
@@ -91,7 +91,7 @@ class AdapterChainEvent extends Event
     /**
      * setRequest
      *
-     * @param Request $request
+     * @param Request $request            
      * @return AuthEvent
      */
     public function setRequest(Request $request)

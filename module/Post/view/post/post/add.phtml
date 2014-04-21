@@ -19,7 +19,7 @@ $this->placeholder('siteTitle')->set('PREPEND');
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home home-icon"></i>
-                <a href="<?php echo $this->url('home'); ?>"><?php echo $this->translate('Dashboard'); ?></a>
+                <a href="<?php echo $this->url('dashboard'); ?>"><?php echo $this->translate('Dashboard'); ?></a>
             </li>
             <li>
                 <a href="<?php echo $this->url('post'); ?>"><?php echo $this->translate('Posts'); ?></a>
@@ -121,7 +121,7 @@ $this->placeholder('siteTitle')->set('PREPEND');
                 <div class="form-group">
                     <label for="inputUsername" class="col-sm-2 control-label no-padding-right"><?php echo $this->translate('Account'); ?></label>
                     <div class="col-sm-9">
-                        <?php echo $this->formRow($ap->get('account')); ?>
+                        <?php echo $this->formRow($ap->get('user')); ?>
                     </div>
                 </div>
 

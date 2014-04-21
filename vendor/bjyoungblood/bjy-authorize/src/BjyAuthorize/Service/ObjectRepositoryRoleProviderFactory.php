@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Service;
 
 use BjyAuthorize\Exception\InvalidArgumentException;
@@ -21,6 +20,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class ObjectRepositoryRoleProviderFactory implements FactoryInterface
 {
+
     /**
      * {@inheritDoc}
      *
@@ -29,23 +29,21 @@ class ObjectRepositoryRoleProviderFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('BjyAuthorize\Config');
-
+        
         if (! isset($config['role_providers']['BjyAuthorize\Provider\Role\ObjectRepositoryProvider'])) {
-            throw new InvalidArgumentException(
-                'Config for "BjyAuthorize\Provider\Role\ObjectRepositoryProvider" not set'
-            );
+            throw new InvalidArgumentException('Config for "BjyAuthorize\Provider\Role\ObjectRepositoryProvider" not set');
         }
-
+        
         $providerConfig = $config['role_providers']['BjyAuthorize\Provider\Role\ObjectRepositoryProvider'];
-
+        
         if (! isset($providerConfig['role_entity_class'])) {
             throw new InvalidArgumentException('role_entity_class not set in the bjyauthorize role_providers config.');
         }
-
+        
         if (! isset($providerConfig['object_manager'])) {
             throw new InvalidArgumentException('object_manager not set in the bjyauthorize role_providers config.');
         }
-
+        
         /* @var $objectManager \Doctrine\Common\Persistence\ObjectManager */
         $objectManager = $serviceLocator->get($providerConfig['object_manager']);
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\Service;
 
 use Zend\Authentication\AuthenticationService;
@@ -12,46 +11,53 @@ use ZfcBase\EventManager\EventProvider;
 use ZfcUser\Mapper\UserInterface as UserMapperInterface;
 use ZfcUser\Options\UserServiceOptionsInterface;
 
-
 class User extends EventProvider implements ServiceManagerAwareInterface
 {
 
     /**
+     *
      * @var UserMapperInterface
      */
     protected $userMapper;
 
     /**
+     *
      * @var AuthenticationService
      */
     protected $authService;
 
     /**
+     *
      * @var Form
      */
     protected $loginForm;
 
     /**
+     *
      * @var Form
      */
     protected $registerForm;
 
     /**
+     *
      * @var Form
      */
     protected $changePasswordForm;
 
     /**
+     *
      * @var ServiceManager
      */
     protected $serviceManager;
 
     /**
+     *
      * @var UserServiceOptionsInterface
      */
     protected $options;
 
     /**
+     *
      * @var Hydrator\ClassMethods
      */
     protected $formHydrator;
@@ -59,95 +65,113 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     /**
      * createFromForm
      *
-     * @param array $data
+     * @param array $data            
      * @return \ZfcUser\Entity\UserInterface
      * @throws Exception\InvalidArgumentException
      */
     public function register(array $data)
     {
         $class = $this->getOptions()->getUserEntityClass();
-        $user  = new $class;
-        $form  = $this->getRegisterForm();
+        $user = new $class();
+        $form = $this->getRegisterForm();
         $form->setHydrator($this->getFormHydrator());
         $form->bind($user);
         $form->setData($data);
-        if (!$form->isValid()) {
+        if (! $form->isValid()) {
             return false;
         }
-
+        
         $user = $form->getData();
         /* @var $user \ZfcUser\Entity\UserInterface */
-
-        $bcrypt = new Bcrypt;
-        $bcrypt->setCost($this->getOptions()->getPasswordCost());
+        
+        $bcrypt = new Bcrypt();
+        $bcrypt->setCost($this->getOptions()
+            ->getPasswordCost());
         $user->setPassword($bcrypt->create($user->getPassword()));
-
+        
         if ($this->getOptions()->getEnableUsername()) {
-            $user->setUsername($data['username']);
+            $user->setUsername($data['user_name']);
         }
         if ($this->getOptions()->getEnableDisplayName()) {
             $user->setDisplayName($data['display_name']);
         }
-
+        
         // If user state is enabled, set the default state value
         if ($this->getOptions()->getEnableUserState()) {
             if ($this->getOptions()->getDefaultUserState()) {
-                $user->setState($this->getOptions()->getDefaultUserState());
+                $user->setState($this->getOptions()
+                    ->getDefaultUserState());
             }
         }
-        $this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $user, 'form' => $form));
+        $this->getEventManager()->trigger(__FUNCTION__, $this, array(
+            'user' => $user,
+            'form' => $form
+        ));
         $this->getUserMapper()->insert($user);
-        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('user' => $user, 'form' => $form));
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array(
+            'user' => $user,
+            'form' => $form
+        ));
         return $user;
     }
 
     /**
      * change the current users password
      *
-     * @param array $data
+     * @param array $data            
      * @return boolean
      */
     public function changePassword(array $data)
     {
         $currentUser = $this->getAuthService()->getIdentity();
-
+        
         $oldPass = $data['credential'];
         $newPass = $data['newCredential'];
-
-        $bcrypt = new Bcrypt;
-        $bcrypt->setCost($this->getOptions()->getPasswordCost());
-
-        if (!$bcrypt->verify($oldPass, $currentUser->getPassword())) {
+        
+        $bcrypt = new Bcrypt();
+        $bcrypt->setCost($this->getOptions()
+            ->getPasswordCost());
+        
+        if (! $bcrypt->verify($oldPass, $currentUser->getPassword())) {
             return false;
         }
-
+        
         $pass = $bcrypt->create($newPass);
         $currentUser->setPassword($pass);
-
-        $this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $currentUser));
+        
+        $this->getEventManager()->trigger(__FUNCTION__, $this, array(
+            'user' => $currentUser
+        ));
         $this->getUserMapper()->update($currentUser);
-        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('user' => $currentUser));
-
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array(
+            'user' => $currentUser
+        ));
+        
         return true;
     }
 
     public function changeEmail(array $data)
     {
         $currentUser = $this->getAuthService()->getIdentity();
-
-        $bcrypt = new Bcrypt;
-        $bcrypt->setCost($this->getOptions()->getPasswordCost());
-
-        if (!$bcrypt->verify($data['credential'], $currentUser->getPassword())) {
+        
+        $bcrypt = new Bcrypt();
+        $bcrypt->setCost($this->getOptions()
+            ->getPasswordCost());
+        
+        if (! $bcrypt->verify($data['credential'], $currentUser->getPassword())) {
             return false;
         }
-
+        
         $currentUser->setEmail($data['newIdentity']);
-
-        $this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $currentUser));
+        
+        $this->getEventManager()->trigger(__FUNCTION__, $this, array(
+            'user' => $currentUser
+        ));
         $this->getUserMapper()->update($currentUser);
-        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('user' => $currentUser));
-
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array(
+            'user' => $currentUser
+        ));
+        
         return true;
     }
 
@@ -167,7 +191,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     /**
      * setUserMapper
      *
-     * @param UserMapperInterface $userMapper
+     * @param UserMapperInterface $userMapper            
      * @return User
      */
     public function setUserMapper(UserMapperInterface $userMapper)
@@ -192,7 +216,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     /**
      * setAuthenticationService
      *
-     * @param AuthenticationService $authService
+     * @param AuthenticationService $authService            
      * @return User
      */
     public function setAuthService(AuthenticationService $authService)
@@ -202,6 +226,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     }
 
     /**
+     *
      * @return Form
      */
     public function getRegisterForm()
@@ -213,7 +238,8 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     }
 
     /**
-     * @param Form $registerForm
+     *
+     * @param Form $registerForm            
      * @return User
      */
     public function setRegisterForm(Form $registerForm)
@@ -223,6 +249,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     }
 
     /**
+     *
      * @return Form
      */
     public function getChangePasswordForm()
@@ -234,7 +261,8 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     }
 
     /**
-     * @param Form $changePasswordForm
+     *
+     * @param Form $changePasswordForm            
      * @return User
      */
     public function setChangePasswordForm(Form $changePasswordForm)
@@ -250,8 +278,9 @@ class User extends EventProvider implements ServiceManagerAwareInterface
      */
     public function getOptions()
     {
-        if (!$this->options instanceof UserServiceOptionsInterface) {
-            $this->setOptions($this->getServiceManager()->get('zfcuser_module_options'));
+        if (! $this->options instanceof UserServiceOptionsInterface) {
+            $this->setOptions($this->getServiceManager()
+                ->get('zfcuser_module_options'));
         }
         return $this->options;
     }
@@ -259,7 +288,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     /**
      * set service options
      *
-     * @param UserServiceOptionsInterface $options
+     * @param UserServiceOptionsInterface $options            
      */
     public function setOptions(UserServiceOptionsInterface $options)
     {
@@ -279,7 +308,7 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     /**
      * Set service manager instance
      *
-     * @param ServiceManager $serviceManager
+     * @param ServiceManager $serviceManager            
      * @return User
      */
     public function setServiceManager(ServiceManager $serviceManager)
@@ -295,10 +324,11 @@ class User extends EventProvider implements ServiceManagerAwareInterface
      */
     public function getFormHydrator()
     {
-        if (!$this->formHydrator instanceof Hydrator\ClassMethods) {
-            $this->setFormHydrator($this->getServiceManager()->get('zfcuser_register_form_hydrator'));
+        if (! $this->formHydrator instanceof Hydrator\ClassMethods) {
+            $this->setFormHydrator($this->getServiceManager()
+                ->get('zfcuser_register_form_hydrator'));
         }
-
+        
         return $this->formHydrator;
     }
 

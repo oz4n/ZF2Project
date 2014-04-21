@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Provider\Role;
 
 use BjyAuthorize\Acl\Role;
@@ -17,18 +16,21 @@ use BjyAuthorize\Acl\Role;
  */
 class Config implements ProviderInterface
 {
+
     /**
+     *
      * @var \Zend\Permissions\Acl\Role\RoleInterface[]
      */
     protected $roles = array();
 
     /**
-     * @param array $config
+     *
+     * @param array $config            
      */
     public function __construct(array $config = array())
     {
         $roles = array();
-
+        
         foreach ($config as $key => $value) {
             if (is_numeric($key)) {
                 $roles = array_merge($roles, $this->loadRole($value));
@@ -36,14 +38,15 @@ class Config implements ProviderInterface
                 $roles = array_merge($roles, $this->loadRole($key, $value));
             }
         }
-
+        
         $this->roles = $roles;
     }
 
     /**
-     * @param string      $name
-     * @param array       $options
-     * @param string|null $parent
+     *
+     * @param string $name            
+     * @param array $options            
+     * @param string|null $parent            
      *
      * @return array
      */
@@ -54,11 +57,11 @@ class Config implements ProviderInterface
         } else {
             $children = array();
         }
-
-        $roles   = array();
-        $role    = new Role($name, $parent);
+        
+        $roles = array();
+        $role = new Role($name, $parent);
         $roles[] = $role;
-
+        
         foreach ($children as $key => $value) {
             if (is_numeric($key)) {
                 $roles = array_merge($roles, $this->loadRole($value, array(), $role));
@@ -66,7 +69,7 @@ class Config implements ProviderInterface
                 $roles = array_merge($roles, $this->loadRole($key, $value, $role));
             }
         }
-
+        
         return $roles;
     }
 

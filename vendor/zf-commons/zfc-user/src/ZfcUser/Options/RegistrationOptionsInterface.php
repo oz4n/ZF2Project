@@ -1,13 +1,13 @@
 <?php
-
 namespace ZfcUser\Options;
 
 interface RegistrationOptionsInterface
 {
+
     /**
      * set enable display name
      *
-     * @param bool $flag
+     * @param bool $flag            
      * @return ModuleOptions
      */
     public function setEnableDisplayName($enableDisplayName);
@@ -22,7 +22,7 @@ interface RegistrationOptionsInterface
     /**
      * set enable user registration
      *
-     * @param bool $enableRegistration
+     * @param bool $enableRegistration            
      */
     public function setEnableRegistration($enableRegistration);
 
@@ -36,7 +36,7 @@ interface RegistrationOptionsInterface
     /**
      * set enable username
      *
-     * @param bool $flag
+     * @param bool $flag            
      * @return ModuleOptions
      */
     public function setEnableUsername($enableUsername);
@@ -51,7 +51,7 @@ interface RegistrationOptionsInterface
     /**
      * set user form timeout in seconds
      *
-     * @param int $userFormTimeout
+     * @param int $userFormTimeout            
      */
     public function setUserFormTimeout($userFormTimeout);
 
@@ -65,7 +65,7 @@ interface RegistrationOptionsInterface
     /**
      * set use a captcha in registration form
      *
-     * @param bool $useRegistrationFormCaptcha
+     * @param bool $useRegistrationFormCaptcha            
      * @return ModuleOptions
      */
     public function setUseRegistrationFormCaptcha($useRegistrationFormCaptcha);
@@ -80,7 +80,7 @@ interface RegistrationOptionsInterface
     /**
      * set login after registration
      *
-     * @param bool $loginAfterRegistration
+     * @param bool $loginAfterRegistration            
      * @return ModuleOptions
      */
     public function setLoginAfterRegistration($loginAfterRegistration);
@@ -95,7 +95,7 @@ interface RegistrationOptionsInterface
     /**
      * set form CAPTCHA options
      *
-     * @param array $formCaptchaOptions
+     * @param array $formCaptchaOptions            
      * @return ModuleOptions
      */
     public function setFormCaptchaOptions($formCaptchaOptions);

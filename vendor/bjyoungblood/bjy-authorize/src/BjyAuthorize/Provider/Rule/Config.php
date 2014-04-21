@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Provider\Rule;
 
 /**
@@ -15,13 +14,16 @@ namespace BjyAuthorize\Provider\Rule;
  */
 class Config implements ProviderInterface
 {
+
     /**
+     *
      * @var array
      */
     protected $rules = array();
 
     /**
-     * @param array $config
+     *
+     * @param array $config            
      */
     public function __construct(array $config = array())
     {

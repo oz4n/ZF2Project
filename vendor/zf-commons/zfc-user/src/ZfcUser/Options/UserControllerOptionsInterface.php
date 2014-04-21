@@ -1,15 +1,15 @@
 <?php
-
 namespace ZfcUser\Options;
 
 use ZfcUser\Options\AuthenticationOptionsInterface;
 
 interface UserControllerOptionsInterface
 {
+
     /**
      * set use redirect param if present
      *
-     * @param bool $useRedirectParameterIfPresent
+     * @param bool $useRedirectParameterIfPresent            
      */
     public function setUseRedirectParameterIfPresent($useRedirectParameterIfPresent);
 

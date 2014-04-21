@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Collector;
 
 use BjyAuthorize\Provider\Identity\ProviderInterface;
@@ -21,22 +20,26 @@ use ZendDeveloperTools\Collector\CollectorInterface;
  */
 class RoleCollector implements CollectorInterface, Serializable
 {
-    const NAME     = 'bjy_authorize_role_collector';
+
+    const NAME = 'bjy_authorize_role_collector';
 
     const PRIORITY = 150;
 
     /**
-     * @var array|string[] collected role ids
+     *
+     * @var array string[] role ids
      */
     protected $collectedRoles = array();
 
     /**
-     * @var \BjyAuthorize\Provider\Identity\ProviderInterface|null
+     *
+     * @var \BjyAuthorize\Provider\Identity\ProviderInterface null
      */
     protected $identityProvider;
 
     /**
-     * @param \BjyAuthorize\Provider\Identity\ProviderInterface $identityProvider
+     *
+     * @param \BjyAuthorize\Provider\Identity\ProviderInterface $identityProvider            
      */
     public function __construct(ProviderInterface $identityProvider)
     {
@@ -67,18 +70,18 @@ class RoleCollector implements CollectorInterface, Serializable
         if (! $this->identityProvider) {
             return;
         }
-
+        
         $roles = $this->identityProvider->getIdentityRoles();
-
+        
         if (! is_array($roles) && ! $roles instanceof \Traversable) {
             $roles = (array) $roles;
         }
-
+        
         foreach ($roles as $role) {
             if ($role instanceof RoleInterface) {
                 $role = $role->getRoleId();
             }
-
+            
             if ($role) {
                 $this->collectedRoles[] = (string) $role;
             }
@@ -86,7 +89,8 @@ class RoleCollector implements CollectorInterface, Serializable
     }
 
     /**
-     * @return array|string[]
+     *
+     * @return array string[]
      */
     public function getCollectedRoles()
     {

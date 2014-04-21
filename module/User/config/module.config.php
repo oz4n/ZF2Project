@@ -1,4 +1,5 @@
 <?php
+
 return [
     'controllers' => [
         'invokables' => [
@@ -8,16 +9,51 @@ return [
     'router' => [
         'routes' => [
             'user' => [
-                'type' => 'segment',
+                'type' => 'Literal',
                 'options' => [
-                    'route' => '/user[/][:action][/:id]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[0-9]+'
-                    ],
+                    'route' => '/dashboard/user',
                     'defaults' => [
-                        'controller' => 'User\Controller\User',
+                        '__NAMESPACE__' => 'User\Controller',
+                        'controller' => 'User',
                         'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'add' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/add',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'User\Controller',
+                                'controller' => 'User',
+                                'action' => 'add'
+                            ]
+                        ]
+                    ],
+                    'edit' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/edit[/][:id]',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'User\Controller',
+                                'controller' => 'User',
+                                'action' => 'edit',
+                                'id' => '[0-9]+'
+                            ]
+                        ]
+                    ],
+                    'delete' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/delete[/][:id]',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'User\Controller',
+                                'controller' => 'User',
+                                'action' => 'delete',
+                                'id' => '[0-9]+'
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -26,23 +62,6 @@ return [
     'view_manager' => [
         'template_path_stack' => [
             'user' => __DIR__ . '/../view'
-        ]
-    ],
-    
-    'doctrine' => [
-        'driver' => [
-            'user_orm_driver' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => [
-                    __DIR__ . '/../src/User/Entity'
-                ]
-            ],
-            'orm_default' => [
-                'drivers' => [
-                    'User\Entity' => 'user_orm_driver'
-                ]
-            ]
         ]
     ]
 ];

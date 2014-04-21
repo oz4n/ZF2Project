@@ -7,7 +7,6 @@
  * @license        http://framework.zend.com/license/new-bsd New BSD License
  * @package        Zend_Service
  */
-
 namespace BjyAuthorize\Service;
 
 use BjyAuthorize\Service\AuthorizeAwareInterface;
@@ -22,6 +21,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class AuthorizeAwareServiceInitializer implements InitializerInterface
 {
+
     /**
      * {@inheritDoc}
      */
@@ -30,7 +30,7 @@ class AuthorizeAwareServiceInitializer implements InitializerInterface
         if (! $instance instanceof AuthorizeAwareInterface) {
             return;
         }
-
+        
         /* @var $authorize \BjyAuthorize\Service\Authorize */
         $authorize = $serviceLocator->get('BjyAuthorize\Service\Authorize');
 

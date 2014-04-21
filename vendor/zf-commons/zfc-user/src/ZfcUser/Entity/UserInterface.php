@@ -1,9 +1,9 @@
 <?php
-
 namespace ZfcUser\Entity;
 
 interface UserInterface
 {
+
     /**
      * Get id.
      *
@@ -11,28 +11,22 @@ interface UserInterface
      */
     public function getId();
 
-    /**
-     * Set id.
-     *
-     * @param int $id
-     * @return UserInterface
-     */
-    public function setId($id);
+   
 
     /**
-     * Get username.
+     * Get userName.
      *
      * @return string
      */
-    public function getUsername();
+    public function getUserName();
 
     /**
-     * Set username.
+     * Set userName.
      *
-     * @param string $username
+     * @param string $username            
      * @return UserInterface
      */
-    public function setUsername($username);
+    public function setUserName($username);
 
     /**
      * Get email.
@@ -44,7 +38,7 @@ interface UserInterface
     /**
      * Set email.
      *
-     * @param string $email
+     * @param string $email            
      * @return UserInterface
      */
     public function setEmail($email);
@@ -59,7 +53,7 @@ interface UserInterface
     /**
      * Set displayName.
      *
-     * @param string $displayName
+     * @param string $displayName            
      * @return UserInterface
      */
     public function setDisplayName($displayName);
@@ -74,7 +68,7 @@ interface UserInterface
     /**
      * Set password.
      *
-     * @param string $password
+     * @param string $password            
      * @return UserInterface
      */
     public function setPassword($password);
@@ -89,9 +83,8 @@ interface UserInterface
     /**
      * Set state.
      *
-     * @param int $state
+     * @param int $state            
      * @return UserInterface
      */
     public function setState($state);
-
 }

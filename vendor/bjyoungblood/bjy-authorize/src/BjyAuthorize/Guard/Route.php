@@ -5,13 +5,11 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Guard;
 
 use BjyAuthorize\Exception\UnAuthorizedException;
 use BjyAuthorize\Provider\Rule\ProviderInterface as RuleProviderInterface;
 use BjyAuthorize\Provider\Resource\ProviderInterface as ResourceProviderInterface;
-
 use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -24,39 +22,46 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class Route implements GuardInterface, RuleProviderInterface, ResourceProviderInterface
 {
+
     /**
      * Marker for invalid route errors
      */
     const ERROR = 'error-unauthorized-route';
 
     /**
+     *
      * @var ServiceLocatorInterface
      */
     protected $serviceLocator;
 
     /**
+     *
      * @var array[]
      */
     protected $rules = array();
 
     /**
+     *
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
 
     /**
-     * @param array                   $rules
-     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @param array $rules            
+     * @param ServiceLocatorInterface $serviceLocator            
      */
     public function __construct(array $rules, ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
-
+        
         foreach ($rules as $rule) {
-            if (!is_array($rule['roles'])) {
-                $rule['roles'] = array($rule['roles']);
+            if (! is_array($rule['roles'])) {
+                $rule['roles'] = array(
+                    $rule['roles']
+                );
             }
-
+            
             $this->rules['route/' . $rule['route']] = $rule['roles'];
         }
     }
@@ -66,7 +71,10 @@ class Route implements GuardInterface, RuleProviderInterface, ResourceProviderIn
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'onRoute'), -1000);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array(
+            $this,
+            'onRoute'
+        ), - 1000);
     }
 
     /**
@@ -87,11 +95,11 @@ class Route implements GuardInterface, RuleProviderInterface, ResourceProviderIn
     public function getResources()
     {
         $resources = array();
-
+        
         foreach (array_keys($this->rules) as $resource) {
             $resources[] = $resource;
         }
-
+        
         return $resources;
     }
 
@@ -101,32 +109,37 @@ class Route implements GuardInterface, RuleProviderInterface, ResourceProviderIn
     public function getRules()
     {
         $rules = array();
-
+        
         foreach ($this->rules as $resource => $roles) {
-            $rules[] = array($roles, $resource);
+            $rules[] = array(
+                $roles,
+                $resource
+            );
         }
-
-        return array('allow' => $rules);
+        
+        return array(
+            'allow' => $rules
+        );
     }
 
     /**
      * Event callback to be triggered on dispatch, causes application error triggering
      * in case of failed authorization check
      *
-     * @param MvcEvent $event
+     * @param MvcEvent $event            
      *
      * @return void
      */
     public function onRoute(MvcEvent $event)
     {
-        $service    = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
-        $match      = $event->getRouteMatch();
-        $routeName  = $match->getMatchedRouteName();
-
+        $service = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
+        $match = $event->getRouteMatch();
+        $routeName = $match->getMatchedRouteName();
+        
         if ($service->isAllowed('route/' . $routeName)) {
             return;
         }
-
+        
         $event->setError(static::ERROR);
         $event->setParam('route', $routeName);
         $event->setParam('identity', $service->getIdentity());

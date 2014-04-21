@@ -51,7 +51,7 @@ class Module
     {
     	return array(
     	    'invokables' => array(
-    	        'NavigationHelper' => 'Setting\Helper\NavigationHelper',    	           	       
+    	        'NavigationHelper' => 'Setting\View\Helper\NavigationHelper',    	           	       
     	        'BreadcrumbsHelper' => 'Setting\Helper\BreadcrumdsHelper',    	           	       
     	    )
     	);

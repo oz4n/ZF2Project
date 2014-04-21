@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Service;
 
 use Zend\ServiceManager\FactoryInterface;
@@ -18,6 +17,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class IdentityProviderServiceFactory implements FactoryInterface
 {
+
     /**
      * {@inheritDoc}
      *
@@ -26,7 +26,7 @@ class IdentityProviderServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('BjyAuthorize\Config');
-
+        
         return $serviceLocator->get($config['identity_provider']);
     }
 }

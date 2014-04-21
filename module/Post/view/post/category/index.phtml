@@ -1,62 +1,143 @@
-<div class="main-content">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('breadcrumbs', 'fixed');
-            } catch (e) {
-            }
-        </script>
-
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="<?php echo $this->url('home'); ?>">
-                    <?php echo $this->translate('Dashboard'); ?>
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo $this->url('post'); ?>">
-                    <?php echo $this->translate('Posts'); ?>
-                </a>
-            </li>
-            <li class="active">
-                <?php echo $this->translate('Categories'); ?>
-            </li>
-        </ul>
-        <!-- .breadcrumb -->
-
-        <div class="nav-search" id="nav-search">
-            <form class="form-search">
-                <span class="input-icon">
-                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                    <i class="icon-search nav-search-icon"></i>
-                </span>
-            </form>
-        </div><!-- #nav-search -->
+<?php
+/**
+ * @var \ORM\Entity\Taxonomy $cat
+ * 
+ */
+$i = 1;
+?>
+<ul class="breadcrumb breadcrumb-page">
+    <div class="breadcrumb-label text-light-gray">
+        <?php echo $this->translate('You are here:'); ?> 
     </div>
-    <div class="page-content">
-        <div class="page-header">
-            <h1>
-                <?php echo $this->translate('Categories'); ?>
-                <small>
-                    <i class="icon-double-angle-right"></i>
-                    <a href="<?php echo $this->url('category', ['action' => 'add']); ?>">
-                        <?php echo $this->translate('Add New'); ?>
-                    </a>
-                </small>
-            </h1>           
+    <li>       
+        <a href="<?php echo $this->url('dashboard'); ?>"><?php echo $this->translate('Dashboard'); ?></a>
+    </li>
+    <li class="active">
+        <?php echo $this->translate('Categories'); ?></a>
+    </li>    
+</ul>
+<div class="page-header">
+    <div class="row">
+        <div class="col-xs-6">
+            <h1 class="text-center text-left-sm">
+                <i class="fa fa-sitemap page-header-icon"> </i>
+                &nbsp;
+                <?php echo $this->translate("Categories"); ?>        
+                <?php echo $this->translate('or'); ?>
+                <a href="<?php echo $this->url('post/post_category_add', ['action' => 'add']); ?>"><?php echo $this->translate('Add New'); ?></a>
+            </h1>
         </div>
-         <div class="row">          
-                <div class="col-xs-12">
-                       content
+        <div class="col-xs-6">
+            <div class="pull-right" style="width: 60%">        
+                <form action="#">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="<?php echo $this->translate('Search category'); ?>..." name="s">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </span>
+                    </div> <!-- / .input-group -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+<div class="row">
+    <div class="col-sm-12">        
+        <div class="panel colourable">
+            <div class="panel-heading">
+                <span class="panel-title">
+                    <i class="panel-title-icon fa fa-tasks"></i>
+                    <?php echo $this->translate('Categories'); ?>
+                </span>
+                <div class="panel-heading-controls">                    
+                    <em>
+                        <?php echo $this->translate('Showing 1 to'); ?> 
+                        <?php echo count($this->taxonomy); ?> 
+                        <?php echo $this->translate('of'); ?> 
+                        <?php echo $this->taxcount; ?> 
+                        <?php echo $this->translate('entries'); ?>
+                    </em>
+                </div>         
+            </div>
+            <div class="panel-body">                              
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/> 
+                            </th>
+                            <th><?php echo $this->translate('Title'); ?></th>
+                            <th><?php echo $this->translate('Slug'); ?></th>                            
+                            <th><?php echo $this->translate('Posts'); ?></th>                            
+                            <th><?php echo $this->translate('Action'); ?></th>                            
+                        </tr>
+                    </thead>
+                    <tbody>         
+
+                        <?php foreach ($taxonomy as $cat): ?>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" value="<?php echo $cat->getId(); ?>"/> 
+                                </td>                                
+                                <td>
+                                    <?php
+                                    for ($l = 0; $l < $cat->getLvl(); $l++) {
+                                        echo "&HorizontalLine;";
+                                    }
+                                    if ($cat->getLvl() === 0) {
+                                        echo $cat->getName();
+                                    } else {
+                                        echo '&nbsp;' . $cat->getName();
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo $cat->getSlug(); ?></td>                                
+                                <td><?php echo $cat->getCount(); ?></td>                                
+                                <td>                                   
+                                    <div class="btn-group btn-group-xs">                        
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="fa fa-cog"></span>&nbsp;<span class="fa fa-caret-down"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li>
+                                                <a href="<?php echo $this->url('post/post_category_delete', ['action' => 'delete', 'id' => $cat->getId()]); ?>"><?php echo $this->translate('Delete'); ?></a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo $this->url('post/post_category_edit', ['action' => 'edit', 'id' => $cat->getId()]); ?>"><?php echo $this->translate('Edit'); ?></a>
+                                            </li>      
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="#"><?php echo $this->translate('Quick Edit'); ?></a>
+                                            </li>  
+                                        </ul> 
+                                    </div>
+                                </td>                                
+                            </tr>       
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer" style="margin-top: -17px">
+                <div class="row"> 
+                    <?php
+                    echo $this->paginationControl(
+                            $this->taxonomy, 'sliding', ['partial/paginator.phtml', 'Post'], ['route' => 'post/post_category_pagintaion', 'taxcount' => $taxcount]
+                    );
+                    ?>
                 </div>
             </div>
+            
+        </div>
+        <div class="note note-info">
+            <b><em><?php echo $this->translate('Note'); ?>:</em></b>
+            <p><em><?php echo $this->translate('Deleting a category does not delete the posts in that category. Instead, posts that were only assigned to the deleted category are set to the category Uncategorized.'); ?></em></p>
+        </div>
     </div>
 </div>
 
 <script>
-   jQuery(function ($){
-        $('ul.nav > li.words').addClass('active open');
-        $('ul.submenu > li.category').addClass('active');
-   });   
+    jQuery(function($) {
+        $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().parent().parent().addClass('active open');
+        $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().addClass('active');
+    });
 </script>

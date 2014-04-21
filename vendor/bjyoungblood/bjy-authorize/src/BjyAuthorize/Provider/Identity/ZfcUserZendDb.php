@@ -35,7 +35,7 @@ class ZfcUserZendDb implements ProviderInterface
     /**
      * @var string
      */
-    protected $tableName = 'user_role_linker';
+    protected $tableName = 'rolerelation';
 
     /**
      * @param \Zend\Db\Adapter\Adapter $adapter

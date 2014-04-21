@@ -5,26 +5,29 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use BjyAuthorize\Service\Authorize;
 
 /**
- * IsAllowed View helper. Allows checking access to a resource/privilege in views.
+ * IsAllowed View helper.
+ * Allows checking access to a resource/privilege in views.
  *
  * @author Ben Youngblood <bx.youngblood@gmail.com>
  */
 class IsAllowed extends AbstractHelper
 {
+
     /**
+     *
      * @var Authorize
      */
     protected $authorizeService;
 
     /**
-     * @param Authorize $authorizeService
+     *
+     * @param Authorize $authorizeService            
      */
     public function __construct(Authorize $authorizeService)
     {
@@ -32,8 +35,9 @@ class IsAllowed extends AbstractHelper
     }
 
     /**
-     * @param mixed      $resource
-     * @param mixed|null $privilege
+     *
+     * @param mixed $resource            
+     * @param mixed|null $privilege            
      *
      * @return bool
      */

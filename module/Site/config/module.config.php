@@ -30,7 +30,7 @@ return [
         ]
     ],
     'translator' => array(
-        'locale' => 'id_ID',
+        'locale' => 'en_US',
         'translation_file_patterns' => array(
             array(
                 'type' => 'gettext',

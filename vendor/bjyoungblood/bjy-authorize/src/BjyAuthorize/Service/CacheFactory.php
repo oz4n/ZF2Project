@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Service;
 
 use Zend\Cache\Storage\StorageInterface;
@@ -20,11 +19,12 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class CacheFactory implements FactoryInterface
 {
+
     /**
      * Create a cache
      *
-     * @param   ServiceLocatorInterface $serviceLocator
-     * @return  StorageInterface
+     * @param ServiceLocatorInterface $serviceLocator            
+     * @return StorageInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

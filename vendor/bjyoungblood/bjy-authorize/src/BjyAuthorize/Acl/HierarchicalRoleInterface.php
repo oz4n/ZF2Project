@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Acl;
 
 use Zend\Permissions\Acl\Role\RoleInterface;
@@ -17,10 +16,11 @@ use Zend\Permissions\Acl\Role\RoleInterface;
  */
 interface HierarchicalRoleInterface extends RoleInterface
 {
+
     /**
      * Get the parent role
      *
-     * @return \Zend\Permissions\Acl\Role\RoleInterface|null
+     * @return \Zend\Permissions\Acl\Role\RoleInterface null
      */
     public function getParent();
 }

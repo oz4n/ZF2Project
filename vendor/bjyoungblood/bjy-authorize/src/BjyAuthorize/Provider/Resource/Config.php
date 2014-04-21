@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Provider\Resource;
 
 /**
@@ -15,13 +14,16 @@ namespace BjyAuthorize\Provider\Resource;
  */
 class Config implements ProviderInterface
 {
+
     /**
+     *
      * @var \Zend\Permissions\Acl\Resource\ResourceInterface[]
      */
     protected $resources = array();
 
     /**
-     * @param \Zend\Permissions\Acl\Resource\ResourceInterface[] $config
+     *
+     * @param \Zend\Permissions\Acl\Resource\ResourceInterface[] $config            
      */
     public function __construct(array $config = array())
     {

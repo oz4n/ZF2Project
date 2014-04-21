@@ -7,6 +7,8 @@
  */
 
 return array(
+    
+   
     'bjyauthorize' => array(
         // default role for unauthenticated users
         'default_role'          => 'guest',

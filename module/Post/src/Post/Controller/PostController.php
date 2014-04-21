@@ -1,10 +1,11 @@
 <?php
+
 namespace Post\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use ORM\DAO\DAOManager;
 use Doctrine\ORM\EntityManager;
+use ORM\OrmDAO\PostDao;
 use ORM\Registry\Registry;
 use ORM\Entity\Post;
 use Post\Form\PostForm;
@@ -44,7 +45,7 @@ class PostController extends AbstractActionController
     {
         if (null === $this->entityManager) {
             $this->setEntityManager($this->getServiceLocator()
-                ->get('Doctrine\ORM\EntityManager'));
+                            ->get('Doctrine\ORM\EntityManager'));
         }
         return $this->entityManager;
     }
@@ -55,7 +56,7 @@ class PostController extends AbstractActionController
      */
     protected function PostDaoManager()
     {
-        return new DAOManager($this->getEntityManager(), 'ORM\Entity\Post');
+        return new PostDao($this->getEntityManager(), 'ORM\Entity\Post');
     }
 
     /**
@@ -76,8 +77,6 @@ class PostController extends AbstractActionController
     {
         return $this->PostDaoManager()->find($id);
     }
-    
-   
 
     /**
      * 
@@ -86,9 +85,9 @@ class PostController extends AbstractActionController
     public function indexAction()
     {
         $repository = $this->PostDaoManager();
-        $posts = $repository->findAll();       
+        $posts = $repository->findAll();
         return new ViewModel([
-            'posts' => $posts,           
+            'posts' => $posts,
         ]);
     }
 
@@ -103,13 +102,13 @@ class PostController extends AbstractActionController
         $post = new Post();
         $form = new PostForm();
         $form->bind($post);
-        
+
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setData($request->getPost());           
+            $form->setData($request->getPost());
             // $post->setCreateTime(new \DateTime('now'));
             // $post->setUpdateTime(new \DateTime('now'));
-            
+
             if ($form->isValid()) {
                 $this->PostDaoManager()->save($post);
                 $this->redirect()->toRoute('post');
@@ -119,7 +118,7 @@ class PostController extends AbstractActionController
             'form' => $form
         ]);
     }
-    
+
     /**
      * 
      * @return Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
@@ -128,17 +127,17 @@ class PostController extends AbstractActionController
     {
         $request = $this->getRequest();
         $id = $request->isPost() ? $request->getPost()->post["id"] : (int) $this->params('id', null);
-        
+
         if (null === $id) {
             return $this->redirect()->toRoute('post');
         }
-        
+
         $this->RegisterEntityManager();
         $post = $this->findPostId($id);
-        
+
         $form = new PostForm();
         $form->bind($post);
-        
+
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
@@ -146,14 +145,14 @@ class PostController extends AbstractActionController
                 $this->redirect()->toRoute("post");
             }
         }
-        
+
         return new ViewModel([
             'form' => $form,
             'post' => $post,
             'id' => $id
         ]);
     }
-    
+
     /**
      * 
      * @return Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>
@@ -161,13 +160,13 @@ class PostController extends AbstractActionController
     public function deleteAction()
     {
         $id = (int) $this->params('id', null);
-        
+
         if (null === $id) {
             return $this->redirect()->toRoute('post');
         }
-        
+
         $this->PostDaoManager()->remove($this->findPostId($id));
         $this->redirect()->toRoute('post');
     }
-}
 
+}

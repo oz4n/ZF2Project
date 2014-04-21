@@ -1,37 +1,17 @@
-<div class="main-content">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('breadcrumbs', 'fixed');               
-            } catch (e) {
-            }
-        </script>
-        <ul class="breadcrumb">
-            <li class="active">
-                <i class="icon-home home-icon"></i> 
-                <?php echo $this->translate("Dashboard"); ?>
-            </li>
-        </ul>
-        <!-- .breadcrumb -->
+<ul class="breadcrumb breadcrumb-page">
+    <div class="breadcrumb-label text-light-gray"><?php echo $this->translate('You are here:'); ?> </div>
+    <li>
+        <a href="<?php echo $this->url('dashboard'); ?>"><?php echo $this->translate('Dashboard'); ?></a>
+    </li>
+</ul>
+<div class="page-header">
 
-        <div class="nav-search" id="nav-search">
-            <form class="form-search">
-                <span class="input-icon"> 
-                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" /> 
-                    <i class="icon-search nav-search-icon"></i>
-                </span>
-            </form>
-        </div>
-        <!-- #nav-search -->
+    <div class="row">
+        <!-- Page header, center on small screens -->
+        <h1 class="col-xs-12 col-sm-4 text-center text-left-sm">
+            <i class="fa fa-dashboard page-header-icon">                
+            </i>&nbsp;&nbsp;<?php echo $this->translate("Dashboard"); ?>
+        </h1>
     </div>
-    <div class="page-content">
-        <div class="page-header">
-            <h1>
-                <?php echo $this->translate('Dashboard'); ?>                
-            </h1>
-        </div>
-        <div class="page-content">
-        
-        </div>
-    </div>
-</div>
+</div> 
+<!-- / .page-header -->

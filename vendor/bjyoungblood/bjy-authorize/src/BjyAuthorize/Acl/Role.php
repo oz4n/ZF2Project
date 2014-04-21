@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Acl;
 
 use BjyAuthorize\Exception;
@@ -18,19 +17,23 @@ use Zend\Permissions\Acl\Role\RoleInterface;
  */
 class Role implements RoleInterface, HierarchicalRoleInterface
 {
+
     /**
+     *
      * @var string
      */
     protected $roleId;
 
     /**
+     *
      * @var RoleInterface
      */
     protected $parent;
 
     /**
-     * @param string|null               $roleId
-     * @param RoleInterface|string|null $parent
+     *
+     * @param string|null $roleId            
+     * @param RoleInterface|string|null $parent            
      */
     public function __construct($roleId = null, $parent = null)
     {
@@ -51,14 +54,15 @@ class Role implements RoleInterface, HierarchicalRoleInterface
     }
 
     /**
-     * @param string $roleId
+     *
+     * @param string $roleId            
      *
      * @return self
      */
     public function setRoleId($roleId)
     {
         $this->roleId = (string) $roleId;
-
+        
         return $this;
     }
 
@@ -71,7 +75,8 @@ class Role implements RoleInterface, HierarchicalRoleInterface
     }
 
     /**
-     * @param RoleInterface|string|null $parent
+     *
+     * @param RoleInterface|string|null $parent            
      *
      * @throws \BjyAuthorize\Exception\InvalidRoleException
      *
@@ -81,22 +86,22 @@ class Role implements RoleInterface, HierarchicalRoleInterface
     {
         if (null === $parent) {
             $this->parent = null;
-
+            
             return $this;
         }
-
+        
         if (is_string($parent)) {
             $this->parent = new Role($parent);
-
+            
             return $this;
         }
-
+        
         if ($parent instanceof RoleInterface) {
             $this->parent = $parent;
-
+            
             return $this;
         }
-
+        
         throw Exception\InvalidRoleException::invalidRoleInstance($parent);
     }
 }

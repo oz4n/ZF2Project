@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Provider\Role;
 
 use BjyAuthorize\Acl\Role;
@@ -20,13 +19,16 @@ use Zend\Permissions\Acl\Role\RoleInterface;
  */
 class ObjectRepositoryProvider implements ProviderInterface
 {
+
     /**
+     *
      * @var \Doctrine\Common\Persistence\ObjectRepository
      */
     protected $objectRepository;
 
     /**
-     * @param \Doctrine\Common\Persistence\ObjectRepository $objectRepository
+     *
+     * @param \Doctrine\Common\Persistence\ObjectRepository $objectRepository            
      */
     public function __construct(ObjectRepository $objectRepository)
     {
@@ -39,29 +41,29 @@ class ObjectRepositoryProvider implements ProviderInterface
     public function getRoles()
     {
         $result = $this->objectRepository->findAll();
-        $roles  = array();
-
+        $roles = array();
+        
         // Pass One: Build each object
         foreach ($result as $role) {
-            if (!$role instanceof RoleInterface) {
+            if (! $role instanceof RoleInterface) {
                 continue;
             }
-
+            
             $roleId = $role->getRoleId();
             $parent = null;
-
+            
             if ($role instanceof HierarchicalRoleInterface && $parent = $role->getParent()) {
                 $parent = $parent->getRoleId();
             }
-
+            
             $roles[$roleId] = new Role($roleId, $parent);
         }
-
+        
         // Pass Two: Re-inject parent objects to preserve hierarchy
         /* @var $roleObj \BjyAuthorize\Acl\Role */
         foreach ($roles as $roleObj) {
             $parentRoleObj = $roleObj->getParent();
-
+            
             if ($parentRoleObj && $parentRoleObj->getRoleId()) {
                 $roleObj->setParent($roles[$parentRoleObj->getRoleId()]);
             }

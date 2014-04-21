@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Service;
 
 use BjyAuthorize\Provider\Identity\ZfcUserZendDb;
@@ -19,6 +18,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class ZfcUserZendDbIdentityProviderServiceFactory implements FactoryInterface
 {
+
     /**
      * {@inheritDoc}
      *
@@ -27,11 +27,11 @@ class ZfcUserZendDbIdentityProviderServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         /* @var $adapter \Zend\Db\Adapter\Adapter */
-        $adapter     = $serviceLocator->get('zfcuser_zend_db_adapter');
+        $adapter = $serviceLocator->get('zfcuser_zend_db_adapter');
         /* @var $userService \ZfcUser\Service\User */
         $userService = $serviceLocator->get('zfcuser_user_service');
-        $config      = $serviceLocator->get('BjyAuthorize\Config');
-
+        $config = $serviceLocator->get('BjyAuthorize\Config');
+        
         $provider = new ZfcUserZendDb($adapter, $userService);
 
         $provider->setDefaultRole($config['default_role']);

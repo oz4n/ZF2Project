@@ -5,13 +5,11 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Guard;
 
 use BjyAuthorize\Exception\UnAuthorizedException;
 use BjyAuthorize\Provider\Rule\ProviderInterface as RuleProviderInterface;
 use BjyAuthorize\Provider\Resource\ProviderInterface as ResourceProviderInterface;
-
 use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,41 +25,50 @@ use Zend\Http\Request as HttpRequest;
  */
 class Controller implements GuardInterface, RuleProviderInterface, ResourceProviderInterface
 {
+
     /**
      * Marker for invalid route errors
      */
     const ERROR = 'error-unauthorized-controller';
 
     /**
+     *
      * @var ServiceLocatorInterface
      */
     protected $serviceLocator;
 
     /**
+     *
      * @var array[]
      */
     protected $rules = array();
 
     /**
+     *
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
 
     /**
-     * @param array                   $rules
-     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @param array $rules            
+     * @param ServiceLocatorInterface $serviceLocator            
      */
     public function __construct(array $rules, ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
-
+        
         foreach ($rules as $rule) {
-            if (!is_array($rule['roles'])) {
-                $rule['roles'] = array($rule['roles']);
+            if (! is_array($rule['roles'])) {
+                $rule['roles'] = array(
+                    $rule['roles']
+                );
             }
-
-            $rule['action'] = isset($rule['action']) ? (array) $rule['action'] : array(null);
-
+            
+            $rule['action'] = isset($rule['action']) ? (array) $rule['action'] : array(
+                null
+            );
+            
             foreach ((array) $rule['controller'] as $controller) {
                 foreach ($rule['action'] as $action) {
                     $this->rules[$this->getResourceName($controller, $action)] = $rule['roles'];
@@ -75,7 +82,10 @@ class Controller implements GuardInterface, RuleProviderInterface, ResourceProvi
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'onDispatch'), -1000);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array(
+            $this,
+            'onDispatch'
+        ), - 1000);
     }
 
     /**
@@ -96,11 +106,11 @@ class Controller implements GuardInterface, RuleProviderInterface, ResourceProvi
     public function getResources()
     {
         $resources = array();
-
+        
         foreach (array_keys($this->rules) as $resource) {
             $resources[] = $resource;
         }
-
+        
         return $resources;
     }
 
@@ -111,17 +121,22 @@ class Controller implements GuardInterface, RuleProviderInterface, ResourceProvi
     {
         $rules = array();
         foreach ($this->rules as $resource => $roles) {
-            $rules[] = array($roles, $resource);
+            $rules[] = array(
+                $roles,
+                $resource
+            );
         }
-
-        return array('allow' => $rules);
+        
+        return array(
+            'allow' => $rules
+        );
     }
 
     /**
      * Retrieves the resource name for a given controller
      *
-     * @param string $controller
-     * @param string $action
+     * @param string $controller            
+     * @param string $action            
      *
      * @return string
      */
@@ -130,7 +145,7 @@ class Controller implements GuardInterface, RuleProviderInterface, ResourceProvi
         if (isset($action)) {
             return sprintf('controller/%s:%s', $controller, $action);
         }
-
+        
         return sprintf('controller/%s', $controller);
     }
 
@@ -138,28 +153,26 @@ class Controller implements GuardInterface, RuleProviderInterface, ResourceProvi
      * Event callback to be triggered on dispatch, causes application error triggering
      * in case of failed authorization check
      *
-     * @param MvcEvent $event
+     * @param MvcEvent $event            
      *
      * @return void
      */
     public function onDispatch(MvcEvent $event)
     {
         /* @var $service \BjyAuthorize\Service\Authorize */
-        $service    = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
-        $match      = $event->getRouteMatch();
+        $service = $this->serviceLocator->get('BjyAuthorize\Service\Authorize');
+        $match = $event->getRouteMatch();
         $controller = $match->getParam('controller');
-        $action     = $match->getParam('action');
-        $request    = $event->getRequest();
-        $method     = $request instanceof HttpRequest ? strtolower($request->getMethod()) : null;
-
-        $authorized = $service->isAllowed($this->getResourceName($controller))
-            || $service->isAllowed($this->getResourceName($controller, $action))
-            || ($method && $service->isAllowed($this->getResourceName($controller, $method)));
-
+        $action = $match->getParam('action');
+        $request = $event->getRequest();
+        $method = $request instanceof HttpRequest ? strtolower($request->getMethod()) : null;
+        
+        $authorized = $service->isAllowed($this->getResourceName($controller)) || $service->isAllowed($this->getResourceName($controller, $action)) || ($method && $service->isAllowed($this->getResourceName($controller, $method)));
+        
         if ($authorized) {
             return;
         }
-
+        
         $event->setError(static::ERROR);
         $event->setParam('identity', $service->getIdentity());
         $event->setParam('controller', $controller);

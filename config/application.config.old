@@ -11,19 +11,13 @@ return array(
         'DoctrineORMModule',
         'ZendDeveloperTools',
         'ZfcBase',
-        'ZfcUser',
-        'ZfcUserDoctrineORM',
-//         'BjyAuthorize',
-//         'SamUser',
-//         'CsnUser',
-//         'CsnAuthorization',
-        
-        'Setting',
-        'ORM',      
-        'Post',       
+        'Setting',        
+        'ORM',
+        'Post',
         'Page',
         'Appearance',
-        'Dashboard'
+        'Dashboard',
+        'Site'
     ),
     'module_listener_options' => array(
         'module_paths' => array(

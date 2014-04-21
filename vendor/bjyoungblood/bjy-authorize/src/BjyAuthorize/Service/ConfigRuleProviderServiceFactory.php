@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Service;
 
 use BjyAuthorize\Provider\Rule\Config;
@@ -19,6 +18,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class ConfigRuleProviderServiceFactory implements FactoryInterface
 {
+
     /**
      * {@inheritDoc}
      *
@@ -27,7 +27,7 @@ class ConfigRuleProviderServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('BjyAuthorize\Config');
-
+        
         return new Config($config['rule_providers']['BjyAuthorize\Provider\Rule\Config']);
     }
 }

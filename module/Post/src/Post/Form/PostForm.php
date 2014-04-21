@@ -2,7 +2,7 @@
 namespace Post\Form;
 
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+use Zend\Stdlib\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
 class PostForm extends Form
@@ -15,7 +15,7 @@ class PostForm extends Form
         $this->setAttribute('role', 'form');
         $this->setAttribute('class', 'form-horizontal');
         
-        $this->setHydrator(new ClassMethodsHydrator());
+        $this->setHydrator(new ClassMethods());
         $this->setInputFilter(new InputFilter());
         
         $this->add([
@@ -47,7 +47,7 @@ class PostForm extends Form
 //                 'slug',
                 'status',
                 'commentStatus',
-                'account'            
+                'user'            
             ]
         ]);
     }

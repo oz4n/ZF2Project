@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\Form;
 
 use Zend\Form\Form;
@@ -10,7 +9,9 @@ use ZfcUser\Module as ZfcUser;
 
 class ChangePassword extends ProvidesEventsForm
 {
+
     /**
+     *
      * @var AuthenticationOptionsInterface
      */
     protected $authOptions;
@@ -19,62 +20,62 @@ class ChangePassword extends ProvidesEventsForm
     {
         $this->setAuthenticationOptions($options);
         parent::__construct($name);
-
+        
         $this->add(array(
             'name' => 'identity',
             'options' => array(
-                'label' => '',
+                'label' => ''
             ),
             'attributes' => array(
                 'type' => 'hidden'
-            ),
+            )
         ));
-
+        
         $this->add(array(
             'name' => 'credential',
             'options' => array(
-                'label' => 'Current Password',
+                'label' => 'Current Password'
             ),
             'attributes' => array(
-                'type' => 'password',
-            ),
+                'type' => 'password'
+            )
         ));
-
+        
         $this->add(array(
             'name' => 'newCredential',
             'options' => array(
-                'label' => 'New Password',
+                'label' => 'New Password'
             ),
             'attributes' => array(
-                'type' => 'password',
-            ),
+                'type' => 'password'
+            )
         ));
-
+        
         $this->add(array(
             'name' => 'newCredentialVerify',
             'options' => array(
-                'label' => 'Verify New Password',
+                'label' => 'Verify New Password'
             ),
             'attributes' => array(
-                'type' => 'password',
-            ),
+                'type' => 'password'
+            )
         ));
-
+        
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'value' => 'Submit',
-                'type'  => 'submit'
-            ),
+                'type' => 'submit'
+            )
         ));
-
+        
         $this->getEventManager()->trigger('init', $this);
     }
 
     /**
      * Set Authentication-related Options
      *
-     * @param AuthenticationOptionsInterface $authOptions
+     * @param AuthenticationOptionsInterface $authOptions            
      * @return Login
      */
     public function setAuthenticationOptions(AuthenticationOptionsInterface $authOptions)

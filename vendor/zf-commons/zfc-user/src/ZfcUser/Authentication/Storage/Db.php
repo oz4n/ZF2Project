@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\Authentication\Storage;
 
 use Zend\Authentication\Storage;
@@ -10,22 +9,27 @@ use ZfcUser\Mapper\UserInterface as UserMapper;
 
 class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
 {
+
     /**
+     *
      * @var StorageInterface
      */
     protected $storage;
 
     /**
+     *
      * @var UserMapper
      */
     protected $mapper;
 
     /**
+     *
      * @var mixed
      */
     protected $resolvedIdentity;
 
     /**
+     *
      * @var ServiceManager
      */
     protected $serviceManager;
@@ -54,26 +58,26 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
         if (null !== $this->resolvedIdentity) {
             return $this->resolvedIdentity;
         }
-
+        
         $identity = $this->getStorage()->read();
-
+        
         if (is_int($identity) || is_scalar($identity)) {
             $identity = $this->getMapper()->findById($identity);
         }
-
+        
         if ($identity) {
             $this->resolvedIdentity = $identity;
         } else {
             $this->resolvedIdentity = null;
         }
-
+        
         return $this->resolvedIdentity;
     }
 
     /**
      * Writes $contents to storage
      *
-     * @param  mixed $contents
+     * @param mixed $contents            
      * @throws \Zend\Authentication\Exception\InvalidArgumentException If writing $contents to storage is impossible
      * @return void
      */
@@ -103,7 +107,7 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
     public function getStorage()
     {
         if (null === $this->storage) {
-            $this->setStorage(new Storage\Session);
+            $this->setStorage(new Storage\Session());
         }
         return $this->storage;
     }
@@ -111,7 +115,7 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
     /**
      * setStorage
      *
-     * @param Storage\StorageInterface $storage
+     * @param Storage\StorageInterface $storage            
      * @access public
      * @return Db
      */
@@ -137,7 +141,7 @@ class Db implements Storage\StorageInterface, ServiceManagerAwareInterface
     /**
      * setMapper
      *
-     * @param UserMapper $mapper
+     * @param UserMapper $mapper            
      * @return Db
      */
     public function setMapper(UserMapper $mapper)

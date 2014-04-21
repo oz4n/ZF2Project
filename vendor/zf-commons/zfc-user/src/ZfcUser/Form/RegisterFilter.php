@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\Form;
 
 use ZfcBase\InputFilter\ProvidesEventsInputFilter;
@@ -8,10 +7,13 @@ use ZfcUser\Options\RegistrationOptionsInterface;
 
 class RegisterFilter extends ProvidesEventsInputFilter
 {
+
     protected $emailValidator;
+
     protected $usernameValidator;
 
     /**
+     *
      * @var RegistrationOptionsInterface
      */
     protected $options;
@@ -21,86 +23,98 @@ class RegisterFilter extends ProvidesEventsInputFilter
         $this->setOptions($options);
         $this->emailValidator = $emailValidator;
         $this->usernameValidator = $usernameValidator;
-
+        
         if ($this->getOptions()->getEnableUsername()) {
             $this->add(array(
-                'name'       => 'username',
-                'required'   => true,
+                'name' => 'user_name',
+                'required' => true,
                 'validators' => array(
                     array(
-                        'name'    => 'StringLength',
+                        'name' => 'StringLength',
                         'options' => array(
                             'min' => 3,
-                            'max' => 255,
-                        ),
+                            'max' => 255
+                        )
                     ),
-                    $this->usernameValidator,
-                ),
+                    $this->usernameValidator
+                )
             ));
         }
-
+        
         $this->add(array(
-            'name'       => 'email',
-            'required'   => true,
+            'name' => 'email',
+            'required' => true,
             'validators' => array(
                 array(
                     'name' => 'EmailAddress'
                 ),
                 $this->emailValidator
-            ),
+            )
         ));
-
+        
         if ($this->getOptions()->getEnableDisplayName()) {
             $this->add(array(
-                'name'       => 'display_name',
-                'required'   => true,
-                'filters'    => array(array('name' => 'StringTrim')),
+                'name' => 'display_name',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim'
+                    )
+                ),
                 'validators' => array(
                     array(
-                        'name'    => 'StringLength',
+                        'name' => 'StringLength',
                         'options' => array(
                             'min' => 3,
-                            'max' => 128,
-                        ),
-                    ),
-                ),
+                            'max' => 128
+                        )
+                    )
+                )
             ));
         }
-
+        
         $this->add(array(
-            'name'       => 'password',
-            'required'   => true,
-            'filters'    => array(array('name' => 'StringTrim')),
+            'name' => 'password',
+            'required' => true,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim'
+                )
+            ),
             'validators' => array(
                 array(
-                    'name'    => 'StringLength',
+                    'name' => 'StringLength',
                     'options' => array(
-                        'min' => 6,
-                    ),
-                ),
-            ),
+                        'min' => 6
+                    )
+                )
+            )
         ));
-
+        
         $this->add(array(
-            'name'       => 'passwordVerify',
-            'required'   => true,
-            'filters'    => array(array('name' => 'StringTrim')),
+            'name' => 'passwordVerify',
+            'required' => true,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim'
+                )
+            ),
             'validators' => array(
                 array(
-                    'name'    => 'StringLength',
+                    'name' => 'StringLength',
                     'options' => array(
-                        'min' => 6,
-                    ),
+                        'min' => 6
+                    )
                 ),
                 array(
-                    'name'    => 'Identical',
+                    'name' => 'Identical',
                     'options' => array(
-                        'token' => 'password',
-                    ),
-                ),
-            ),
+                        'token' => 'password'
+                    )
+                )
+            )
         ));
-
+        
         $this->getEventManager()->trigger('init', $this);
     }
 
@@ -129,7 +143,7 @@ class RegisterFilter extends ProvidesEventsInputFilter
     /**
      * set options
      *
-     * @param RegistrationOptionsInterface $options
+     * @param RegistrationOptionsInterface $options            
      */
     public function setOptions(RegistrationOptionsInterface $options)
     {

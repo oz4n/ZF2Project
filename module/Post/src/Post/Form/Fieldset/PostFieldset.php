@@ -4,7 +4,7 @@ namespace Post\Form\Fieldset;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use ORM\Registry\Registry;
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity as DoctrineEntityHydrator;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 use ORM\Entity\Post;
 
 class PostFieldset extends Fieldset implements InputFilterProviderInterface
@@ -14,7 +14,7 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('post');
         $em = Registry::get('entityManager');
-        $this->setHydrator(new DoctrineEntityHydrator($em))->setObject(new Post());
+        $this->setHydrator(new DoctrineEntity($em))->setObject(new Post());
         
         $this->add([
             'name' => 'id',
@@ -125,14 +125,14 @@ class PostFieldset extends Fieldset implements InputFilterProviderInterface
         
         $this->add([
             'type' => 'DoctrineModule\Form\Element\ObjectSelect',
-            'name' => 'account',
+            'name' => 'user',
             "attributes" => [
                 "class" => "col-xs-10 col-sm-5"
             ],
             'options' => [
                 'object_manager' => $em,
-                'target_class' => 'ORM\Entity\Account',
-                'property' => 'username'
+                'target_class' => 'ORM\Entity\User',
+                'property' => 'userName'
             ]
         ]);
     }

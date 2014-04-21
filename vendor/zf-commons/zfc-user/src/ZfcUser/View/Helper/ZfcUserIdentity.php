@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
@@ -7,7 +6,9 @@ use Zend\Authentication\AuthenticationService;
 
 class ZfcUserIdentity extends AbstractHelper
 {
+
     /**
+     *
      * @var AuthenticationService
      */
     protected $authService;
@@ -40,7 +41,7 @@ class ZfcUserIdentity extends AbstractHelper
     /**
      * Set authService.
      *
-     * @param AuthenticationService $authService
+     * @param AuthenticationService $authService            
      * @return \ZfcUser\View\Helper\ZfcUserIdentity
      */
     public function setAuthService(AuthenticationService $authService)

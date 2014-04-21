@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env php
 SRC_DIR="`pwd`"
 cd "`dirname "$0"`"
 cd "../zendframework/zftool"

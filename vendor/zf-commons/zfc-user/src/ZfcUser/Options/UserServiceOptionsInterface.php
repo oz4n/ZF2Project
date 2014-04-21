@@ -1,17 +1,15 @@
 <?php
-
 namespace ZfcUser\Options;
 
 use ZfcUser\Options\RegistrationOptionsInterface;
 
-interface UserServiceOptionsInterface extends
-    RegistrationOptionsInterface,
-    AuthenticationOptionsInterface
+interface UserServiceOptionsInterface extends RegistrationOptionsInterface, AuthenticationOptionsInterface
 {
+
     /**
      * set user entity class name
      *
-     * @param string $userEntityClass
+     * @param string $userEntityClass            
      * @return ModuleOptions
      */
     public function setUserEntityClass($userEntityClass);

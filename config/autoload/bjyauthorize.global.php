@@ -4,7 +4,7 @@ return array(
     'bjyauthorize' => array(
 
         // set the 'guest' role as default (must be defined in a role provider)
-        'default_role' => 'guest',
+        'default_role' => '1',
 
         /* this module uses a meta-role that inherits from any roles that should
          * be applied to the active user. the identity provider tells us which
@@ -34,7 +34,7 @@ return array(
              * 'admin' inheriting from user
              */
             'BjyAuthorize\Provider\Role\Config' => array(
-                'guest' => array(),
+                'guest' => array('1'),
                 'user'  => array('children' => array(
                     'admin' => array(),
                 )),
@@ -43,17 +43,17 @@ return array(
             // this will load roles from the user_role table in a database
             // format: user_role(role_id(varchar), parent(varchar))
             'BjyAuthorize\Provider\Role\ZendDb' => array(
-                'table'                 => 'user_role',
-                'identifier_field_name' => 'is_default',
-                'role_id_field'         => 'role_id',
-                'parent_role_field'     => 'parent_id',
+                'table'                 => 'role',
+                'identifier_field_name' => 'name',
+                'role_id_field'         => 'id',
+                'parent_role_field'     => 'parent',
             ),
 
             // this will load roles from
             // the 'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' service
             'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
                 // class name of the entity representing the role
-//                 'role_entity_class' => 'ORM\Role\Entity',
+                'role_entity_class' => 'ORM\Entity\Role',
                 // service name of the object manager
                 //'object_manager'    => 'My\Doctrine\Common\Persistence\ObjectManager',
             ),
@@ -78,7 +78,7 @@ return array(
                 'allow' => array(
                     // allow guests and users (and admins, through inheritance)
                     // the "wear" privilege on the resource "pants"
-                    array(array('guest', 'user'), 'pants', 'wear')
+                    array(array('1', 3), 'pants', 'wear')
                 ),
 
                 // Don't mix allow/deny rules if you are using role inheritance.
@@ -101,23 +101,27 @@ return array(
             'BjyAuthorize\Guard\Controller' => array(              
                 array('controller' => 'zfcuser', 'roles' => array()),
                 // Below is the default index action used by the ZendSkeletonApplication
-                array('controller' => 'Setting\Controller\Index', 'roles' => array('admin', 'user')),
+                array('controller' => 'Setting\Controller\Index', 'roles' => array(2, 3)),
                 
-                array('controller' => 'Dashboard\Controller\Dashboard', 'roles' => array('admin', 'user')),
+                array('controller' => 'Dashboard\Controller\Dashboard', 'roles' => array(2, 3)),
+                array('controller' => 'Post\Controller\Post', 'roles' => array(2, 3)),
+                array('controller' => 'Site\Controller\Site', 'roles' => array(1)),
             ),
 
             /* If this guard is specified here (i.e. it is enabled), it will block
              * access to all routes unless they are specified here.
              */
             'BjyAuthorize\Guard\Route' => array(
-                array('route' => 'zfcuser', 'roles' => array('admin','user')),
-                array('route' => 'zfcuser/logout', 'roles' => array('admin','user')),
-                array('route' => 'zfcuser/login', 'roles' => array('guest')),
-                array('route' => 'zfcuser/register', 'roles' => array('guest')),
+                array('route' => 'zfcuser', 'roles' => array(2,3)),
+                array('route' => 'zfcuser/logout', 'roles' => array(2,3)),
+                array('route' => 'zfcuser/login', 'roles' => array('1')),
+                array('route' => 'zfcuser/register', 'roles' => array('1')),
                 
                 // Below is the default index action used by the ZendSkeletonApplication
-                array('route' => 'setting', 'roles' => array('admin', 'user')),
-                array('route' => 'dashboard', 'roles' => array('admin', 'user')),
+                array('route' => 'setting', 'roles' => array(2, 3)),
+                array('route' => 'dashboard', 'roles' => array(2, 3)),                
+                array('route' => 'dashboard/post', 'roles' => array(2, 3)),                
+                array('route' => 'site', 'roles' => array(1)),
             ),
         ),
     ),

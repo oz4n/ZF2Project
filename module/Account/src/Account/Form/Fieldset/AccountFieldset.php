@@ -1,11 +1,11 @@
 <?php
 namespace Account\Form\Fieldset;
 
-use ORM\Entity\Account;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity as DoctrineEntityHydrator;
 use ORM\Registry\Registry;
+use ORM\Entity\User;
 
 
 class AccountFieldset extends Fieldset implements InputFilterProviderInterface
@@ -18,7 +18,7 @@ class AccountFieldset extends Fieldset implements InputFilterProviderInterface
     {
         parent::__construct('account');
         $em = Registry::get('entityManager');        
-        $this->setHydrator(new DoctrineEntityHydrator($em))->setObject(new Account());
+        $this->setHydrator(new DoctrineEntityHydrator($em))->setObject(new User());
         $this->add([
             'name' => 'id',
             'type' => 'Zend\Form\Element\Hidden'
@@ -35,14 +35,6 @@ class AccountFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'password',
             'type' => 'Zend\Form\Element\Password',
             'attributes' => [                
-                'class' => 'form-control'
-            ]
-        ]);
-        
-        $this->add([
-            'name' => 'salt',
-            'type' => 'Zend\Form\Element\Text',
-            'attributes' => [               
                 'class' => 'form-control'
             ]
         ]);
@@ -90,17 +82,7 @@ class AccountFieldset extends Fieldset implements InputFilterProviderInterface
                     'required' => true
                 ]
             ],
-            'salt' => [
-                'required' => true,
-                'filters' => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ],
-                'properties' => [
-                    'required' => true
-                ]
-            ],
+                     
             'email' => [
                 'required' => true,
                 'filters' => [

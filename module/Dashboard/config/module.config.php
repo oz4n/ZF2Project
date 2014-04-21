@@ -1,28 +1,27 @@
 <?php
-
 return [
     'controllers' => [
         'invokables' => [
-            'Dashboard\Controller\Dashboard' => 'Dashboard\Controller\DashboardController',          
+            'Dashboard\Controller\Dashboard' => 'Dashboard\Controller\DashboardController'
         ]
     ],
+    
     'router' => [
         'routes' => [
             'dashboard' => [
-                'type' => 'segment',
+                'type' => 'Literal',
                 'options' => [
-                    'route' => '/dashboard[/][:action][/:id]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[0-9]+'
-                    ],
+                    'route' => '/dashboard',
                     'defaults' => [
-                        'controller' => 'Dashboard\Controller\Dashboard',
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'Dashboard',
                         'action' => 'index'
                     ]
-                ]
-            ]           
+                ],
+                'may_terminate' => true,
+            ]
         ]
+        
     ],
     'view_manager' => [
         'template_path_stack' => [
@@ -35,8 +34,8 @@ return [
             array(
                 'type' => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
-                'pattern' => '%s.mo',
-            ),
-        ),
-    ),
+                'pattern' => '%s.mo'
+            )
+        )
+    )
 ];

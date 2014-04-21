@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Post
  *
- * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_post_post1_idx", columns={"parent"})})
+ * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_post_user1_idx", columns={"user_id"})})
  * @ORM\Entity
  */
 class Post
@@ -24,7 +24,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @ORM\Column(name="title", type="string", length=225, nullable=false)
      */
     private $title;
 
@@ -38,76 +38,99 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="text", nullable=false)
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
     private $slug;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=5, nullable=false)
+     * @ORM\Column(name="status", type="string", length=15, nullable=false)
      */
-    private $status = 'P';
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="create_time", type="datetime", nullable=false)
-     */
-    private $createTime;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="update_time", type="datetime", nullable=false)
-     */
-    private $updateTime;
+    private $status = 'Draft';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comment_status", type="string", length=5, nullable=true)
+     * @ORM\Column(name="comment_status", type="string", length=15, nullable=true)
      */
-    private $commentStatus = 'E';
+    private $commentStatus = 'Enable';
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="post_status", type="string", length=25, nullable=true)
+     * @ORM\Column(name="like", type="integer", nullable=true)
      */
-    private $postStatus;
+    private $like = '0';
 
     /**
-     * @var \ORM\Entity\Post
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="ORM\Entity\Post")
+     * @ORM\Column(name="unlike", type="integer", nullable=true)
+     */
+    private $unlike = '0';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=false)
+     */
+    private $updated;
+
+    /**
+     * @var \ORM\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="ORM\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
+     */
+    private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="ORM\Entity\Post", inversedBy="post")
+     * @ORM\JoinTable(name="postrelations",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     *   }
+     * )
      */
     private $parent;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="ORM\Entity\TermTaxonomy", inversedBy="post")
-     * @ORM\JoinTable(name="relationships",
+     * @ORM\ManyToMany(targetEntity="ORM\Entity\Taxonomy", inversedBy="post")
+     * @ORM\JoinTable(name="taxpostrelations",
      *   joinColumns={
      *     @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="term_taxonomy_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="tax_id", referencedColumnName="id")
      *   }
      * )
      */
-    private $termTaxonomy;
+    private $tax;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->termTaxonomy = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->parent = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tax = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -214,52 +237,6 @@ class Post
     }
 
     /**
-     * Set createTime
-     *
-     * @param \DateTime $createTime
-     * @return Post
-     */
-    public function setCreateTime($createTime)
-    {
-        $this->createTime = $createTime;
-
-        return $this;
-    }
-
-    /**
-     * Get createTime
-     *
-     * @return \DateTime 
-     */
-    public function getCreateTime()
-    {
-        return $this->createTime;
-    }
-
-    /**
-     * Set updateTime
-     *
-     * @param \DateTime $updateTime
-     * @return Post
-     */
-    public function setUpdateTime($updateTime)
-    {
-        $this->updateTime = $updateTime;
-
-        return $this;
-    }
-
-    /**
-     * Get updateTime
-     *
-     * @return \DateTime 
-     */
-    public function getUpdateTime()
-    {
-        return $this->updateTime;
-    }
-
-    /**
      * Set commentStatus
      *
      * @param string $commentStatus
@@ -283,45 +260,147 @@ class Post
     }
 
     /**
-     * Set postStatus
+     * Set like
      *
-     * @param string $postStatus
+     * @param integer $like
      * @return Post
      */
-    public function setPostStatus($postStatus)
+    public function setLike($like)
     {
-        $this->postStatus = $postStatus;
+        $this->like = $like;
 
         return $this;
     }
 
     /**
-     * Get postStatus
+     * Get like
      *
-     * @return string 
+     * @return integer 
      */
-    public function getPostStatus()
+    public function getLike()
     {
-        return $this->postStatus;
+        return $this->like;
     }
 
     /**
-     * Set parent
+     * Set unlike
+     *
+     * @param integer $unlike
+     * @return Post
+     */
+    public function setUnlike($unlike)
+    {
+        $this->unlike = $unlike;
+
+        return $this;
+    }
+
+    /**
+     * Get unlike
+     *
+     * @return integer 
+     */
+    public function getUnlike()
+    {
+        return $this->unlike;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Post
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Post
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ORM\Entity\User $user
+     * @return Post
+     */
+    public function setUser(\ORM\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ORM\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add parent
      *
      * @param \ORM\Entity\Post $parent
      * @return Post
      */
-    public function setParent(\ORM\Entity\Post $parent = null)
+    public function addParent(\ORM\Entity\Post $parent)
     {
-        $this->parent = $parent;
+        $this->parent[] = $parent;
 
         return $this;
+    }
+
+    /**
+     * Remove parent
+     *
+     * @param \ORM\Entity\Post $parent
+     */
+    public function removeParent(\ORM\Entity\Post $parent)
+    {
+        $this->parent->removeElement($parent);
     }
 
     /**
      * Get parent
      *
-     * @return \ORM\Entity\Post 
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getParent()
     {
@@ -329,35 +408,35 @@ class Post
     }
 
     /**
-     * Add termTaxonomy
+     * Add tax
      *
-     * @param \ORM\Entity\TermTaxonomy $termTaxonomy
+     * @param \ORM\Entity\Taxonomy $tax
      * @return Post
      */
-    public function addTermTaxonomy(\ORM\Entity\TermTaxonomy $termTaxonomy)
+    public function addTax(\ORM\Entity\Taxonomy $tax)
     {
-        $this->termTaxonomy[] = $termTaxonomy;
+        $this->tax[] = $tax;
 
         return $this;
     }
 
     /**
-     * Remove termTaxonomy
+     * Remove tax
      *
-     * @param \ORM\Entity\TermTaxonomy $termTaxonomy
+     * @param \ORM\Entity\Taxonomy $tax
      */
-    public function removeTermTaxonomy(\ORM\Entity\TermTaxonomy $termTaxonomy)
+    public function removeTax(\ORM\Entity\Taxonomy $tax)
     {
-        $this->termTaxonomy->removeElement($termTaxonomy);
+        $this->tax->removeElement($tax);
     }
 
     /**
-     * Get termTaxonomy
+     * Get tax
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTermTaxonomy()
+    public function getTax()
     {
-        return $this->termTaxonomy;
+        return $this->tax;
     }
 }

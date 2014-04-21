@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Provider\Rule;
 
 /**
@@ -16,7 +15,9 @@ namespace BjyAuthorize\Provider\Rule;
  */
 interface ProviderInterface
 {
+
     /**
+     *
      * @return array
      */
     public function getRules();

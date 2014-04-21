@@ -1,35 +1,41 @@
 <?php
-
 namespace ZfcUser\Entity;
 
 class User implements UserInterface
 {
+
     /**
+     *
      * @var int
      */
     protected $id;
 
     /**
+     *
      * @var string
      */
-    protected $username;
+    protected $userName;
 
     /**
+     *
      * @var string
      */
     protected $email;
 
     /**
+     *
      * @var string
      */
     protected $displayName;
 
     /**
+     *
      * @var string
      */
     protected $password;
 
     /**
+     *
      * @var int
      */
     protected $state;
@@ -44,37 +50,26 @@ class User implements UserInterface
         return $this->id;
     }
 
+  
     /**
-     * Set id.
-     *
-     * @param int $id
-     * @return UserInterface
-     */
-    public function setId($id)
-    {
-        $this->id = (int) $id;
-        return $this;
-    }
-
-    /**
-     * Get username.
+     * Get userName.
      *
      * @return string
      */
-    public function getUsername()
+    public function getUserName()
     {
-        return $this->username;
+        return $this->userName;
     }
 
     /**
-     * Set username.
+     * Set userName.
      *
-     * @param string $username
+     * @param string $username            
      * @return UserInterface
      */
-    public function setUsername($username)
+    public function setUserName($username)
     {
-        $this->username = $username;
+        $this->userName = $username;
         return $this;
     }
 
@@ -91,7 +86,7 @@ class User implements UserInterface
     /**
      * Set email.
      *
-     * @param string $email
+     * @param string $email            
      * @return UserInterface
      */
     public function setEmail($email)
@@ -113,7 +108,7 @@ class User implements UserInterface
     /**
      * Set displayName.
      *
-     * @param string $displayName
+     * @param string $displayName            
      * @return UserInterface
      */
     public function setDisplayName($displayName)
@@ -135,7 +130,7 @@ class User implements UserInterface
     /**
      * Set password.
      *
-     * @param string $password
+     * @param string $password            
      * @return UserInterface
      */
     public function setPassword($password)
@@ -157,7 +152,7 @@ class User implements UserInterface
     /**
      * Set state.
      *
-     * @param int $state
+     * @param int $state            
      * @return UserInterface
      */
     public function setState($state)

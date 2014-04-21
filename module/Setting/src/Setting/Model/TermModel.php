@@ -1,4 +1,5 @@
 <?php
+
 namespace Setting\Model;
 
 use ORM\Registry\Registry;
@@ -17,7 +18,6 @@ class TermModel
         return new DAOManager($em, 'ORM\Entity\TermTaxonomy');
     }
 
-   
     public function findAllMenu()
     {
         // $this->TermManager()->findAll();
@@ -26,39 +26,39 @@ class TermModel
                 'label' => 'Dashboard',
                 'route' => 'dashboard',
                 'action' => 'index',
-                'id' => 'icon-dashboard',
+                'id' => 'menu-icon fa fa-dashboard',
                 'roles' => array('admin'),
                 'pages' => array()
             ),
             array(
                 'label' => 'Words',
                 'route' => 'post',
-                'id' => ' icon-th-list',
+                'id' => 'menu-icon fa fa-tasks',
                 'pages' => array(
                     array(
                         'label' => 'Posts',
                         'route' => 'post',
                         'action' => 'index',
                         'class' => 'all-post',
-                        'id' => 'icon-double-angle-right'
+                        'id' => 'menu-icon fa fa-angle-double-right'
                     ),
                     array(
                         'label' => 'Add New',
                         'route' => 'post',
                         'action' => 'add',
-                        'id' => 'icon-double-angle-right'
+                        'id' => 'menu-icon fa fa-angle-double-right'
                     ),
                     array(
                         'label' => 'Categories',
-                        'route' => 'category',
+                        'route' => 'post/post_category',
                         'action' => 'index',
-                        'id' => 'icon-double-angle-right'
+                        'id' => 'menu-icon fa fa-angle-double-right'
                     ),
                     array(
                         'label' => 'Tags',
-                        'route' => 'tag',
+                        'route' => 'post/post_tag',
                         'action' => 'index',
-                        'id' => 'icon-double-angle-right'
+                        'id' => 'menu-icon fa fa-angle-double-right'
                     )
                 )
             ),
@@ -66,30 +66,51 @@ class TermModel
                 'label' => 'Pages',
                 'route' => 'page',
                 'action' => 'index',
-                'id' => 'icon-tasks',
+                'id' => 'menu-icon fa fa-files-o',
                 'pages' => array(
                     array(
                         'label' => 'All Pages',
                         'route' => 'page',
                         'action' => 'index',
                         'class' => 'all-page',
-                        'id' => 'icon-double-angle-right'
+                        'id' => 'menu-icon fa fa-angle-double-right'
                     ),
                     array(
                         'label' => 'Add New',
                         'route' => 'page',
                         'action' => 'add',
-                        'id' => 'icon-double-angle-right'
+                        'id' => 'menu-icon fa fa-angle-double-right'
                     )
                 )
             ),
             array(
                 'label' => 'Comments',
-                'route' => 'comment',
+                'route' => 'post/post_comment',
                 'action' => 'index',
-                'id' => 'icon-comments',
+                'id' => 'menu-icon fa fa-comments',
                 'pages' => array()
+            ),
+            array(
+                'label' => 'Users',
+                'route' => 'user',
+                'action' => 'index',
+                'id' => 'menu-icon fa fa-users',
+                'pages' => array(
+                    array(
+                        'label' => 'All User',
+                        'route' => 'user',
+                        'action' => 'index',
+                        'id' => 'menu-icon fa fa-angle-double-right'
+                    ),
+                    array(
+                        'label' => 'Add New',
+                        'route' => 'user/add',
+                        'action' => 'add',
+                        'id' => 'menu-icon fa fa-angle-double-right'
+                    )
+                )
             )
         );
     }
+
 }

@@ -31,9 +31,9 @@ class Terminologi
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="text", nullable=false)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
-    private $slug;
+    private $description;
 
 
 
@@ -71,25 +71,25 @@ class Terminologi
     }
 
     /**
-     * Set slug
+     * Set description
      *
-     * @param string $slug
+     * @param string $description
      * @return Terminologi
      */
-    public function setSlug($slug)
+    public function setDescription($description)
     {
-        $this->slug = $slug;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get slug
+     * Get description
      *
      * @return string 
      */
-    public function getSlug()
+    public function getDescription()
     {
-        return $this->slug;
+        return $this->description;
     }
 }

@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\Provider\Role;
 
 /**
@@ -15,7 +14,9 @@ namespace BjyAuthorize\Provider\Role;
  */
 interface ProviderInterface
 {
+
     /**
+     *
      * @return \Zend\Permissions\Acl\Role\RoleInterface[]
      */
     public function getRoles();

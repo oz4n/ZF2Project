@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\Options;
 
 interface AuthenticationOptionsInterface extends PasswordOptionsInterface
@@ -8,21 +7,21 @@ interface AuthenticationOptionsInterface extends PasswordOptionsInterface
     /**
      * set login form timeout in seconds
      *
-     * @param int $loginFormTimeout
+     * @param int $loginFormTimeout            
      */
     public function setLoginFormTimeout($loginFormTimeout);
 
     /**
      * set login form timeout in seconds
      *
-     * @param int $loginFormTimeout
+     * @param int $loginFormTimeout            
      */
     public function getLoginFormTimeout();
 
     /**
      * set auth identity fields
      *
-     * @param array $authIdentityFields
+     * @param array $authIdentityFields            
      * @return ModuleOptions
      */
     public function setAuthIdentityFields($authIdentityFields);

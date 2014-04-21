@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
@@ -8,7 +7,9 @@ use ZfcUser\Entity\UserInterface as User;
 
 class ZfcUserDisplayName extends AbstractHelper
 {
+
     /**
+     *
      * @var AuthenticationService
      */
     protected $authService;
@@ -17,7 +18,7 @@ class ZfcUserDisplayName extends AbstractHelper
      * __invoke
      *
      * @access public
-     * @param \ZfcUser\Entity\UserInterface $user
+     * @param \ZfcUser\Entity\UserInterface $user            
      * @throws \ZfcUser\Exception\DomainException
      * @return String
      */
@@ -26,16 +27,14 @@ class ZfcUserDisplayName extends AbstractHelper
         if (null === $user) {
             if ($this->getAuthService()->hasIdentity()) {
                 $user = $this->getAuthService()->getIdentity();
-                if (!$user instanceof User) {
-                    throw new \ZfcUser\Exception\DomainException(
-                        '$user is not an instance of User', 500
-                    );
+                if (! $user instanceof User) {
+                    throw new \ZfcUser\Exception\DomainException('$user is not an instance of User', 500);
                 }
             } else {
                 return false;
             }
         }
-
+        
         $displayName = $user->getDisplayName();
         if (null === $displayName) {
             $displayName = $user->getUsername();
@@ -44,7 +43,7 @@ class ZfcUserDisplayName extends AbstractHelper
             $displayName = $user->getEmail();
             $displayName = substr($displayName, 0, strpos($displayName, '@'));
         }
-
+        
         return $displayName;
     }
 
@@ -61,7 +60,7 @@ class ZfcUserDisplayName extends AbstractHelper
     /**
      * Set authService.
      *
-     * @param AuthenticationService $authService
+     * @param AuthenticationService $authService            
      * @return \ZfcUser\View\Helper\ZfcUserDisplayName
      */
     public function setAuthService(AuthenticationService $authService)

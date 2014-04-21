@@ -1,5 +1,4 @@
 <?php
-
 namespace ZfcUser\Authentication\Adapter;
 
 use Zend\Authentication\Adapter\AdapterInterface;
@@ -11,7 +10,9 @@ use ZfcBase\EventManager\EventProvider;
 
 class AdapterChain extends EventProvider implements AdapterInterface
 {
+
     /**
+     *
      * @var AdapterChainEvent
      */
     protected $event;
@@ -24,41 +25,37 @@ class AdapterChain extends EventProvider implements AdapterInterface
     public function authenticate()
     {
         $e = $this->getEvent();
-
-        $result = new AuthenticationResult(
-            $e->getCode(),
-            $e->getIdentity(),
-            $e->getMessages()
-        );
-
+        
+        $result = new AuthenticationResult($e->getCode(), $e->getIdentity(), $e->getMessages());
+        
         $this->resetAdapters();
-
+        
         return $result;
     }
 
     public function prepareForAuthentication(Request $request)
     {
-        $e = $this->getEvent()
-                  ->setRequest($request);
-
+        $e = $this->getEvent()->setRequest($request);
+        
         $this->getEventManager()->trigger('authenticate.pre', $e);
-
-        $result = $this->getEventManager()->trigger('authenticate', $e, function($test) {
+        
+        $result = $this->getEventManager()->trigger('authenticate', $e, function ($test)
+        {
             return ($test instanceof Response);
         });
-
+        
         if ($result->stopped()) {
-            if($result->last() instanceof Response) {
+            if ($result->last() instanceof Response) {
                 return $result->last();
             } else {
                 // throw new Exception('Auth event was stopped without a response.');
             }
         }
-
+        
         if ($e->getIdentity()) {
             return true;
         }
-
+        
         return false;
     }
 
@@ -86,7 +83,7 @@ class AdapterChain extends EventProvider implements AdapterInterface
      */
     public function logoutAdapters()
     {
-        //Adapters might need to perform additional cleanup after logout
+        // Adapters might need to perform additional cleanup after logout
         $this->getEventManager()->trigger('logout', $this->getEvent());
     }
 
@@ -98,7 +95,7 @@ class AdapterChain extends EventProvider implements AdapterInterface
     public function getEvent()
     {
         if (null === $this->event) {
-            $this->setEvent(new AdapterChainEvent);
+            $this->setEvent(new AdapterChainEvent());
             $this->event->setTarget($this);
         }
         return $this->event;
@@ -109,12 +106,12 @@ class AdapterChain extends EventProvider implements AdapterInterface
      *
      * By default, will re-cast to AdapterChainEvent if another event type is provided.
      *
-     * @param  Event $e
+     * @param Event $e            
      * @return AdapterChain
      */
     public function setEvent(Event $e)
     {
-        if ($e instanceof Event && !$e instanceof AdapterChainEvent) {
+        if ($e instanceof Event && ! $e instanceof AdapterChainEvent) {
             $eventParams = $e->getParams();
             $e = new AdapterChainEvent();
             $e->setParams($eventParams);

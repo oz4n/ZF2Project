@@ -5,9 +5,10 @@ use Account\Form\AccountForm;
 use Doctrine\ORM\EntityManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use ORM\Entity\Account;
+use ORM\Entity\User;
 use ORM\Registry\Registry;
-use ORM\DAO\DAOManager;
+use ORM\OrmDAO\UserDao;
+
 
 class AccountController extends AbstractActionController
 {
@@ -55,7 +56,7 @@ class AccountController extends AbstractActionController
      */
     protected function AccountDaoManager()
     {
-        return new DAOManager($this->getEntityManager(), 'ORM\Entity\Account');
+        return new UserDao($this->getEntityManager(), 'ORM\Entity\User');
     }
 
     /**
@@ -101,7 +102,7 @@ class AccountController extends AbstractActionController
     public function addAction()
     {
         $this->RegisterEntityManager();
-        $account = new Account();
+        $account = new User();
         $form = new AccountForm();
         $form->bind($account);
         $request = $this->getRequest();

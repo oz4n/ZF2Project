@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize;
 
 use Zend\EventManager\EventInterface;
@@ -22,30 +21,26 @@ use Zend\ServiceManager\AbstractPluginManager;
  *
  * @author Ben Youngblood <bx.youngblood@gmail.com>
  */
-class Module implements
-    AutoloaderProviderInterface,
-    BootstrapListenerInterface,
-    ConfigProviderInterface,
-    ControllerPluginProviderInterface,
-    ViewHelperProviderInterface
+class Module implements AutoloaderProviderInterface, BootstrapListenerInterface, ConfigProviderInterface, ControllerPluginProviderInterface, ViewHelperProviderInterface
 {
+
     /**
      * {@inheritDoc}
      */
     public function onBootstrap(EventInterface $event)
     {
         /* @var $app \Zend\Mvc\ApplicationInterface */
-        $app            = $event->getTarget();
+        $app = $event->getTarget();
         /* @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
         $serviceManager = $app->getServiceManager();
-        $config         = $serviceManager->get('BjyAuthorize\Config');
-        $strategy       = $serviceManager->get($config['unauthorized_strategy']);
-        $guards         = $serviceManager->get('BjyAuthorize\Guards');
-
+        $config = $serviceManager->get('BjyAuthorize\Config');
+        $strategy = $serviceManager->get($config['unauthorized_strategy']);
+        $guards = $serviceManager->get('BjyAuthorize\Guards');
+        
         foreach ($guards as $guard) {
             $app->getEventManager()->attach($guard);
         }
-
+        
         $app->getEventManager()->attach($strategy);
     }
 
@@ -56,14 +51,15 @@ class Module implements
     {
         return array(
             'factories' => array(
-                'isAllowed' => function (AbstractPluginManager $pluginManager) {
+                'isAllowed' => function (AbstractPluginManager $pluginManager)
+                {
                     $serviceLocator = $pluginManager->getServiceLocator();
                     /* @var $authorize \BjyAuthorize\Service\Authorize */
                     $authorize = $serviceLocator->get('BjyAuthorize\Service\Authorize');
-
+                    
                     return new View\Helper\IsAllowed($authorize);
                 }
-            ),
+            )
         );
     }
 
@@ -74,14 +70,15 @@ class Module implements
     {
         return array(
             'factories' => array(
-                'isAllowed' => function (AbstractPluginManager $pluginManager) {
+                'isAllowed' => function (AbstractPluginManager $pluginManager)
+                {
                     $serviceLocator = $pluginManager->getServiceLocator();
                     /* @var $authorize \BjyAuthorize\Service\Authorize */
                     $authorize = $serviceLocator->get('BjyAuthorize\Service\Authorize');
-
+                    
                     return new Controller\Plugin\IsAllowed($authorize);
                 }
-            ),
+            )
         );
     }
 

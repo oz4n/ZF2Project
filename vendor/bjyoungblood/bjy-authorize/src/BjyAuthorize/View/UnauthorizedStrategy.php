@@ -5,7 +5,6 @@
  * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace BjyAuthorize\View;
 
 use Zend\EventManager\EventManagerInterface;
@@ -27,18 +26,23 @@ use BjyAuthorize\Guard\Route;
  */
 class UnauthorizedStrategy implements ListenerAggregateInterface
 {
+
     /**
+     *
      * @var string
      */
     protected $template;
 
     /**
+     *
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
 
     /**
-     * @param string $template name of the template to use on unauthorized requests
+     *
+     * @param string $template
+     *            name of the template to use on unauthorized requests
      */
     public function __construct($template)
     {
@@ -50,7 +54,10 @@ class UnauthorizedStrategy implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'onDispatchError'), -5000);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array(
+            $this,
+            'onDispatchError'
+        ), - 5000);
     }
 
     /**
@@ -66,7 +73,8 @@ class UnauthorizedStrategy implements ListenerAggregateInterface
     }
 
     /**
-     * @param string $template
+     *
+     * @param string $template            
      */
     public function setTemplate($template)
     {
@@ -74,6 +82,7 @@ class UnauthorizedStrategy implements ListenerAggregateInterface
     }
 
     /**
+     *
      * @return string
      */
     public function getTemplate()
@@ -82,45 +91,46 @@ class UnauthorizedStrategy implements ListenerAggregateInterface
     }
 
     /**
-     * Callback used when a dispatch error occurs. Modifies the
+     * Callback used when a dispatch error occurs.
+     * Modifies the
      * response object with an according error if the application
      * event contains an exception related with authorization.
      *
-     * @param MvcEvent $event
+     * @param MvcEvent $event            
      *
      * @return void
      */
     public function onDispatchError(MvcEvent $event)
     {
         // Do nothing if the result is a response object
-        $result   = $event->getResult();
+        $result = $event->getResult();
         $response = $event->getResponse();
-
+        
         if ($result instanceof Response || ($response && ! $response instanceof HttpResponse)) {
             return;
         }
-
+        
         // Common view variables
         $viewVariables = array(
-           'error'      => $event->getParam('error'),
-           'identity'   => $event->getParam('identity'),
+            'error' => $event->getParam('error'),
+            'identity' => $event->getParam('identity')
         );
-
+        
         switch ($event->getError()) {
             case Controller::ERROR:
                 $viewVariables['controller'] = $event->getParam('controller');
-                $viewVariables['action']     = $event->getParam('action');
+                $viewVariables['action'] = $event->getParam('action');
                 break;
             case Route::ERROR:
                 $viewVariables['route'] = $event->getParam('route');
                 break;
             case Application::ERROR_EXCEPTION:
-                if (!($event->getParam('exception') instanceof UnAuthorizedException)) {
+                if (! ($event->getParam('exception') instanceof UnAuthorizedException)) {
                     return;
                 }
-
+                
                 $viewVariables['reason'] = $event->getParam('exception')->getMessage();
-                $viewVariables['error']  = 'error-unauthorized';
+                $viewVariables['error'] = 'error-unauthorized';
                 break;
             default:
                 /*

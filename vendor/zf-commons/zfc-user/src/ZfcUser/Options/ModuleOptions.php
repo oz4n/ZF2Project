@@ -1,130 +1,154 @@
 <?php
-
 namespace ZfcUser\Options;
 
 use Zend\Stdlib\AbstractOptions;
 
-class ModuleOptions extends AbstractOptions implements
-    UserControllerOptionsInterface,
-    UserServiceOptionsInterface
+class ModuleOptions extends AbstractOptions implements UserControllerOptionsInterface, UserServiceOptionsInterface
 {
+
     /**
      * Turn off strict options mode
      */
     protected $__strictMode__ = false;
 
     /**
+     *
      * @var bool
      */
     protected $useRedirectParameterIfPresent = true;
 
     /**
+     *
      * @var string
      */
     protected $loginRedirectRoute = 'zfcuser';
 
     /**
+     *
      * @var string
      */
     protected $logoutRedirectRoute = 'zfcuser/login';
 
     /**
+     *
      * @var int
      */
     protected $loginFormTimeout = 300;
 
     /**
+     *
      * @var int
      */
     protected $userFormTimeout = 300;
 
     /**
+     *
      * @var bool
      */
     protected $loginAfterRegistration = true;
 
     /**
+     *
      * @var int
      */
     protected $enableUserState = false;
 
     /**
+     *
      * @var int
      */
     protected $defaultUserState = 1;
 
     /**
+     *
      * @var Array
      */
-    protected $allowedLoginStates = array( null, 1 );
+    protected $allowedLoginStates = array(
+        null,
+        1
+    );
 
     /**
+     *
      * @var array
      */
-    protected $authAdapters = array( 100 => 'ZfcUser\Authentication\Adapter\Db' );
+    protected $authAdapters = array(
+        100 => 'ZfcUser\Authentication\Adapter\Db'
+    );
 
     /**
+     *
      * @var array
      */
-    protected $authIdentityFields = array( 'email' );
+    protected $authIdentityFields = array(
+        'email'
+    );
 
     /**
+     *
      * @var string
      */
     protected $userEntityClass = 'ZfcUser\Entity\User';
 
     /**
+     *
      * @var string
      */
     protected $userLoginWidgetViewTemplate = 'zfc-user/user/login.phtml';
 
     /**
+     *
      * @var bool
      */
     protected $enableRegistration = true;
 
     /**
+     *
      * @var bool
      */
     protected $enableUsername = false;
 
     /**
+     *
      * @var bool
      */
     protected $enableDisplayName = false;
 
     /**
+     *
      * @var bool
      */
     protected $useRegistrationFormCaptcha = false;
 
     /**
+     *
      * @var int
      */
     protected $passwordCost = 14;
-    
+
     /**
+     *
      * @var string
      */
-    
     protected $tableName = 'user';
 
     /**
+     *
      * @var array
      */
     protected $formCaptchaOptions = array(
-        'class'   => 'figlet',
+        'class' => 'figlet',
         'options' => array(
-            'wordLen'    => 5,
+            'wordLen' => 5,
             'expiration' => 300,
-            'timeout'    => 300,
-        ),
+            'timeout' => 300
+        )
     );
 
     /**
      * set login redirect route
      *
-     * @param string $loginRedirectRoute
+     * @param string $loginRedirectRoute            
      * @return ModuleOptions
      */
     public function setLoginRedirectRoute($loginRedirectRoute)
@@ -146,7 +170,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set logout redirect route
      *
-     * @param string $logoutRedirectRoute
+     * @param string $logoutRedirectRoute            
      * @return ModuleOptions
      */
     public function setLogoutRedirectRoute($logoutRedirectRoute)
@@ -168,7 +192,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set use redirect param if present
      *
-     * @param bool $useRedirectParameterIfPresent
+     * @param bool $useRedirectParameterIfPresent            
      * @return ModuleOptions
      */
     public function setUseRedirectParameterIfPresent($useRedirectParameterIfPresent)
@@ -190,7 +214,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set the view template for the user login widget
      *
-     * @param string $userLoginWidgetViewTemplate
+     * @param string $userLoginWidgetViewTemplate            
      * @return ModuleOptions
      */
     public function setUserLoginWidgetViewTemplate($userLoginWidgetViewTemplate)
@@ -212,7 +236,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set enable user registration
      *
-     * @param bool $enableRegistration
+     * @param bool $enableRegistration            
      * @return ModuleOptions
      */
     public function setEnableRegistration($enableRegistration)
@@ -234,7 +258,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set login form timeout
      *
-     * @param int $loginFormTimeout
+     * @param int $loginFormTimeout            
      * @return ModuleOptions
      */
     public function setLoginFormTimeout($loginFormTimeout)
@@ -256,7 +280,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set user form timeout in seconds
      *
-     * @param int $userFormTimeout
+     * @param int $userFormTimeout            
      * @return ModuleOptions
      */
     public function setUserFormTimeout($userFormTimeout)
@@ -278,7 +302,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set login after registration
      *
-     * @param bool $loginAfterRegistration
+     * @param bool $loginAfterRegistration            
      * @return ModuleOptions
      */
     public function setLoginAfterRegistration($loginAfterRegistration)
@@ -310,7 +334,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set user state usage for registration/login process
      *
-     * @param boolean $flag
+     * @param boolean $flag            
      * @return ModuleOptions
      */
     public function setEnableUserState($flag)
@@ -332,7 +356,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set default user state on registration
      *
-     * @param int $state
+     * @param int $state            
      * @return ModuleOptions
      */
     public function setDefaultUserState($state)
@@ -354,7 +378,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set list of states to allow user login
      *
-     * @param Array $states
+     * @param Array $states            
      * @return ModuleOptions
      */
     public function setAllowedLoginStates(Array $states)
@@ -366,7 +390,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set auth adapters
      *
-     * @param array $authAdapterss
+     * @param array $authAdapterss            
      * @return ModuleOptions
      */
     public function setAuthAdapters($authAdapters)
@@ -388,7 +412,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set auth identity fields
      *
-     * @param array $authIdentityFields
+     * @param array $authIdentityFields            
      * @return ModuleOptions
      */
     public function setAuthIdentityFields($authIdentityFields)
@@ -410,7 +434,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set enable username
      *
-     * @param bool $flag
+     * @param bool $flag            
      * @return ModuleOptions
      */
     public function setEnableUsername($flag)
@@ -432,7 +456,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set enable display name
      *
-     * @param bool $flag
+     * @param bool $flag            
      * @return ModuleOptions
      */
     public function setEnableDisplayName($flag)
@@ -454,7 +478,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set use a captcha in registration form
      *
-     * @param bool $useRegistrationFormCaptcha
+     * @param bool $useRegistrationFormCaptcha            
      * @return ModuleOptions
      */
     public function setUseRegistrationFormCaptcha($useRegistrationFormCaptcha)
@@ -476,7 +500,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set user entity class name
      *
-     * @param string $userEntityClass
+     * @param string $userEntityClass            
      * @return ModuleOptions
      */
     public function setUserEntityClass($userEntityClass)
@@ -498,7 +522,7 @@ class ModuleOptions extends AbstractOptions implements
     /**
      * set password cost
      *
-     * @param int $passwordCost
+     * @param int $passwordCost            
      * @return ModuleOptions
      */
     public function setPasswordCost($passwordCost)
@@ -516,29 +540,31 @@ class ModuleOptions extends AbstractOptions implements
     {
         return $this->passwordCost;
     }
-    
+
     /**
      * set user table name
-     * 
-     * @param string $tableName
+     *
+     * @param string $tableName            
      */
-    public function setTableName($tableName){
-        $this->tableName=$tableName;
+    public function setTableName($tableName)
+    {
+        $this->tableName = $tableName;
     }
-    
+
     /**
      * get user table name
-     * 
+     *
      * @return string
      */
-    public function getTableName(){
+    public function getTableName()
+    {
         return $this->tableName;
     }
 
     /**
      * set form CAPTCHA options
      *
-     * @param array $formCaptchaOptions
+     * @param array $formCaptchaOptions            
      * @return ModuleOptions
      */
     public function setFormCaptchaOptions($formCaptchaOptions)
