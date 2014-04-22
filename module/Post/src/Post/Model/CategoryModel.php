@@ -118,7 +118,7 @@ class CategoryModel implements ServiceLocatorAwareInterface
 
     public function findById($id)
     {
-        return $this->catDaoManager()->find($id);
+        return $this->catDaoManager()->findByPk($id);
     }
 
     public function save($object)
