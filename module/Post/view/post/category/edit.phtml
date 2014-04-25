@@ -2,7 +2,7 @@
 /**
  * 
  */
-$i = 1;
+
 ?>
 <ul class="breadcrumb breadcrumb-page">
     <div class="breadcrumb-label text-light-gray">
@@ -40,7 +40,7 @@ $i = 1;
                                 <span class="fa fa-search"></span>
                             </button>
                         </span>
-                    </div> <!-- / .input-group -->
+                    </div> 
                 </form>
             </div>
         </div>
@@ -210,11 +210,8 @@ $i = 1;
                     </tbody>
                 </table>               
             </div>
-<<<<<<< HEAD
+
             <div class="panel-footer" style="margin-top: -17px">
-=======
-            <div class="panel-footer">
->>>>>>> 358ec0db38cf69d02d3acc59a6810f4d21384e09
                 <div class="row">
                     <?php
                     echo $this->paginationControl(
@@ -224,19 +221,15 @@ $i = 1;
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
         <div class="note note-info">
             <b><em><?php echo $this->translate('Note'); ?>:</em></b>
             <p><em><?php echo $this->translate('Deleting a category does not delete the posts in that category. Instead, posts that were only assigned to the deleted category are set to the category Uncategorized.'); ?></em></p>
         </div>
-=======
->>>>>>> 358ec0db38cf69d02d3acc59a6810f4d21384e09
     </div>
-</div>
-<!-- / .page-header -->
-<script>
-    jQuery(function($) {
-        $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().parent().parent().addClass('active open');
-        $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().addClass('active');
-    });
-</script>
+    <!-- / .page-header -->
+    <script>
+        jQuery(function($) {
+            $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().parent().parent().addClass('active open');
+            $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().addClass('active');
+        });
+    </script>

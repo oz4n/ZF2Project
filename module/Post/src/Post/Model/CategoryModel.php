@@ -9,28 +9,24 @@
 namespace Post\Model;
 
 use ORM\OrmDAO\CategoryDao;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use ORM\Registry\Registry;
+use ORM\Entity\Taxonomy;
+use Post\Form\TaxForm;
+use Post\Paginator\Paginator;
 
 /**
  * Description of CategoryModel
  *
  * @author melengo
  */
-class CategoryModel implements ServiceLocatorAwareInterface
+class CategoryModel
 {
-
-    /**
-     *
-     * @var type 
-     */
-    protected $services;
 
     /**
      *
      * @var EntityManager
      */
-    protected $entityManager;
+    protected $dao;
 
     /**
      *
@@ -40,95 +36,123 @@ class CategoryModel implements ServiceLocatorAwareInterface
 
     /**
      * 
-     * @param type $objekmanager
+     * @param type $service
      */
-    public function __construct($objekmanager)
+    public function __construct($service)
     {
-        $this->setServiceLocator($objekmanager);
+        $this->dao = new CategoryDao($service, $this->entity);
+        Registry::set("entityManager", $this->getEntityManager());
     }
 
     /**
      * 
-     * @param \Zend\ServiceManager\ServiceLocatorInterface $locator
+     * @return \Post\Paginator\Paginator
      */
-    public function setServiceLocator(ServiceLocatorInterface $locator)
+    public function getPaginator($offset, $limit, $page = 6)
     {
-        $this->services = $locator;
+        return new Paginator($this->findAllWithPagination($offset, $limit), $offset, $limit, $page);
+    }
+
+    /**
+     * 
+     * @param type $object
+     * @return type
+     */
+    public function getForm($object)
+    {
+        $form = new TaxForm();
+        return $form->bind($object);
+    }
+
+    /**
+     * 
+     * @return \ORM\Entity\Taxonomy
+     */
+    public function getEntity()
+    {
+        return new Taxonomy();
+    }
+
+    /**
+     * 
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getEntityManager()
+    {
+        return $this->dao->getEntityManager();
+    }
+
+    /**
+     * 
+     * @return Doctrine\Common\Persistence\ObjectRepository
+     */
+    public function getObjectRepository()
+    {
+        return $this->dao->getObjectRepository();
     }
 
     /**
      * 
      * @return type
      */
-    public function getServiceLocator()
+    public function findAllWithPagination($offset, $limit)
     {
-        return $this->services;
-    }
-
-    /**
-     * Sets the EntityManager
-     *
-     * @param EntityManager $em            
-     * @access public
-     * @return UserController
-     */
-    public function setEntityManager(\Doctrine\ORM\EntityManager $em)
-    {
-        $this->entityManager = $em;
-        return $this;
-    }
-
-    /**
-     * Returns the EntityManager
-     *
-     * Fetches the EntityManager from ServiceLocator if it has not been initiated
-     * and then returns it
-     *
-     * @access public
-     * @return EntityManager
-     */
-    public function getEntityManager()
-    {
-        if (null === $this->entityManager) {
-            $this->setEntityManager(
-                    $this->getServiceLocator()->get('Doctrine\ORM\EntityManager')
-            );
-        }
-        return $this->entityManager;
+        $dql = $this->dao->findAllCat($offset, $limit);
+        return $this->dao->getEntityManager()->createQuery($dql->getDQL());
     }
 
     /**
      * 
-     * @return \ORM\OrmDAO\CategoryDao
+     * @return type
      */
-    protected function catDaoManager()
-    {
-        return new CategoryDao($this->getEntityManager(), $this->entity);
-    }
-
-    public function findAllByQuery($offset, $limit)
-    {
-        return $this->catDaoManager()->getAllCatBy($offset, $limit);
-    }
-
     public function findAll()
     {
-        return $this->catDaoManager()->findBy(['term' => 1], ['root' => 'ASC', 'lft' => 'ASC']);
+        return $this->dao->findAllCat()->getQuery()->getResult(\Doctrine\ORM\AbstractQuery::HYDRATE_OBJECT);
     }
 
-    public function findById($id)
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function findByPk($id)
     {
-        return $this->catDaoManager()->findByPk($id);
+        $result = $this->dao->findByPk($id)->getQuery()->getResult(\Doctrine\ORM\AbstractQuery::HYDRATE_OBJECT);
+        if ($result != null) {
+            return $result;
+        } else {
+            return false;
+        }
     }
 
+    /**
+     * 
+     * @param type $object
+     * @return type
+     */
     public function save($object)
     {
-        return $this->catDaoManager()->save($object);
+        return $this->dao->save($object);
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
     public function delete($id)
     {
-        return $this->catDaoManager()->remove($this->findById($id));
+        return $this->dao->remove($this->findByPk($id));
+    }
+
+    public function toArray()
+    {
+        
+    }
+
+    public function toJson()
+    {
+        
     }
 
 }

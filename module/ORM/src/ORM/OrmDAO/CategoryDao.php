@@ -12,27 +12,20 @@ use ORM\GeneralDAO\DAOManager;
 
 /**
  * Description of CategoryDao
- * @property $objectManager $name Description
+ * @property $entityManager $name Description
  * @author melengo
  */
 class CategoryDao extends DAOManager
 {
 
-    public function __construct($objectManager, $class)
+    public function __construct($service, $class)
     {
-        parent::__construct($objectManager, $class);
+        parent::__construct($service, $class);
     }
-
-    public function getAllCatBy($offset = null, $limit = null)
+    
+    public function findAllCat($offset = null, $limit = null)
     {
-        $qb = $this->objectManager->createQueryBuilder();
-        $qb->select('t')->from($this->getClass(), 't');
-        $qb->where('t.term=1');
-        $qb->orderBy('t.root,t.lft', 'ASC');
-        $qb->setMaxResults($limit);
-        $qb->setFirstResult($offset);
-        $result = $qb->getDQL();
-        return $this->objectManager->createQuery($result);
+        return $this->findAll('t.term=1', ['orderBy' => ['entity' => 't.root,t.lft', 'sort' => self::ASC], 'limit' => $limit, 'offset' => $offset]);
     }
 
 }

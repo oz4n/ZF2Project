@@ -26,11 +26,11 @@ class Paginator extends ZendPaginator
     /**
      * 
      * @param type $query
-     * @param type $limit
      * @param type $offset
+     * @param type $limit
      * @param type $pageRange
      */
-    public function __construct($query, $limit, $offset, $pageRange = 5)
+    public function __construct($query, $offset, $limit, $pageRange = 5)
     {
         $adapter = $this->getPaging($query);
         parent::__construct($adapter);

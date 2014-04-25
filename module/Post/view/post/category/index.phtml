@@ -119,27 +119,24 @@ $i = 1;
             </div>
 
             <div class="panel-footer" style="margin-top: -17px">
-
-
                 <div class="row"> 
                     <?php
                     echo $this->paginationControl(
                             $this->taxonomy, 'sliding', ['partial/paginator.phtml', 'Post'], ['route' => 'post/post_category_pagintaion', 'taxcount' => $taxcount]
                     );
                     ?>
-              
-            </div>
+                </div>
+            </div>            
         </div>
         <div class="note note-info">
             <b><em><?php echo $this->translate('Note'); ?>:</em></b>
             <p><em><?php echo $this->translate('Deleting a category does not delete the posts in that category. Instead, posts that were only assigned to the deleted category are set to the category Uncategorized.'); ?></em></p>
         </div>
     </div>
-</div>
 
-<script>
-    jQuery(function($) {
-        $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().parent().parent().addClass('active open');
-        $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().addClass('active');
-    });
-</script>
+    <script>
+        jQuery(function($) {
+            $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().parent().parent().addClass('active open');
+            $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().addClass('active');
+        });
+    </script>
