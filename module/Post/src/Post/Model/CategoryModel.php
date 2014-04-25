@@ -12,6 +12,7 @@ use ORM\OrmDAO\CategoryDao;
 use ORM\Registry\Registry;
 use ORM\Entity\Taxonomy;
 use Post\Form\TaxForm;
+use Post\Form\SearchForm;
 use Post\Paginator\Paginator;
 
 /**
@@ -53,6 +54,13 @@ class CategoryModel
         return new Paginator($this->findAllWithPagination($offset, $limit), $offset, $limit, $page);
     }
 
+    public function getPaginatorWithKey($key, $offset, $limit, $page = 6)
+    {
+        $dql = $this->dao->findAllCatWithKey($key, $offset, $limit);
+        $em = $this->dao->getEntityManager()->createQuery($dql->getDQL());
+        return new Paginator($em, $offset, $limit, $page);
+    }
+
     /**
      * 
      * @param type $object
@@ -62,6 +70,11 @@ class CategoryModel
     {
         $form = new TaxForm();
         return $form->bind($object);
+    }
+
+    public function getFormSearch()
+    {
+        return new SearchForm();
     }
 
     /**
@@ -142,7 +155,7 @@ class CategoryModel
      */
     public function delete($id)
     {
-        return $this->dao->remove($this->findByPk($id));
+        return $this->dao->remove($this->getObjectRepository()->find($id));
     }
 
     public function toArray()

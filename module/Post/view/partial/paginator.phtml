@@ -16,7 +16,7 @@
             <!-- Previous page link -->
             <?php if (isset($this->previous)): ?>
                 <li class="paginate_button ">
-                    <a href="<?php echo $this->url($this->route, ['id' => $this->taxid]); ?>?page=<?php echo $this->previous; ?>">
+                    <a href="<?php echo $this->url($this->route, ['id' => $this->taxid]); ?>?<?php echo $this->keyword == null ? '' : 'keyword=' . $this->keyword . '&&'; ?>page=<?php echo $this->previous; ?>">
                         Previous
                     </a>
                 </li>
@@ -31,7 +31,7 @@
             <?php foreach ($this->pagesInRange as $page): ?>
                 <?php if ($page != $this->current): ?>
                     <li>
-                        <a href="<?php echo $this->url($this->route, ['id' => $this->taxid]); ?>?page=<?php echo $page; ?>">
+                        <a href="<?php echo $this->url($this->route, ['id' => $this->taxid]); ?>?<?php echo $this->keyword == null ? '' : 'keyword=' . $this->keyword . '&&'; ?>page=<?php echo $page; ?>">
                             <?php echo $page; ?>
                         </a>
                     </li>
@@ -45,7 +45,7 @@
             <!-- Next page link -->
             <?php if (isset($this->next)): ?>
                 <li>
-                    <a href="<?php echo $this->url($this->route, ['id' => $this->taxid]); ?>?page=<?php echo $this->next; ?>">
+                    <a href="<?php echo $this->url($this->route, ['id' => $this->taxid]); ?>?<?php echo $this->keyword == null ? '' : 'keyword=' . $this->keyword . '&&'; ?>page=<?php echo $this->next; ?>">
                         Next
                     </a>
                 </li>

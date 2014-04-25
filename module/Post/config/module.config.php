@@ -81,7 +81,7 @@ return [
                         'options' => [
                             'route' => '/categories/[page:page]',
                             'constraints' => [
-                                'page' => '[0-9]+'
+                                'page' => '[0-9]+',                                
                             ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Post\Controller',
@@ -115,14 +115,13 @@ return [
                             ]
                         ]
                     ],
-                    
                     'post_category_pagintaion_edit' => [
                         'type' => 'Segment',
                         'options' => [
                             'route' => '/category/edit[/][:id][/page/:page]',
                             'constraints' => [
                                 'id' => '[0-9]+',
-                                'page' => '[0-9]+',                                
+                                'page' => '[0-9]+',
                             ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Post\Controller',
@@ -131,13 +130,12 @@ return [
                             ]
                         ]
                     ],
-                    
                     'post_category_pagintaion_add' => [
                         'type' => 'Segment',
                         'options' => [
                             'route' => '/category/add[/page/:page]',
-                            'constraints' => [                              
-                                'page' => '[0-9]+',                                
+                            'constraints' => [
+                                'page' => '[0-9]+',
                             ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Post\Controller',
@@ -146,7 +144,6 @@ return [
                             ]
                         ]
                     ],
-                    
 //                    'post_category_pagintaion_edit_serch' => [
 //                        'type' => 'Segment',
 //                        'options' => [
@@ -177,7 +174,6 @@ return [
 //                            ]
 //                        ]
 //                    ],
-                    
                     'post_category_delete' => [
                         'type' => 'Segment',
                         'options' => [

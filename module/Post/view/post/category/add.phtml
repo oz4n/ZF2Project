@@ -30,16 +30,27 @@ $i = 1;
         </div>
         <div class="col-xs-6">
             <div class="pull-right" style="width: 60%">        
-                <form action="#">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" placeholder="<?php echo $this->translate('Search category'); ?>..." name="s">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit">
-                                <span class="fa fa-search"></span>
-                            </button>
-                        </span>
-                    </div> <!-- / .input-group -->
-                </form>
+                <?php
+                $formsearch->setAttribute('action', $this->url('post/post_category_add'));
+                $formsearch->prepare();
+                $search = $formsearch->get('search');
+                $search->get('keyword')->setattributes([
+                    'class' => 'form-control',
+                    'placeholder' => $this->translate('Search category')
+                ]);
+                
+                ?>
+                <?php echo $this->form()->openTag($formsearch); ?>               
+                <div class="input-group input-group-sm">
+                    <?php echo $this->formHidden($formsearch->get('security')); ?>
+                    <?php echo $this->formRow($search->get('keyword')); ?>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>               
+                <?php echo $this->form()->closeTag(); ?>
             </div>
         </div>
     </div>
@@ -209,13 +220,13 @@ $i = 1;
                 <div class="row">
                     <?php
                     echo $this->paginationControl(
-                            $this->taxonomy, 'Sliding', 'partial/paginator.phtml', ['route' => 'post/post_category_pagintaion_add', 'taxcount' => $taxcount]
+                            $this->taxonomy, 'Sliding', 'partial/paginator.phtml', ['route' => 'post/post_category_pagintaion_add', 'taxcount' => $taxcount, 'keyword' => $keyword]
                     );
                     ?>
                 </div>
             </div>
         </div>
-         <div class="note note-info">
+        <div class="note note-info">
             <b><em><?php echo $this->translate('Note'); ?>:</em></b>
             <p><em><?php echo $this->translate('Deleting a category does not delete the posts in that category. Instead, posts that were only assigned to the deleted category are set to the category Uncategorized.'); ?></em></p>
         </div>
