@@ -3,7 +3,6 @@
  * @var \ORM\Entity\Taxonomy $cat
  * 
  */
-$i = 1;
 ?>
 <ul class="breadcrumb breadcrumb-page">
     <div class="breadcrumb-label text-light-gray">
@@ -14,17 +13,17 @@ $i = 1;
     </li>
     <?php if (null == $keyword): ?>
         <li class="active">
-            <?php echo $this->translate('Categories'); ?></a>
+            <?php echo $this->translate('Categories'); ?>
         </li>   
     <?php else: ?>
         <li>
             <a href="<?php echo $this->url('post/post_category'); ?>"><?php echo $this->translate('Categories'); ?></a>
         </li>
-        <li class="active">
-            <?php echo $this->translate('Keyword'); ?>
+        <li>
+            <a href="<?php echo $this->url('post/post_category'); ?>?keyword=<?php echo $keyword; ?>"><?php echo $this->translate('Keyword'); ?></a>
         </li>
         <li class="active">
-            <?php echo $keyword; ?></a>
+            <?php echo $keyword; ?>
         </li> 
     <?php endif; ?>
 </ul>
@@ -66,24 +65,34 @@ $i = 1;
     </div>
 </div> 
 <div class="row">
-    <div class="col-sm-12">        
-        <div class="panel colourable">
-            <div class="panel-heading">
-                <span class="panel-title">
-                    <i class="panel-title-icon fa fa-tasks"></i>
-                    <?php echo $this->translate('Categories'); ?>
-                </span>
-                <div class="panel-heading-controls">                    
-                    <em>
-                        <?php echo $this->translate('Showing 1 to'); ?> 
-                        <?php echo count($this->taxonomy); ?> 
-                        <?php echo $this->translate('of'); ?> 
-                        <?php echo $this->taxcount; ?> 
-                        <?php echo $this->translate('entries'); ?>
-                    </em>
-                </div>         
+    <div class="col-sm-12">
+
+        <div class="row" style="padding-bottom: 5px">
+            <div class="col-xs-6">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option >Bulk Actions</option>
+                            <option value="delete">Delete</option>
+                            <option value="edit">Quick Edit</option>
+                        </select>
+                    </div>
+                    <button name="button" type="submit" class="btn btn-primary btn-small" value="appley">
+                        <i class="fa fa-check"></i> &nbsp; <?php echo $this->translate('Appley'); ?>
+                    </button>                
+                </form>
             </div>
-            <div class="panel-body">                              
+            <div class="col-xs-6">
+                <?php
+                echo $this->paginationControl(
+                        $this->taxonomy, 'Sliding', 'partial/paginator.phtml', ['route' => 'post/post_category_pagintaion', 'taxcount' => $taxcount, 'keyword' => $keyword]
+                );
+                ?>
+            </div>
+        </div>
+
+        <div class="panel" style="margin-bottom: 10px">
+            <div class="panel-body"> 
                 <table class="table">
                     <thead>
                         <tr>
@@ -96,8 +105,7 @@ $i = 1;
                             <th><?php echo $this->translate('Action'); ?></th>                            
                         </tr>
                     </thead>
-                    <tbody>         
-
+                    <tbody> 
                         <?php foreach ($taxonomy as $cat): ?>
                             <tr>
                                 <td>
@@ -105,19 +113,23 @@ $i = 1;
                                 </td>                                
                                 <td>
                                     <?php
-                                    for ($l = 0; $l < $cat->getLvl(); $l++) {
-                                        echo "&HorizontalLine;";
-                                    }
-                                    if ($cat->getLvl() === 0) {
+                                    if (null == $keyword):
+                                        for ($l = 0; $l < $cat->getLvl(); $l++) {
+                                            echo "&HorizontalLine;";
+                                        }
+                                        if ($cat->getLvl() === 0) {
+                                            echo $cat->getName();
+                                        } else {
+                                            echo '&nbsp;' . $cat->getName();
+                                        }
+                                    else:
                                         echo $cat->getName();
-                                    } else {
-                                        echo '&nbsp;' . $cat->getName();
-                                    }
+                                    endif;
                                     ?>
                                 </td>
                                 <td><?php echo $cat->getSlug(); ?></td>                                
                                 <td><?php echo $cat->getCount(); ?></td>                                
-                                <td>                                   
+                                <td>
                                     <div class="btn-group btn-group-xs">                        
                                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="fa fa-cog"></span>&nbsp;<span class="fa fa-caret-down"></span></button>
                                         <ul class="dropdown-menu dropdown-menu-right">
@@ -137,28 +149,42 @@ $i = 1;
                             </tr>       
                         <?php endforeach; ?>
                     </tbody>
-                </table>
-            </div>
-
-            <div class="panel-footer" style="margin-top: -17px">
-                <div class="row"> 
-                    <?php
-                    echo $this->paginationControl(
-                            $this->taxonomy, 'sliding', ['partial/paginator.phtml', 'Post'], ['route' => 'post/post_category_pagintaion', 'taxcount' => $taxcount, 'keyword' => $keyword]
-                    );
-                    ?>
-                </div>
+                </table>                
             </div>            
+        </div>
+        <div class="row" style="padding-bottom: 10px">
+            <div class="col-xs-6">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option >Bulk Actionss</option>
+                            <option value="delete">Delete</option>
+                        </select>
+                    </div>
+                    <button name="button" type="submit" class="btn btn-primary btn-small" value="appley">
+                        <i class="fa fa-check"></i> &nbsp; <?php echo $this->translate('Appley'); ?>
+                    </button>  
+                </form>
+            </div>
+            <div class="col-xs-6 ">                
+                <?php
+                echo $this->paginationControl(
+                        $this->taxonomy, 'Sliding', 'partial/paginator.phtml', ['route' => 'post/post_category_pagintaion', 'taxcount' => $taxcount, 'keyword' => $keyword]
+                );
+                ?>
+            </div>
         </div>
         <div class="note note-info">
             <b><em><?php echo $this->translate('Note'); ?>:</em></b>
             <p><em><?php echo $this->translate('Deleting a category does not delete the posts in that category. Instead, posts that were only assigned to the deleted category are set to the category Uncategorized.'); ?></em></p>
         </div>
     </div>
+</div>
 
-    <script>
-        jQuery(function($) {
-            $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().parent().parent().addClass('active open');
-            $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().addClass('active');
-        });
-    </script>
+
+<script>
+    jQuery(function($) {
+        $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().parent().parent().addClass('active open');
+        $('ul.navigation > li > ul.submenu > li > #navigationhelper-Categories').parent().addClass('active');
+    });
+</script>

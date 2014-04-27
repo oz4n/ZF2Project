@@ -26,11 +26,6 @@ class CategoryController extends AbstractActionController
         ]);
     }
 
-    public function serchAction()
-    {
-        
-    }
-
     /**
      * 
      * @return \Zend\View\Model\ViewModel
@@ -42,7 +37,7 @@ class CategoryController extends AbstractActionController
         $form = $this->getModel()->getForm($tax);
         $page = (int) $this->params()->fromQuery('page', 1);
         $keyword = $this->getRequest()->isPost() ? $this->getRequest()->getPost()->search['keyword'] : $this->params()->fromQuery('keyword');
-        $paginator = $this->getModel()->getPaginatorWithKey($keyword, $page, (int) 19);
+        $paginator = $this->getModel()->getPaginatorWithKey($keyword, $page, (int) 19, 2);
 
         if (isset($this->getRequest()->getPost()->tax) && $this->getRequest()->isPost()) {
             $form->setData($this->getRequest()->getPost());
@@ -73,9 +68,7 @@ class CategoryController extends AbstractActionController
         $tax = $this->getModel()->getObjectRepository()->find($this->getId());
         $form = $this->getModel()->getForm($tax);
         $keyword = $this->getRequest()->isPost() ? $this->getRequest()->getPost()->search['keyword'] : $this->params()->fromQuery('keyword');
-        $paginator = $this->getModel()->getPaginatorWithKey($keyword, $page, (int) 3);
-//        $paginator = $this->getModel()->getPaginator($page, (int) 19, 3);
-
+        $paginator = $this->getModel()->getPaginatorWithKey($keyword, $page, (int) 19);
         if (isset($this->getRequest()->getPost()->tax) && $this->getRequest()->isPost()) {
             $form->setData($this->getRequest()->getPost());
 
@@ -102,8 +95,6 @@ class CategoryController extends AbstractActionController
      */
     public function deleteAction()
     {
-//        echo $this->getId();
-//        exit();
         $this->getModel()->delete($this->getId());
         $this->redirect()->toRoute('post/post_category');
     }

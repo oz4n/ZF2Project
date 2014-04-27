@@ -1,29 +1,28 @@
-<div class="col-xs-6 text-left">
-    <div class="btn-group btn-group-xs" >                        
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><?php echo $this->translate('Bulk action'); ?>&nbsp;<span class="fa fa-caret-down"></span></button>
-        <ul class="dropdown-menu dropdown-menu-left">
-            <li><a href="#"><?php echo $this->translate('Delete'); ?></a></li>
-            <li><a href="#"><?php echo $this->translate('Quick Edit'); ?></a></li>                            
-            <li class="divider"></li>
-            <li><a href="#"><?php echo $this->translate('Check All'); ?></a></li>
-            <li><a href="#"><?php echo $this->translate('Uncheck All'); ?></a></li>
-        </ul> 
-    </div>
-</div>
-<div class="col-xs-6 text-right" >
-    <?php if ($this->pageCount !== 1): ?>    
-        <ul class="pagination pagination-xs" style="margin-right:-6px">
+<div class="pull-right ">
+
+
+
+    <ul class="pagination" style="margin-right:-5px">
+        <li class="paginate_button ">
+            <a href="#" style="border: none">
+                <em>
+                    <?php echo $this->taxcount; ?> 
+                    <?php echo $this->translate('Entries'); ?>
+                </em>
+            </a>
+        </li>
+        <?php if ($this->pageCount !== 1): ?> 
             <!-- Previous page link -->
             <?php if (isset($this->previous)): ?>
                 <li class="paginate_button ">
                     <a href="<?php echo $this->url($this->route, ['id' => $this->taxid]); ?>?<?php echo $this->keyword == null ? '' : 'keyword=' . $this->keyword . '&&'; ?>page=<?php echo $this->previous; ?>">
-                        Previous
+                        <i class="fa fa-angle-double-left"></i>
                     </a>
                 </li>
             <?php else: ?>
                 <li class="disabled">
                     <a href="#">
-                        Previous
+                        <i class="fa fa-angle-double-left"></i>
                     </a>
                 </li>
             <?php endif; ?>
@@ -46,16 +45,16 @@
             <?php if (isset($this->next)): ?>
                 <li>
                     <a href="<?php echo $this->url($this->route, ['id' => $this->taxid]); ?>?<?php echo $this->keyword == null ? '' : 'keyword=' . $this->keyword . '&&'; ?>page=<?php echo $this->next; ?>">
-                        Next
+                        <i class="fa fa-angle-double-right"></i>
                     </a>
                 </li>
             <?php else: ?>
                 <li class="disabled">
                     <a href="#">
-                        Next
+                        <i class="fa fa-angle-double-right"></i>
                     </a>
                 </li>
             <?php endif; ?>
-        </ul>
-    <?php endif; ?>
+        <?php endif; ?>
+    </ul>
 </div>
